@@ -9,7 +9,7 @@ namespace OpeCar.OperCar.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            
         }
     }
 }

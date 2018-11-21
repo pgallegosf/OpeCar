@@ -28,6 +28,9 @@ namespace OpeCar.OperCar.Web
                       "~/Content/css/bootstrap.css"));
             bundles.Add(new StyleBundle("~/Content/particles").Include(
                       "~/Content/css/particles/style.css"));
+            /************************Areas*************************************/
+            bundles.Add(new StyleBundle("~/Content/login").Include(
+                      "~/Content/css/areas/login.css"));
         }
     }
 }

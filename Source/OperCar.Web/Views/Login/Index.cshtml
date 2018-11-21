@@ -9,8 +9,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/particles")
 </head>
 <body>
+    <div id="particles-js"></div>
 <div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
@@ -18,5 +21,9 @@
         </ul>
     </div>
 </div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/popper")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/particles")
 </body>
 </html>

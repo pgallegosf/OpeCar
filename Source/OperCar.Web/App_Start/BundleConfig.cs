@@ -16,10 +16,18 @@ namespace OpeCar.OperCar.Web
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js"));
+            /*************************PARTICLES**********************************/
+            bundles.Add(new ScriptBundle("~/bundles/particles").Include(
+                        "~/Scripts/particles/particles.js",
+                        "~/Scripts/particles/js/app.js",
+                        "~/Scripts/particles/js/lib/stats.js"
+                        ));
 
             /**********************************HOJAS DE ESTILOS***********************************************/
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                       "~/Content/css/bootstrap.css"));
+            bundles.Add(new StyleBundle("~/Content/particles").Include(
+                      "~/Content/css/particles/style.css"));
         }
     }
 }

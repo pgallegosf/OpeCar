@@ -6,43 +6,62 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width"/>
+    @*<link rel="icon" href="~/Content/images/cropped-cropped-ALEATICA_CMYK_POS-1-32x32.png">*@
     <title>Login</title>
     @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/particles")
     @Styles.Render("~/Content/login")
 </head>
-<body class="text-center">
-    <div id="particles-js"></div>
-    <form class="form-signin position-relative">
-        <img class="mb-4" src="~/Content/images/logo.gif">
-        <div class="content-form-login">
-
-            <h1 class="h3 mb-3 font-weight-normal">Acceso a intranet</h1>
-            <div class="div-text-login">
-                <label for="inputEmail" class="sr-only">Email</label>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email" required="" autofocus="">
-            </div>
-            <div class="div-text-login">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+<body>
+    <div id="particles-js" ></div>
+<div class="container">
+    <div class="row vertical-default">
+        <div class="col-md-3">
+            <div class="figure margin-top-20 margin-bottom-20">
+                <span>
+                    <img width="251" height="73" class="mb-4" src="~/Content/images/logo.gif" alt="" />
+                </span>
             </div>
         </div>
-        <div class="">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Acceder</button>
-        </div>
-        @*<p class="mt-5 mb-3 text-muted">© </p>*@
-    </form>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+    <div class="container-login">
+        <form class="form-signin position-relative" onsubmit=" return false ">
 
-    @*<div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-            </ul>
-        </div>*@
+            <div class="content-form-login">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/popper")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/particles")
+                <h1 class="h1 mb-3 font-weight-normal text-center">Acceso</h1>
+                <div class="col-12"></div>
+                <div class="form-group">
+                    <div class="um-field-label">
+                        <label for="txtEmail">Email</label>
+                    </div>
+                    <input type="email" id="txtEmail" class="form-control" placeholder="Email" required="" autofocus="">
+                </div>
+                <div class="form-group">
+                    <div class="um-field-label">
+                        <label for="txtPassword">Password</label>
+                    </div>
+                    <input type="password" id="txtPassword" class="form-control" placeholder="Password" required="">
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-lg btn-primary btn-block" id="btnLogin" type="submit">Acceder</button>
+            </div>
+            <div class="alert alert-danger" id="contenedorMensaje" role="alert" style="display: none">
+
+            </div>
+        </form>
+    </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/popper")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/particles")
+        @Scripts.Render("~/bundles/login")
 </body>
 </html>

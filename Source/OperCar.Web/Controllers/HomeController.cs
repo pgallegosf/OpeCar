@@ -6,6 +6,7 @@ namespace OpeCar.OperCar.Web.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "Inicio";
             return View();
         }
     }

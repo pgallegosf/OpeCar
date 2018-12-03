@@ -185,6 +185,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\general.js" />
+    <Content Include="Scripts\home.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\particles\js\app.js" />
     <Content Include="Scripts\particles\js\lib\stats.js" />

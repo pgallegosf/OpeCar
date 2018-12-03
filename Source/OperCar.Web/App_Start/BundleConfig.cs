@@ -22,6 +22,9 @@ namespace OpeCar.OperCar.Web
                         "~/Scripts/particles/js/app.js",
                         "~/Scripts/particles/js/lib/stats.js"
                         ));
+            /***************************************************************/
+            bundles.Add(new ScriptBundle("~/bundles/home").Include(
+                       "~/Scripts/home.js"));
             /*************************AREAS**********************************/
             bundles.Add(new ScriptBundle("~/bundles/login").Include(
                         "~/Scripts/areas/login.js"));

@@ -69,35 +69,37 @@
         </div>
     </div>*@
     <div id="masthead" class="menu navbar navbar-static-top header-logo-left-menu-below oxy-mega-menu navbar-sticky navbar-not-mobile-stuck">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#"><img src="~/Content/images/logo.gif" alt="Empleados ALEATICA"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">CONOCE TU ORGANIZACION<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">APLICACIONES</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">NOTICIAS Y MULTIMEDIA</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <div class="container-nav">
+            <nav class=" navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="#"><img src="~/Content/images/logo.gif" alt="Empleados ALEATICA"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">CONOCE TU ORGANIZACION<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">APLICACIONES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">NOTICIAS Y MULTIMEDIA</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown link
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     </div>
         @*<div class="nav-container clearfix">
                 <nav class="collapse navbar-collapse main-navbar navbar-left" role="navigation">
@@ -150,14 +152,28 @@
             </div>
         </div>
     </div>*@
-    <div class="container body-content">
-        @RenderBody()
-
-        <footer>
-
-        </footer>
-    </div>
-
+<div class="content body-content" role="main">
+    <article>
+        <section class="section">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </section>
+    </article>
+    <section class="section">
+        <div class="container">
+            
+        </div>
+    </section>
+    <footer id="footer" role="contentinfo">
+        <section class="section">
+            <div class="container">
+                <hr>
+            </div>
+        </section>
+    </footer>
+</div>
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")

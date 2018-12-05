@@ -14,6 +14,11 @@ namespace OpeCar.OperCar.Web
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Aplicacion",
+                url: "Aplicacion",
+                defaults: new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

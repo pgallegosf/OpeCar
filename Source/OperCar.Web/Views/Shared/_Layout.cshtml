@@ -71,7 +71,7 @@
     <div id="masthead" class="menu navbar navbar-static-top header-logo-left-menu-below oxy-mega-menu navbar-sticky navbar-not-mobile-stuck">
         <div class="container-nav">
             <nav class=" navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="~/Content/images/logo.gif" alt="Empleados ALEATICA"></a>
+                <a class="navbar-brand" href="#"><img src="~/Content/images/logo.png" alt="Empleados ALEATICA"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -81,7 +81,7 @@
                             <a class="nav-link" href="#">CONOCE TU ORGANIZACION<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">APLICACIONES</a>
+                            <a class="nav-link" href="Aplicacion">APLICACIONES</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">NOTICIAS Y MULTIMEDIA</a>
@@ -154,11 +154,7 @@
     </div>*@
 <div class="content body-content" role="main">
     <article>
-        <section class="section">
-            <div class="container">
-                @RenderBody()
-            </div>
-        </section>
+        @RenderBody()
     </article>
     <section class="section">
         <div class="container">
@@ -169,6 +165,33 @@
         <section class="section">
             <div class="container">
                 <hr>
+                <div class="row margin-bottom-40 margin-top-40">
+                    <div class="col-sm-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Conoce tu organización</li>
+                            <li class="list-group-item">Aplicaciones</li>
+                            <li class="list-group-item">Noticias y multimedia</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="text-2" class="sidebar-widget  widget_text">
+                            <h3 class="sidebar-header">Sobre nosotros</h3>
+                            <div class="textwidget">
+                                Somos un Grupo de promoción y operación de Infraestructura Smart con visión de futuro.
+                                Incorporamos el desarrollo tecnológico, la inteligencia empresarial e iniciativas socialmente responsables
+                                y respetuosas con el entorno ambiental para aportar soluciones de infraestructura y movilidad eficientes
+                                y sostenibles.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="text-19" class="sidebar-widget  widget_text">
+                            <div class="textwidget">
+                                <p>© @DateTime.Now.Year OPECAR</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </footer>

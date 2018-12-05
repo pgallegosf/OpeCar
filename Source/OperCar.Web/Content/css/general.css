@@ -1,1 +1,15 @@
-﻿
+﻿h1, h2, h3, h4, h5, h6 {
+    color: #78b82a;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 36px;
+}
+.background_soft_gray {
+    background: #F1F0EF !important;
+}

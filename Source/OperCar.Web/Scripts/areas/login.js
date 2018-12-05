@@ -4,7 +4,7 @@
 });
 
 function Login() {
-
+    $(".alert").alert();
     $("#contenedorMensaje").hide();
     $("#btnLogin").addClass("disabled");
     var usuario = $("#txtEmail").val().trim();
@@ -20,9 +20,12 @@ function Login() {
         window.location.replace("Home");
     }
     else {
+        
         $("#btnLogin").removeClass("disabled");
+        $("#contenedorMensaje").html(divmensaje);
+        $("#textAlert").text("Usuario y/o contraseña incorrectos");
         $("#contenedorMensaje").show();
-        $("#contenedorMensaje").text("Usuario y/o contraseña incorrectos");
+        
     }
 
     //var ajax = $.ajax({
@@ -46,3 +49,12 @@ function Login() {
     //});
 
 }
+
+function OcultarMensaje() {
+    $("#contenedorMensaje").hide();
+}
+
+var divmensaje = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
+    "<strong>Error</strong> <span id='textAlert'></span>" +
+    "<button type='button' class='close' data-dismiss='alert' aria-label='Close' onclick='OcultarMensaje'>" +
+    "<span aria-hidden='true'>&times;</span></button> </div>";

@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@ViewBag.Title-OpeCar</title>
-    @*<link rel="icon" href="~/Content/images/cropped-cropped-ALEATICA_CMYK_POS-1-32x32.png">*@
+    <link rel="icon" href="~/Content/images/cropped-cropped-ALEATICA_CMYK_POS-1-32x32.png">
     @Styles.Render("~/Content/bootstrap")
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     @Styles.Render("~/Content/general")
     @Styles.Render("~/Content/home")
+    @Styles.Render("~/Content/animate")
 
 </head>
 <body>
@@ -20,7 +21,7 @@
                 <div class="sidebar-widget widget_search">
                     <div class="top-search">
 
-                        <form role="search" method="get" id="searchform" action="https://empleados.aleatica.com/">
+                        <form role="search" method="get" id="searchform" action="">
                             <div class="input-group">
                                 <input type="text" value="" name="s" id="s" class="form-control" placeholder="Buscar">
                                 <span class="input-group-btn">
@@ -42,7 +43,7 @@
                 <div id="custom_html-5" class="widget_text sidebar-widget text-right small-screen-center widget_custom_html">
 
                     <div class="textwidget custom-html-widget">
-                        <a id="salirtopbar" href="https://empleados.aleatica.com/logout/">
+                        <a id="salirtopbar" href="Logout">
                             <i class="menu-icon fas fa-user"></i>&nbsp;CERRAR SESIÓN
                         </a>
                     </div>
@@ -71,7 +72,7 @@
     <div id="masthead" class="menu navbar navbar-static-top header-logo-left-menu-below oxy-mega-menu navbar-sticky navbar-not-mobile-stuck">
         <div class="container-nav">
             <nav class=" navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#"><img src="~/Content/images/logo.png" alt="Empleados ALEATICA"></a>
+                <a class="navbar-brand" href="Home"><img src="~/Content/images/logo.png" alt="Empleados ALEATICA"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -86,7 +87,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">NOTICIAS Y MULTIMEDIA</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        @*<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Dropdown link
                             </a>
@@ -95,7 +96,7 @@
                                 <a class="dropdown-item" href="#">Another action</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </nav>

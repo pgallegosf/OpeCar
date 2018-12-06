@@ -16,7 +16,7 @@ function Login() {
         Usuario: usuario,
         Clave: clave
     };
-    if (login.Usuario === "admin" && login.Clave == "1234") {
+    if (login.Usuario === "admin@operadora.pe" && login.Clave === "1234") {
         window.location.replace("Home");
     }
     else {

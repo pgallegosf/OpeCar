@@ -40,6 +40,8 @@ namespace OpeCar.OperCar.Web
                       "~/Content/css/general.css"));
             bundles.Add(new StyleBundle("~/Content/home").Include(
                       "~/Content/css/home.css"));
+            bundles.Add(new StyleBundle("~/Content/animate").Include(
+                      "~/Content/css/animate.css"));
             /************************Areas*************************************/
             bundles.Add(new StyleBundle("~/Content/login").Include(
                       "~/Content/css/areas/login.css"));

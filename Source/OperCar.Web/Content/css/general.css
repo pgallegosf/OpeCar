@@ -1,6 +1,12 @@
 ﻿h1, h2, h3, h4, h5, h6 {
     color: #78b82a;
 }
+.margin-top-0 {
+    margin-top: 0;
+}
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
 .margin-top-20 {
     margin-top: 20px;
 }
@@ -12,4 +18,50 @@ h1 {
 }
 .background_soft_gray {
     background: #F1F0EF !important;
+}
+#content {
+    background: #fff;
+    color: #534741;
+}
+/****aplicaciones***/
+
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.blog-os-animation.animated, .os-animation.animated, .recent-simple-os-animation.animated, .staff-os-animation.animated {
+    opacity: 1;
+}
+.figure {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    max-width: 100%;
+}
+.bounceInLeft {
+    animation-name: bounceInLeft;
+}
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.figure-image img {
+    transition: all .5s;
+}
+
+hr.hr_brown_ohl {
+    border-top: 4px solid #e35000 !important;
+}
+hr {
+    border-top-color: #fff !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+.wp-caption img,img{max-width:100%;height:auto}
+.figure.image-effect-zoom-in:hover img {
+    transform: scale3d(1.1,1.1,1);
+}
+.font_24px {
+    font-size: 24px !important;
 }

@@ -15,6 +15,16 @@ namespace OpeCar.OperCar.Web
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                name: "Logout",
+                url: "Logout",
+                defaults: new { controller = "Login", action = "Logout", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "Home",
+                url: "Home",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Aplicacion",
                 url: "Aplicacion",
                 defaults: new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }

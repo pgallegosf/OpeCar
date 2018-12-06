@@ -19,5 +19,10 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             return Json(null, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Logout()
+        {
+            return RedirectToAction("Index", "Login");
+        }
     }
 }

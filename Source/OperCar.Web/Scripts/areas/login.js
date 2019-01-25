@@ -17,7 +17,9 @@ function Login() {
         Clave: clave
     };
     if (login.Usuario === "admin@operadora.pe" && login.Clave === "1234") {
-        window.location.replace("Aplicacion");
+        var url = $("#RedirectTo").val();
+        location.href = url;
+        //window.location.replace("/Aplicacion");
     }
     else {
         

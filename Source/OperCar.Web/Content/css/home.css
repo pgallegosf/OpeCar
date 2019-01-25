@@ -370,6 +370,12 @@ a:active, a:focus, a:hover{
     background-color: #78b82a;
     color: #fff;
 }
+#footer a:hover {
+    color: #534741;
+}
+#footer a {
+    color: #fff;
+}
 hr {
     border-top-color: #fff !important;
     margin-top: 10px !important;

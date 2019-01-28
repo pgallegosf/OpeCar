@@ -12,6 +12,7 @@
 
     });
     OcultarTopBar();
+    $(".OpenDoc").on("click", AbrirDoc);
     
 });
 

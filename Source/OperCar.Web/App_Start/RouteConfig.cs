@@ -29,6 +29,16 @@ namespace OpeCar.OperCar.Web
                 url: "Aplicacion",
                 defaults: new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                "AbrirDocumento",
+                "AbrirArchivo",
+                new { controller = "Aplicacion", action = "AbrirArchivo", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                "Aplicaciones",
+                "Index",
+                new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

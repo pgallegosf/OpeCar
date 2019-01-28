@@ -8,9 +8,10 @@ namespace OpeCar.OperCar.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             /**********************************QUERYS************************************************************/
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquerySlim").Include(
                         "~/Scripts/jquery-3.3.1.slim.min.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-3.3.1.min.js"));
             bundles.Add(new ScriptBundle("~/bundles/popper").Include(
                         "~/Scripts/popper.min.js"));
 
@@ -28,6 +29,8 @@ namespace OpeCar.OperCar.Web
             /*************************AREAS**********************************/
             bundles.Add(new ScriptBundle("~/bundles/login").Include(
                         "~/Scripts/areas/login.js"));
+            bundles.Add(new ScriptBundle("~/bundles/aplicacion").Include(
+                        "~/Scripts/areas/aplicacion.js"));
 
 
 

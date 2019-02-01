@@ -21,7 +21,7 @@ namespace OpeCar.OperCar.Web.Controllers
 
             try { 
             Process p = new Process();
-            p.StartInfo.FileName = "smb://10.10.101.17\\shared\\Nue.txt";
+            p.StartInfo.FileName = archivo;
             //"D:\\Afinity\\DQ_PV\\Documentos\\RQ2018-1088_AT.docx";
             p.Start();
             var result = true;

@@ -161,6 +161,8 @@
     <Compile Include="Controllers\AplicacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrganizacionController.cs" />
+    <Compile Include="Controllers\SIGController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,6 +175,7 @@
   <ItemGroup>
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\areas\login.css" />
+    <Content Include="Content\css\areas\organizacion.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\general.css" />
@@ -235,6 +238,8 @@
     <Content Include="Scripts\particles\particles.json" />
     <Content Include="Views\Aplicacion\Index.cshtml" />
     <None Include="Properties\PublishProfiles\OpeCarWeb.pubxml" />
+    <Content Include="Views\SIG\Index.cshtml" />
+    <Content Include="Views\Organizacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">

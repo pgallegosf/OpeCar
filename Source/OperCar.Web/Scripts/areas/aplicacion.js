@@ -5,7 +5,8 @@ function AbrirDoc() {
     var data = {};
     //data.archivo = "\\\\10.10.101.17\\shared\\Nue.txt";
     //"\\10.15.61.15\Bd_Cae\CAE_OSITRAN";
-    data.archivo = "\\\\10.10.101.25\\\dq_pv\\Incidencias.xlsx";
+    //data.archivo = "\\\\10.10.101.25\\\dq_pv\\Incidencias.xlsx";
+    data.archivo = "D:\\Cuentas\\Libro1.xlsx";
     
 
     var jqxhr = $.ajax({

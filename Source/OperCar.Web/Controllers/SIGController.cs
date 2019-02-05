@@ -96,7 +96,7 @@ namespace OpeCar.OperCar.Web.Controllers
             };
             var documento4 = new EDocumento
             {
-                IdDocumento = 5,
+                IdDocumento = 8,
                 ImagenFondo = "",
                 Descripcion = "Procedimientos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
@@ -106,7 +106,7 @@ namespace OpeCar.OperCar.Web.Controllers
             };
             var documento5 = new EDocumento
             {
-                IdDocumento = 6,
+                IdDocumento = 9,
                 ImagenFondo = "",
                 Descripcion = "Instructivos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
@@ -116,7 +116,7 @@ namespace OpeCar.OperCar.Web.Controllers
             };
             var documento6 = new EDocumento
             {
-                IdDocumento = 7,
+                IdDocumento = 10,
                 ImagenFondo = "",
                 Descripcion = "Formatos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
@@ -126,48 +126,124 @@ namespace OpeCar.OperCar.Web.Controllers
             };
             var documento7 = new EDocumento
             {
-                IdDocumento = 5,
+                IdDocumento = 11,
                 ImagenFondo = "",
                 Descripcion = "Procedimientos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
                 Tipo = 1,
                 Nivel = 2,
-                IdPadre = 2
+                IdPadre = 3
             };
             var documento8 = new EDocumento
             {
-                IdDocumento = 6,
+                IdDocumento = 12,
                 ImagenFondo = "",
                 Descripcion = "Instructivos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
                 Tipo = 1,
                 Nivel = 2,
-                IdPadre = 2
+                IdPadre = 3
             };
             var documento9 = new EDocumento
             {
-                IdDocumento = 7,
+                IdDocumento = 13,
                 ImagenFondo = "",
                 Descripcion = "Formatos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
                 Tipo = 2,
                 Nivel = 1,
-                IdPadre = 2
+                IdPadre = 3
             };
             var documento10 = new EDocumento
             {
-                IdDocumento = 7,
+                IdDocumento = 14,
                 ImagenFondo = "",
-                Descripcion = "procedimiento 1",
+                Descripcion = "Procedimientos",
                 Archivo = "~/Content/images/iconos_ALEATICA-40.png",
                 Tipo = 2,
                 Nivel = 1,
-                IdPadre = 2
+                IdPadre = 4
+            };
+            var documento11 = new EDocumento
+            {
+                IdDocumento = 15,
+                ImagenFondo = "",
+                Descripcion = "Instructivos",
+                Archivo = "~/Content/images/iconos_ALEATICA-40.png",
+                Tipo = 1,
+                Nivel = 2,
+                IdPadre = 4
+            };
+            var documento12 = new EDocumento
+            {
+                IdDocumento = 16,
+                ImagenFondo = "",
+                Descripcion = "Formatos",
+                Archivo = "~/Content/images/iconos_ALEATICA-40.png",
+                Tipo = 2,
+                Nivel = 1,
+                IdPadre = 4
+            };
+            var documento13 = new EDocumento
+            {
+                IdDocumento = 17,
+                ImagenFondo = "",
+                Descripcion = "Procedimiento 1",
+                Archivo = "~/Content/images/iconos_ALEATICA-40.png",
+                Tipo = 1,
+                Nivel = 3,
+                IdPadre = 5
+            };
+            var documento14 = new EDocumento
+            {
+                IdDocumento = 18,
+                ImagenFondo = "",
+                Descripcion = "Procedimiento 2",
+                Archivo = "~/Content/images/iconos_ALEATICA-40.png",
+                Tipo = 2,
+                Nivel = 3,
+                IdPadre = 5
+            };
+            var documento15 = new EDocumento
+            {
+                IdDocumento = 19,
+                ImagenFondo = "",
+                Descripcion = "Instructivo 1",
+                Archivo = "~/Content/images/iconos_ALEATICA-40.png",
+                Tipo = 1,
+                Nivel = 3,
+                IdPadre = 6
+            };
+            var documento16 = new EDocumento
+            {
+                IdDocumento = 20,
+                ImagenFondo = "",
+                Descripcion = "Instructivo 2",
+                Archivo = "~/Content/images/iconos_ALEATICA-40.png",
+                Tipo = 2,
+                Nivel = 3,
+                IdPadre = 6
             };
             lista.Add(documento1);
             lista.Add(documento2);
             lista.Add(documento3);
             lista.Add(documento4);
+            lista.Add(documento5);
+            lista.Add(documento6);
+            lista.Add(documento7);
+            lista.Add(documento8);
+            lista.Add(documento9);
+            lista.Add(documento10);
+            lista.Add(documento11);
+            lista.Add(documento12);
+            lista.Add(documento13);
+            lista.Add(documento14);
+            lista.Add(documento15);
+            lista.Add(documento16);
+            //lista.Add(documento17);
+            //lista.Add(documento18);
+            //lista.Add(documento19);
+            //lista.Add(documento20);
 
             ViewBag.listaSIG = lista;
             return View(lista);

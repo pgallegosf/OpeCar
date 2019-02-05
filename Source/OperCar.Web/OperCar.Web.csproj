@@ -193,6 +193,7 @@
     <Content Include="Content\images\iconos_colores_naranja-oscuro-63.png" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\pdf_imagev4.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

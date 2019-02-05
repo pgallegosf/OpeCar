@@ -8,6 +8,43 @@
     color: #fff;
     /*border-bottom: 1px solid rgba(0, 0, 0, 0.125);*/
 }
-.link-titulo {
-    color: #fff!important;
+.collapse > .card-body {
+    border-top-color: #ffffff !important;
+    background: #F1F0EF !important;
 }
+.btn-titulo {
+    color: #ffffff!important;
+}
+.card-documento{
+    margin:2px;
+}
+
+.card-body-doc {
+    background-color: #f9f9f9 !important;
+    padding: 15px 8px 15px 8px;
+}
+.div-btn-descarga {
+    text-align: center;
+}
+.botondescarga {
+    font-size: 18px;
+    color: #fff;
+    background-color: #78b82a;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+.botondescarga:hover {
+    color: #fff;
+    background-color: #7476AB;
+}
+.nombre-doc {
+    color: #78b82a;
+    font-size: 16px;
+}
+.header-area {
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+

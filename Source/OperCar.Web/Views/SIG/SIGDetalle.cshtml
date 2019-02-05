@@ -7,8 +7,8 @@
 <section class="section">
     <div class="container">
         <div class="row vertical-default">
-            <div class="col-md-12     text-default small-screen-default">
-                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal os-animation normal regular animated fadeIn" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
                     @ViewBag.Title
                 </h1>
             </div>
@@ -29,9 +29,9 @@
                     {
                         string collapse = "collapse" + @item.IdDocumento;
                         <div class="card">
-                            <div class="card-header" id="headingOne">
+                            <div class="card-header header-area" id="headingOne">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
+                                    <button class="btn btn-link btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
                                         @item.Descripcion
                                     </button>
                                 </h5>
@@ -39,7 +39,22 @@
 
                             <div id="@collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <div class="row">
+                                        @foreach (var itemHijo in Model.Where(x => x.IdPadre == item.IdDocumento))
+                                        {
+                                                <div class="col-2 card-documento">
+                                                     <div class="card" >
+                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                                        <div class="card-body card-body-doc">
+                                                            <h4 class="nombre-doc">@itemHijo.Descripcion</h4>
+                                                            <div class="div-btn-descarga">
+                                                                <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -48,16 +63,31 @@
                     {
                         string collapse = "collapse" + @item.IdDocumento;
                         <div class="card">
-                            <div class="card-header" id="heading@collapse">
+                            <div class="card-header header-area" id="heading@collapse">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                    <button class="btn btn-link collapsed btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
                                         @item.Descripcion
                                     </button>
                                 </h5>
                             </div>
                             <div id="@collapse" class="collapse" aria-labelledby="heading@collapse" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    <div class="row">
+                                        @foreach (var itemHijo in Model.Where(x => x.IdPadre == item.IdDocumento))
+                                        {
+                                            <div class="col-2 card-documento">
+                                                <div class="card">
+                                                    <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                                    <div class="card-body card-body-doc">
+                                                        <h4 class="nombre-doc">@itemHijo.Descripcion</h4>
+                                                        <div class="div-btn-descarga">
+                                                            <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>

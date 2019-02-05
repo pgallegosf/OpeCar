@@ -1,0 +1,13 @@
+﻿body {
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background: #78b82a;
+    color: #fff;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.125);*/
+}
+.link-titulo {
+    color: #fff!important;
+}

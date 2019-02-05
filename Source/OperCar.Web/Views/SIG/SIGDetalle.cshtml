@@ -1,0 +1,76 @@
+﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EDocumento>
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/sig")
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default">
+            <div class="col-md-12     text-default small-screen-default">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal os-animation normal regular animated fadeIn" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                    @ViewBag.Title
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <br/>
+    <div class="container">
+        <div class="row vertical-top">
+            <div class="col-12 accordion" id="accordionExample">
+                @{int cont = 0;}
+                @foreach (var item in Model.Where(x => x.IdPadre == @ViewBag.IdPadre))
+                {
+
+
+                    if (cont == 0)
+                    {
+                        string collapse = "collapse" + @item.IdDocumento;
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
+                                        @item.Descripcion
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="@collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        string collapse = "collapse" + @item.IdDocumento;
+                        <div class="card">
+                            <div class="card-header" id="heading@collapse">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                        @item.Descripcion
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="@collapse" class="collapse" aria-labelledby="heading@collapse" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    cont++;
+
+
+                }
+            </div>
+
+
+        </div>
+    </div>
+    <br/>
+</section>
+

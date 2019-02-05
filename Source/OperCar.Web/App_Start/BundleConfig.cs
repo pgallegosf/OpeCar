@@ -31,6 +31,8 @@ namespace OpeCar.OperCar.Web
                         "~/Scripts/areas/login.js"));
             bundles.Add(new ScriptBundle("~/bundles/aplicacion").Include(
                         "~/Scripts/areas/aplicacion.js"));
+            bundles.Add(new ScriptBundle("~/bundles/sig").Include(
+                        "~/Scripts/areas/sig.js"));
 
 
 
@@ -50,6 +52,8 @@ namespace OpeCar.OperCar.Web
                       "~/Content/css/areas/login.css"));
             bundles.Add(new StyleBundle("~/Content/organizacion").Include(
                       "~/Content/css/areas/organizacion.css"));
+            bundles.Add(new StyleBundle("~/Content/sig").Include(
+                      "~/Content/css/areas/sig.css"));
         }
     }
 }

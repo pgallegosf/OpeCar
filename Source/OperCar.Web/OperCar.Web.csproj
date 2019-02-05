@@ -174,10 +174,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\areas\sig.css" />
     <Content Include="Content\css\areas\login.css" />
     <Content Include="Content\css\areas\organizacion.css" />
     <Content Include="Content\css\bootstrap.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\general.css" />
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\particles\style.css" />
@@ -198,6 +198,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\areas\aplicacion.js" />
     <Content Include="Scripts\areas\login.js" />
+    <Content Include="Scripts\areas\sig.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\general.js" />
@@ -240,6 +241,7 @@
     <None Include="Properties\PublishProfiles\OpeCarWeb.pubxml" />
     <Content Include="Views\SIG\Index.cshtml" />
     <Content Include="Views\Organizacion\Index.cshtml" />
+    <Content Include="Views\SIG\SIGDetalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">

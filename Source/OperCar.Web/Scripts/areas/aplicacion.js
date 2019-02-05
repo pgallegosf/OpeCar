@@ -1,4 +1,7 @@
-﻿
+﻿$(document).ready(function () {
+    $(".OpenDoc").on("click", AbrirDoc);
+
+});
 function AbrirDoc() {
 
     //var descripcion = $("#descripcionCobertura").val();

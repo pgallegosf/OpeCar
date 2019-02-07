@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace OpeCar.BusinessEntities.GestionArchivo
 {
-    public class EDocumento
+    public class ESubArea
     {
-        public int IdDocumento { get; set; }
         public int IdSubArea { get; set; }
-        public string NombreDocumento { get; set; }
-        public string Extencion { get; set; }
-        public string UrlDocumento { get; set; }
+        public int IdArea { get; set; }
+        public int IdPadre { get; set; }
+        public string Descripcion { get; set; }
+
     }
 }

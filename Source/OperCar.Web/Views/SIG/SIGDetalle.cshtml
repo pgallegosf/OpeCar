@@ -21,76 +21,78 @@
         <div class="row vertical-top">
             <div class="col-12 accordion" id="accordionExample">
                 @{int cont = 0;}
-                @foreach (var item in Model.Where(x => x.IdPadre == @ViewBag.IdPadre))
+                @foreach (var item in ViewBag.listaSubArea)
                 {
 
-
-                    if (cont == 0)
+                    if (@item.IdArea == ViewBag.IdArea)
                     {
-                        string collapse = "collapse" + @item.IdDocumento;
-                        <div class="card">
-                            <div class="card-header header-area" id="headingOne">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
-                                        @item.Descripcion
-                                    </button>
-                                </h5>
-                            </div>
+                        if (cont == 0)
+                        {
+                            string collapse = "collapse" + @item.IdSubArea;
+                            <div class="card">
+                                <div class="card-header header-area" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
+                                            @item.Descripcion
+                                        </button>
+                                    </h5>
+                                </div>
 
-                            <div id="@collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div class="row">
-                                        @foreach (var itemHijo in Model.Where(x => x.IdPadre == item.IdDocumento))
-                                        {
+                                <div id="@collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            @foreach (var itemHijo in Model.Where(x => x.IdSubArea == item.IdSubArea))
+                                            {
                                                 <div class="col-2 card-documento">
-                                                     <div class="card" >
-                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                                    <div class="card">
+                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
                                                         <div class="card-body card-body-doc">
-                                                            <h4 class="nombre-doc">@itemHijo.Descripcion</h4>
+                                                            <h4 class="nombre-doc">@itemHijo.NombreDocumento</h4>
                                                             <div class="div-btn-descarga">
                                                                 <a class="botondescarga" target="_blank" href="#">Descargar</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                        }
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                    else
-                    {
-                        string collapse = "collapse" + @item.IdDocumento;
-                        <div class="card">
-                            <div class="card-header header-area" id="heading@collapse">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
-                                        @item.Descripcion
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="@collapse" class="collapse" aria-labelledby="heading@collapse" data-parent="#accordionExample">
-                                <div class="card-body">
-                                    <div class="row">
-                                        @foreach (var itemHijo in Model.Where(x => x.IdPadre == item.IdDocumento))
-                                        {
-                                            <div class="col-2 card-documento">
-                                                <div class="card">
-                                                    <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
-                                                    <div class="card-body card-body-doc">
-                                                        <h4 class="nombre-doc">@itemHijo.Descripcion</h4>
-                                                        <div class="div-btn-descarga">
-                                                            <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                        }
+                        else
+                        {
+                            string collapse = "collapse" + @item.IdSubArea;
+                            <div class="card">
+                                <div class="card-header header-area" id="heading@collapse">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                            @item.Descripcion
+                                        </button>
+                                    </h5>
+                                </div>
+                                <div id="@collapse" class="collapse" aria-labelledby="heading@collapse" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            @foreach (var itemHijo in Model.Where(x => x.IdSubArea == @item.IdSubArea))
+                                            {
+                                                <div class="col-2 card-documento">
+                                                    <div class="card">
+                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
+                                                        <div class="card-body card-body-doc">
+                                                            <h4 class="nombre-doc">@itemHijo.NombreDocumento</h4>
+                                                            <div class="div-btn-descarga">
+                                                                <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        }
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     }
                     cont++;
 

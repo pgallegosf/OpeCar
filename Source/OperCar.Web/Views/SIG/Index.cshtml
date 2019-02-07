@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EDocumento>
+﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EArea>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,8 +7,8 @@
 <section class="section">
     <div class="container">
         <div class="row vertical-default">
-            <div class="col-md-12     text-default small-screen-default">
-                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal os-animation normal regular animated fadeIn" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
                     Sistema Integrado de Gestión
                 </h1>
             </div>
@@ -20,10 +20,10 @@
         <div class="row vertical-top">
             @foreach (var item in Model)
             {
-                <div class="col-md-2">
-                    <div class="figure margin-top-0 margin-bottom-0 image-effect-zoom-in  os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
-                        <a href="@Url.Action("SIGDetalle", new { idDocumento = @item.IdDocumento })" class="figure-image " target="_blank">
-                            <img width="252" height="238" src="@item.ImagenFondo" class="attachment-full size-full" alt="">
+                <div class="col-md-2 position-inh">
+                    <div class="figure margin-top-0 margin-bottom-0 image-effect-zoom-in  os-animation animated bounceInDown animation-inh position-inh" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                        <a href="@Url.Action("SIGDetalle", new { idArea = @item.IdArea })" class="figure-image" target="_blank">
+                            <img width="252" height="238" src="@item.UrlImg" class="attachment-full size-full" alt="">
                         </a>
                     </div>
                     <div class="col-text-1 text-normal  margin-top-0 margin-bottom-20 os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
@@ -33,14 +33,14 @@
                         <p>
                             <a href="#" target="_blank" rel="noopener">
                                 <span style="color: #534741;">
-                                  @item.Descripcion  
+                                    @item.Descripcion
                                 </span>
                             </a>
                         </p>
                     </div>
                 </div>
             }
-           
+
         </div>
     </div>
 </section>

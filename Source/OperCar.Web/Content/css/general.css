@@ -68,3 +68,6 @@ hr {
 .position-inh {
     position: inherit;
 }
+.animation-inh {
+    animation-name: none!important;
+}

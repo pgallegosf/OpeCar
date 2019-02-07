@@ -182,12 +182,15 @@
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\particles\style.css" />
     <Content Include="Content\images\cropped-cropped-ALEATICA_CMYK_POS-1-32x32.png" />
+    <Content Include="Content\images\enc_mision.PNG" />
+    <Content Include="Content\images\enc_valores.PNG" />
     <Content Include="Content\images\iconos_ALEATICA-14.png" />
     <Content Include="Content\images\iconos_ALEATICA-33.png" />
     <Content Include="Content\images\iconos_ALEATICA-37.png" />
     <Content Include="Content\images\iconos_ALEATICA-40.png" />
     <Content Include="Content\images\iconos_ALEATICA-53.png" />
     <Content Include="Content\images\iconos_ALEATICA-54.png" />
+    <Content Include="Content\images\iconos_capacitacion.png" />
     <Content Include="Content\images\iconos_colores_naranja-oscuro-61.png" />
     <Content Include="Content\images\iconos_colores_naranja-oscuro-62.png" />
     <Content Include="Content\images\iconos_colores_naranja-oscuro-63.png" />

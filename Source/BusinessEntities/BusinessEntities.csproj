@@ -42,6 +42,7 @@
     <Compile Include="GestionArchivo\EArea.cs" />
     <Compile Include="GestionArchivo\EDocumento.cs" />
     <Compile Include="GestionArchivo\ESubArea.cs" />
+    <Compile Include="GestionArchivo\ESubAreaDocumento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\ELogin.cs" />
   </ItemGroup>

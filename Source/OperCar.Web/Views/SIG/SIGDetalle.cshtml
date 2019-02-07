@@ -1,6 +1,6 @@
-﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EDocumento>
+﻿@model OpeCar.BusinessEntities.GestionArchivo.ESubAreaDocumento
+
 @{
-    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/sig")
@@ -17,80 +17,95 @@
     </div>
 </section>
 <section class="section background_soft_gray">
-    <br/>
+    <br />
     <div class="container">
         <div class="row vertical-top">
-            <div class="col-12">
-                <div class="lista-ultimo-subArea active">
-                    <span>Todo</span>
-                </div>
-                <div class="lista-ultimo-subArea">
-                    <span>PDF</span>
-                </div>
-                <div class="lista-ultimo-subArea">
-                    <span>Word</span>
-                </div>
-                 @*<ul>
-                <li>Todo</li>
-                <li>PDF</li>
-            </ul>*@
+            @{
+                if (Model.ListaSubAreas.Any(x => !x.IdPadre.HasValue && x.EsUltimo))
+                {
+                    <div class="col-12">
+                        <div class="lista-ultimo-subArea subAreaTodo active">
+                            <span>Todo</span>
+                        </div>
+                        @foreach (var item in Model.ListaSubAreas.Where(x => !x.IdPadre.HasValue && x.EsUltimo))
+                        {
+                            <div class="lista-ultimo-subArea" data-id="@item.IdSubArea">
+                                <span>@item.Descripcion</span>
+                            </div>
+                        }
                     </div>
+                    <div class="row col-12">
+                        @foreach (var doc in from item in Model.ListaSubAreas.Where(x => !x.IdPadre.HasValue && x.EsUltimo) from doc in Model.ListaDocumentos.Where(x => x.IdSubArea == item.IdSubArea) let car = doc.NombreDocumento select doc)
+                        {
+                            <div class="col-2 card-documento card-subArea @doc.IdSubArea">
+                                <div class="card">
+                                    <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                    <div class="card-body card-body-doc">
+                                        <h4 class="nombre-doc">@doc.NombreDocumento</h4>
+                                        <div class="div-btn-descarga">
+                                            <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
             <div class="col-12 accordion" id="accordionExample">
                 @{int cont = 0;}
-                @foreach (var item in ViewBag.listaSubArea)
+                @foreach (var item in Model.ListaSubAreas.Where(x => x.IdArea == ViewBag.IdArea && !x.EsUltimo))
                 {
 
-                    if (@item.IdArea == ViewBag.IdArea)
-                    {
-                        if (cont == 0)
-                        {
-                            string collapse = "collapse" + @item.IdSubArea;
-                            <div class="card">
-                                <div class="card-header header-area" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
-                                            @item.Descripcion
-                                        </button>
-                                    </h5>
-                                </div>
 
-                                <div id="@collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            @foreach (var itemHijo in Model.Where(x => x.IdSubArea == item.IdSubArea))
-                                            {
-                                                <div class="col-2 card-documento">
-                                                    <div class="card">
-                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
-                                                        <div class="card-body card-body-doc">
-                                                            <h4 class="nombre-doc">@itemHijo.NombreDocumento</h4>
-                                                            <div class="div-btn-descarga">
-                                                                <a class="botondescarga" target="_blank" href="#">Descargar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
+                    if (cont == 0)
+                    {
+                        string collapse = "collapse" + @item.IdSubArea;
+                        <div class="card">
+                            <div class="card-header header-area" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="true" aria-controls="@collapse">
+                                        @item.Descripcion
+                                    </button>
+                                </h5>
                             </div>
-                        }
-                        else
+
+                            <div id="@collapse" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    @{
+                        if (Model.ListaSubAreas.Any(x => x.IdPadre == item.IdSubArea && x.EsUltimo))
                         {
-                            string collapse = "collapse" + @item.IdSubArea;
-                            <div class="card">
-                                <div class="card-header header-area" id="heading@collapse">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
-                                            @item.Descripcion
-                                        </button>
-                                    </h5>
+                            <div class="col-12">
+                                <div class="lista-ultimo-subArea subAreaTodo active">
+                                    <span>Todo</span>
                                 </div>
-                                <div id="@collapse" class="collapse" aria-labelledby="heading@collapse" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            @foreach (var itemHijo in Model.Where(x => x.IdSubArea == @item.IdSubArea))
+                                @foreach (var subArea in Model.ListaSubAreas.Where(x => x.IdPadre == item.IdSubArea && x.EsUltimo))
+                                {
+                                    <div class="lista-ultimo-subArea" data-id="@subArea.IdSubArea">
+                                        <span>@subArea.Descripcion</span>
+                                    </div>
+                                }
+                            </div>
+                                        <div class="row col-12">
+                                            @foreach (var doc in from sub in Model.ListaSubAreas.Where(x => x.IdPadre == item.IdSubArea && x.EsUltimo) from doc in Model.ListaDocumentos.Where(x => x.IdSubArea == sub.IdSubArea) let car = doc.NombreDocumento select doc)
+                                            {
+                                                <div class="col-2 card-documento card-subArea @doc.IdSubArea">
+                                                    <div class="card">
+                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                                        <div class="card-body card-body-doc">
+                                                            <h4 class="nombre-doc">@doc.NombreDocumento</h4>
+                                                            <div class="div-btn-descarga">
+                                                                <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                        }
+                                    }
+                                    @*<div class="row">
+                                            @foreach (var itemHijo in Model.ListaDocumentos.Where(x => x.IdSubArea == item.IdSubArea))
                                             {
                                                 <div class="col-2 card-documento">
                                                     <div class="card">
@@ -104,12 +119,45 @@
                                                     </div>
                                                 </div>
                                             }
-                                        </div>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        string collapse = "collapse" + @item.IdSubArea;
+                        <div class="card">
+                            <div class="card-header header-area" id="heading@collapse">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed btn-titulo" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                        @item.Descripcion
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="@collapse" class="collapse" aria-labelledby="heading@collapse" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="row">
+                                        @foreach (var itemHijo in Model.ListaDocumentos.Where(x => x.IdSubArea == @item.IdSubArea))
+                                        {
+                                            <div class="col-2 card-documento">
+                                                <div class="card">
+                                                    <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                                    <div class="card-body card-body-doc">
+                                                        <h4 class="nombre-doc">@itemHijo.NombreDocumento</h4>
+                                                        <div class="div-btn-descarga">
+                                                            <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>
-                        }
+                        </div>
                     }
+
                     cont++;
 
 
@@ -119,6 +167,6 @@
 
         </div>
     </div>
-    <br/>
+    <br />
 </section>
 @Scripts.Render("~/bundles/sig")

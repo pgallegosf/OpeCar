@@ -177,6 +177,7 @@
     <Content Include="Content\css\areas\sig.css" />
     <Content Include="Content\css\areas\login.css" />
     <Content Include="Content\css\areas\organizacion.css" />
+    <Content Include="Content\css\areas\sigDetalle.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\general.css" />
     <Content Include="Content\css\home.css" />

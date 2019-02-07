@@ -48,3 +48,19 @@
     padding-top: 2px;
 }
 
+.lista-ultimo-subArea {
+    float: left;
+    cursor: pointer;
+    margin: 4px;
+    color: #534741;
+    padding: 2px 10px;
+    border-radius: 30px;
+}
+.lista-ultimo-subArea.active{
+    color: #FFF;
+    background-color: #F79468;
+}
+.lista-ultimo-subArea:hover{
+    color: #FFF;
+    background-color: #F79468;
+}

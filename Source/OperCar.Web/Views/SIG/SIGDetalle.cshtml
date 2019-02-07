@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/sig")
+@Styles.Render("~/Content/sigDetalle")
 <section class="section">
     <div class="container">
         <div class="row vertical-default">
@@ -19,6 +20,21 @@
     <br/>
     <div class="container">
         <div class="row vertical-top">
+            <div class="col-12">
+                <div class="lista-ultimo-subArea active">
+                    <span>Todo</span>
+                </div>
+                <div class="lista-ultimo-subArea">
+                    <span>PDF</span>
+                </div>
+                <div class="lista-ultimo-subArea">
+                    <span>Word</span>
+                </div>
+                 @*<ul>
+                <li>Todo</li>
+                <li>PDF</li>
+            </ul>*@
+                    </div>
             <div class="col-12 accordion" id="accordionExample">
                 @{int cont = 0;}
                 @foreach (var item in ViewBag.listaSubArea)
@@ -105,4 +121,4 @@
     </div>
     <br/>
 </section>
-
+@Scripts.Render("~/bundles/sig")

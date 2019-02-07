@@ -54,6 +54,8 @@ namespace OpeCar.OperCar.Web
                       "~/Content/css/areas/organizacion.css"));
             bundles.Add(new StyleBundle("~/Content/sig").Include(
                       "~/Content/css/areas/sig.css"));
+            bundles.Add(new StyleBundle("~/Content/sigDetalle").Include(
+                      "~/Content/css/areas/sigDetalle.css"));
         }
     }
 }

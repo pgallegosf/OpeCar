@@ -71,3 +71,7 @@ hr {
 .animation-inh {
     animation-name: none!important;
 }
+.lbl-modal {
+    font-size: 16px;
+    color: #534741;
+}

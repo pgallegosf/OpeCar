@@ -22,7 +22,7 @@
             {
                 <div class="col-md-2 position-inh">
                     <div class="figure margin-top-0 margin-bottom-0 image-effect-zoom-in  os-animation animated bounceInDown animation-inh position-inh" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
-                        <a href="@Url.Action("SIGDetalle", new { idArea = @item.IdArea })" class="figure-image" target="_blank">
+                        <a href="@Url.Action("SIGDetalle","SIG", new { idArea = @item.IdArea })"  class="figure-image" >
                             <img width="252" height="238" src="@item.UrlImg" class="attachment-full size-full" alt="">
                         </a>
                     </div>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-text-1 text-normal font_24px margin-top-0 margin-bottom-20 os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
                         <p>
-                            <a href="#" target="_blank" rel="noopener">
+                            <a href="#" rel="noopener">
                                 <span style="color: #534741;">
                                     @item.Descripcion
                                 </span>

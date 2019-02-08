@@ -82,85 +82,7 @@ namespace OpeCar.OperCar.Web.Controllers
             Descripcion = "Estadística y Control de Gestión",
             IdTipo = 1
         };
-        public static EArea Area10 = new EArea
-        {
-
-            IdArea = 11,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Recaudación",
-            IdTipo = 2
-        };
-        public static EArea Area11 = new EArea
-        {
-            IdArea = 12,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Conservación Vial",
-            IdTipo = 2
-        };
-        public static EArea Area12 = new EArea
-        {
-            IdArea = 13,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Atención al Usuario",
-            IdTipo = 2
-        };
-        public static EArea Area13 = new EArea
-        {
-            IdArea = 14,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Sistemas e Infraestructura de TI",
-            IdTipo = 2
-        };
-        public static EArea Area14 = new EArea
-        {
-            IdArea = 15,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Recursos Humanos",
-            IdTipo = 2
-        };
-        public static EArea Area15 = new EArea
-        {
-            IdArea = 16,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Logística y Almacén",
-            IdTipo = 2
-        };
-        public static EArea Area16 = new EArea
-        {
-            IdArea = 17,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Seguridad y Salud en el Trabajo",
-            IdTipo = 2
-        };
-        public static EArea Area17 = new EArea
-        {
-            IdArea = 18,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Gestión Ambiental y Asuntos Sociales",
-            IdTipo = 2
-        };
-        public static EArea Area18 = new EArea
-        {
-            IdArea = 19,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Estadística y Control de Gestión",
-            IdTipo = 2
-        };
-        public static EArea Area19 = new EArea
-        {
-            IdArea = 20,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Prevención de riesgos, GA, RSE",
-            IdTipo = 2
-        };
-        public static EArea Area20 = new EArea
-        {
-            IdArea = 21,
-            UrlImg = "Content/images/iconos_ALEATICA-40.png",
-            Descripcion = "Sistema Integrado de Gestión",
-            IdTipo = 2
-        };
-        public List<EArea> ListaArea = new List<EArea> { Area,Area1, Area2, Area3, Area4, Area5, Area6, Area7, Area8, Area9, Area10, Area11, Area12, Area13, Area14, Area15, Area16, Area17, Area18, Area19, Area20};
+        public List<EArea> ListaArea = new List<EArea> { Area,Area1, Area2, Area3, Area4, Area5, Area6, Area7, Area8, Area9};
         // GET: SIG                                                          
         public ActionResult Index()
         {
@@ -244,21 +166,14 @@ namespace OpeCar.OperCar.Web.Controllers
                 IdSubArea = 10,
                 IdArea = 4,
                 Descripcion = "Procedimientos",
-                EsUltimo = true
-            };
-            var area11 = new ESubArea
-            {
-                IdSubArea = 11,
-                IdArea = 4,
-                Descripcion = "Instructivos",
-                EsUltimo = true
+                EsUltimo = false
             };
             var area12 = new ESubArea
             {
                 IdSubArea = 12,
                 IdArea = 4,
                 Descripcion = "Formatos",
-                EsUltimo = true
+                EsUltimo = false
             };
             var area13 = new ESubArea
             {
@@ -474,21 +389,21 @@ namespace OpeCar.OperCar.Web.Controllers
             var area43 = new ESubArea
             {
                 IdSubArea = 43,
-                IdArea = 14,
+                IdArea = 4,
                 Descripcion = "2018",
-                IdPadre = 40,
+                IdPadre = 10,
                 EsUltimo = true
             };
             var area44 = new ESubArea
             {
                 IdSubArea = 44,
-                IdArea = 14,
+                IdArea = 4,
                 Descripcion = "2019",
-                IdPadre = 40,
+                IdPadre = 10,
                 EsUltimo = true
             };
             //end pruebas sistemas
-            var listaSubArea = new List<ESubArea> { area1, area2, area3, area4, area5, area6, area7, area8, area9, area10, area11, area12, area13, area14, area15, area16, area17, area18, area19, area20, area21, area22, area23, area24, area25, area26, area27, area28, area29, area30, area31, area32, area33, area34, area35, area36, area37, area38, area39, area40, area41, area42, area43, area44 };
+            var listaSubArea = new List<ESubArea> { area1, area2, area3, area4, area5, area6, area7, area8, area9, area10, area12, area13, area14, area15, area16, area17, area18, area19, area20, area21, area22, area23, area24, area25, area26, area27, area28, area29, area30, area31, area32, area33, area34, area35, area36, area37, area38, area39, area40, area41, area42, area43, area44 };
 
             var documento1 = new EDocumento
             {
@@ -528,7 +443,7 @@ namespace OpeCar.OperCar.Web.Controllers
             {
                 IdDocumento = 5,
                 IdSubArea = 43,
-                NombreDocumento = "Plan 1-2018",
+                NombreDocumento = "Procedimientos 1-2018",
                 UrlDocumento = "~/Content/images/iconos_ALEATICA-40.png",
                 Extencion = "pdf"
             };
@@ -536,7 +451,7 @@ namespace OpeCar.OperCar.Web.Controllers
             {
                 IdDocumento = 6,
                 IdSubArea = 43,
-                NombreDocumento = "Plan 2-2018",
+                NombreDocumento = "Procedimientos 2-2018",
                 UrlDocumento = "~/Content/images/iconos_ALEATICA-40.png",
                 Extencion = "pdf"
             };
@@ -544,7 +459,7 @@ namespace OpeCar.OperCar.Web.Controllers
             {
                 IdDocumento = 7,
                 IdSubArea = 44,
-                NombreDocumento = "Planificación 1-2019",
+                NombreDocumento = "Procedure 1-2019",
                 UrlDocumento = "~/Content/images/iconos_ALEATICA-40.png",
                 Extencion = "pdf"
             };
@@ -552,7 +467,7 @@ namespace OpeCar.OperCar.Web.Controllers
             {
                 IdDocumento = 8,
                 IdSubArea = 44,
-                NombreDocumento = "Planificación 2-2019",
+                NombreDocumento = "Procedure 2-2019",
                 UrlDocumento = "~/Content/images/iconos_ALEATICA-40.png",
                 Extencion = "pdf"
             };

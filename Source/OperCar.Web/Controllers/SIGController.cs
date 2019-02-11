@@ -5,12 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using Antlr.Runtime.Misc;
 using OpeCar.BusinessEntities.GestionArchivo;
+using OpeCar.BusinessLogic.Service.GestionDocumental;
 
 namespace OpeCar.OperCar.Web.Controllers
 {
     public class SIGController : Controller
     {
-
+        private NArea _Area { get; set; }
         public static EArea Area = new EArea
             {
                 
@@ -86,11 +87,16 @@ namespace OpeCar.OperCar.Web.Controllers
         // GET: SIG                                                          
         public ActionResult Index()
         {
-            //ViewBag.listaSIG = ListaArea;
+            //Tomar como ejemplo
+            _Area = new NArea();
+            var listaArea = _Area.Listar(1, null);
+            var li = listaArea;
+            //END ejemplo
             return View(ListaArea);
         }
         public ActionResult SIGDetalle(int idArea)
         {
+            
             var titulo = ListaArea.FirstOrDefault(x => x.IdArea == idArea);
             if (titulo != null)
                 ViewBag.Title = titulo.Descripcion;

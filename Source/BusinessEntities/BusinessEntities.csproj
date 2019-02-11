@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestionArchivo\EArea.cs" />
+    <Compile Include="GestionArchivo\EAreaResponse.cs" />
     <Compile Include="GestionArchivo\EDocumento.cs" />
     <Compile Include="GestionArchivo\ESubArea.cs" />
     <Compile Include="GestionArchivo\ESubAreaDocumento.cs" />

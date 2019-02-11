@@ -231,7 +231,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ServiceConfig\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +246,7 @@
     <Content Include="Views\SIG\Index.cshtml" />
     <Content Include="Views\Organizacion\Index.cshtml" />
     <Content Include="Views\SIG\SIGDetalle.cshtml" />
+    <Content Include="ServiceConfig\EndPoint.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">

@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{1D97BE34-E1F1-431C-9AAF-BCE1D7D4BD55}"
+	ProjectSection(SolutionItems) = preProject
+		Library\LP.Util.Web.dll = Library\LP.Util.Web.dll
+		Library\Rest.dll = Library\Rest.dll
+		Library\System.Net.Http.Formatting.dll = Library\System.Net.Http.Formatting.dll
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{AB3BCBCF-1AFE-4A39-A074-8EBD091E1A99}"
 EndProject

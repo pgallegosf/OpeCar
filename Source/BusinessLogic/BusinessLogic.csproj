@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\GestionDocumental\NArea.cs" />
+    <Compile Include="Service\GestionDocumental\NDocumento.cs" />
+    <Compile Include="Service\GestionDocumental\NSubArea.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -39,11 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base.cs" />
     <Compile Include="GestionArchivo\EArea.cs" />
+    <Compile Include="GestionArchivo\EAreaRequest.cs" />
     <Compile Include="GestionArchivo\EAreaResponse.cs" />
     <Compile Include="GestionArchivo\EDocumento.cs" />
+    <Compile Include="GestionArchivo\EDocumentoRequest.cs" />
+    <Compile Include="GestionArchivo\EDocumentoResponse.cs" />
     <Compile Include="GestionArchivo\ESubArea.cs" />
     <Compile Include="GestionArchivo\ESubAreaDocumento.cs" />
+    <Compile Include="GestionArchivo\ESubAreaRequest.cs" />
+    <Compile Include="GestionArchivo\ESubAreaResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\ELogin.cs" />
   </ItemGroup>

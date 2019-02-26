@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LP.Util.Web;
 using OpeCar.BusinessEntities.GestionArchivo;
 using Rest;
@@ -20,6 +16,13 @@ namespace OpeCar.ServiceAgent.Repositories.GestionDocumental
             var metodoComplete = string.Format(metodo, idTipo);
 
             return CallApiRest.Get<List<EAreaResponse>>(urlBase, metodoComplete, headers);
+        }
+        public bool Registrar(EAreaRequest request, string headers)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Area_Registrar");
+            return CallApiRest.Post<bool, EAreaRequest>(request, urlBase, metodo, headers);
         }
     }
 }

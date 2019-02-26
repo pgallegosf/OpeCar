@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Antlr.Runtime.Misc;
+using Newtonsoft.Json;
 using OpeCar.BusinessEntities.GestionArchivo;
 using OpeCar.BusinessLogic.Service.GestionDocumental;
 
@@ -88,18 +90,22 @@ namespace OpeCar.OperCar.Web.Controllers
         public ActionResult Index()
         {
             //Tomar como ejemplo
-            _Area = new NArea();
+             _Area = new NArea();
             var listaArea = _Area.Listar(1, null);
-            var li = listaArea;
+            //var li = listaArea;
             //END ejemplo
-            return View(ListaArea);
+            return View(listaArea);
         }
         public ActionResult SIGDetalle(int idArea)
         {
-            
-            var titulo = ListaArea.FirstOrDefault(x => x.IdArea == idArea);
-            if (titulo != null)
-                ViewBag.Title = titulo.Descripcion;
+            _Area = new NArea();
+            var _SubArea = new NSubArea();
+            var _Documento = new NDocumento();
+            var area = _Area.Listar(1, null).FirstOrDefault(x => x.IdArea == idArea);
+            if (area != null)
+            {
+                ViewBag.Title = area.Descripcion;
+            }
 
             ViewBag.IdArea= idArea;
             
@@ -493,10 +499,46 @@ namespace OpeCar.OperCar.Web.Controllers
             //lista.Add(documento19);
             //lista.Add(documento20);
             var modelo = new ESubAreaDocumento();
-            modelo.ListaDocumentos = listaDocumento;
-            modelo.ListaSubAreas = listaSubArea.Where(x=>x.IdArea==idArea).ToList();
+            //modelo.ListaDocumentos = listaDocumento;
+            modelo.ListaDocumentos = _Documento.Listar(idArea, null); 
+            //modelo.ListaSubAreas = listaSubArea.Where(x=>x.IdArea==idArea).ToList();
+            modelo.ListaSubAreas = _SubArea.Listar(idArea, null);
 
             return View(modelo);
+        }
+        public ActionResult ObtenerFichero(string urlDoc)
+        {
+            //Aquí convendría validar que id no contenga cosas raras
+
+            string rutaCompleta = Path.Combine(@"d:\usb\CV\", urlDoc);
+            return File(rutaCompleta, MimeMapping.GetMimeMapping(rutaCompleta), urlDoc);
+        }
+
+        public JsonResult RegistrarSubArea(ESubAreaRequest request)
+        {
+            NSubArea _NsubArea= new NSubArea();
+            //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
+            var result = _NsubArea.Registrar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ListaComboSubArea(ESubAreaRequest request)
+        {
+            NSubArea _NsubArea = new NSubArea();
+            var result = _NsubArea.Listar(request.IdArea, null).Where(x=>x.IdPadre==request.IdPadre).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult RegistrarDocumento(EDocumentoRequest request)
+        {
+            NDocumento _Ndocumento = new NDocumento();
+            //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
+            var result = _Ndocumento.Registrar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

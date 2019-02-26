@@ -40,6 +40,21 @@ namespace OpeCar.OperCar.Web
                  new { controller = "SIG", action = "SIGDetalle", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                 "ObtenerFichero",
+                "ObtenerFichero",
+                 new { controller = "SIG", action = "ObtenerFichero", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                 "RegistrarSubArea",
+                "RegistrarSubArea",
+                 new { controller = "SIG", action = "RegistrarSubArea", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                 "ListaComboSubArea",
+                "ListaComboSubArea",
+                 new { controller = "SIG", action = "ListaComboSubArea", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 name: "Aplicacion",
                 url: "Aplicacion",
                 defaults: new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }

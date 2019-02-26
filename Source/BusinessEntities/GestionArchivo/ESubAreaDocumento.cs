@@ -4,8 +4,8 @@ namespace OpeCar.BusinessEntities.GestionArchivo
 {
     public class ESubAreaDocumento
     {
-        public List<EDocumento> ListaDocumentos { get; set; }
-        public List<ESubArea> ListaSubAreas { get; set; }
+        public List<EDocumentoResponse> ListaDocumentos { get; set; }
+        public List<ESubAreaResponse> ListaSubAreas { get; set; }
 
     }
 }

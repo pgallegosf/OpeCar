@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OpeCar.BusinessEntities.GestionArchivo
+﻿namespace OpeCar.BusinessEntities.GestionArchivo
 {
     public class EDocumento
     {

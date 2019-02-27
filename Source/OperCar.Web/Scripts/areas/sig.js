@@ -7,7 +7,7 @@
     $('#btnAddSubAreaPrim').on("click", ActualizarDatosSubArea);
     $('#btnGuardarSubArea').on("click", RegistrarSubArea);
     $('#btnGuardarDocumento').on("click", RegistrarDocumento);
-    $('#btnAddSubAreaSec').on("click", ActualizarDatosSubArea);
+    //$('#btnAddSubAreaSec').on("click", ActualizarDatosSubArea);
       
 });
 function HabilitarActive() {
@@ -127,29 +127,43 @@ function ActualizarComboSubArea(idArea,idPadre) {
 function RegistrarDocumento() {
     var codigoSubArea = $("#selSubArea").val();
     var fileDoc = $("#fileDocumento").val();
-    
-    var descripcion = $("#txtSubArea").val();
-    var idPadre = $("#idPadre").val();
-    if (idPadre === "") {
-        idPadre = null;
-    }
-    var data = {
-        request: {
-            IdSubArea: codigoSubArea,
-            IdHistorial: 1,
-            EsUltimo: esUltimo,
-            IndicadorHabilitado: true,
-            Descripcion: descripcion,
-            IdPadre: idPadre
+    var extensiones = fileDoc.substring(fileDoc.lastIndexOf("."));
 
-        }
-    };
+    var formData = new FormData();
+    var file = document.getElementById("fileDocumento").files[0];
+    formData.append("file", file);
+
+    //var formData = new FormData(document.getElementById("formfiledocumento"));
+
+    //var descripcion = $("#txtSubArea").val();
+    //var idPadre = $("#idPadre").val();
+    //if (idPadre === "") {
+    //    idPadre = null;
+    //}
+
+    formData.append("idSubArea", codigoSubArea);
+
+    //var data = {
+    //    request: {
+    //        IdSubArea: codigoSubArea,
+    //        IdHistorial: 1,
+    //        EsUltimo: esUltimo,
+    //        IndicadorHabilitado: true,
+    //        Descripcion: descripcion,
+    //        IdPadre: idPadre
+
+    //    }
+    //};
     var jqxhr = $.ajax({
         type: "POST",
+        dataType: "html",
+        cache: false,
+        contentType: false,
+        processData: false,
         url: "RegistrarDocumento",
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        data: formData,
+        //contentType: "application/json; charset=utf-8",
+        //dataType: "json"
     })
     .done(function (data) {
         // $('#myModal').modal('hide');

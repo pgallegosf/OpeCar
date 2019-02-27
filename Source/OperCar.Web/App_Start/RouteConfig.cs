@@ -65,6 +65,11 @@ namespace OpeCar.OperCar.Web
                 new { controller = "Aplicacion", action = "AbrirArchivo", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+                 "RegistrarDocumento",
+                "RegistrarDocumento",
+                 new { controller = "SIG", action = "RegistrarDocumento", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
                 "Aplicaciones",
                 "Index",
                 new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }

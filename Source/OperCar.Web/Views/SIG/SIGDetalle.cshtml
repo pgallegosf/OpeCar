@@ -144,7 +144,7 @@
                                                         <div class="card-body card-body-doc">
                                                             <h4 class="nombre-doc">@doc.Descripcion</h4>
                                                             <div class="div-btn-descarga">
-                                                                <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = "GALLEGOSFLORES_POOL-CV.docx"})">Descargar</a>
+                                                                <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new { urlDoc = @doc.Descripcion })">Descargar</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -220,9 +220,9 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-file">
-                            <form enctype="multipart/form-data" id="formintegration" method="post">
-                                <input type="file" class="custom-file-input" id="fileDocumento" lang="es">
-                             </form>
+                            <form enctype="multipart/form-data" id="formfiledocumento" method="post">
+                                <input type="file" class="custom-file-input" id="fileDocumento" name="file" lang="es">
+                            </form>
                                 <label class="custom-file-label" for="fileDocumento">Seleccionar Archivo</label>
                         </div>
                     </div>
@@ -230,7 +230,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" id="btnGuardarDocumento" class="btn btn-primary">Guardar</button>
+                <button type="submit" id="btnGuardarDocumento" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

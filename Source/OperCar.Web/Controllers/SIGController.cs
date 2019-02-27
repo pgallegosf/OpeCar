@@ -510,7 +510,7 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             //Aquí convendría validar que id no contenga cosas raras
 
-            string rutaCompleta = Path.Combine(@"d:\usb\CV\", urlDoc);
+            string rutaCompleta = Path.Combine(@"D:\", urlDoc);
             return File(rutaCompleta, MimeMapping.GetMimeMapping(rutaCompleta), urlDoc);
         }
 
@@ -530,15 +530,48 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _NsubArea.Listar(request.IdArea, null).Where(x=>x.IdPadre==request.IdPadre).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult RegistrarDocumento(EDocumentoRequest request)
+        [HttpPost]
+        public string RegistrarDocumento(HttpPostedFileBase file, int idSubArea)
         {
+            var request = new EDocumentoRequest();
+            string response;
+            string urlDocumento;
+            if (file == null)
+            {
+                urlDocumento = " ";
+            }
+            else
+            {
+                string archivo = (file.FileName).ToLower();
+                string ext = Path.GetExtension(archivo);
+
+                urlDocumento = @"D:\\" + archivo + ext;
+                //file.SaveAs(Server.MapPath("~/" + urlDocumento));
+                file.SaveAs(urlDocumento);
+                request.UrlDocumento = urlDocumento;
+                request.Descripcion = archivo;
+                request.IdSubArea = idSubArea;
+                request.IdHistorico = 1;
+                if(ext==".pdf"){
+                    request.IdTipoDocumento = 1;
+                }
+                else if(ext==".doc" || ext==".docx"){
+                    request.IdTipoDocumento = 2;
+                }
+                else{
+                    request.IdTipoDocumento = 3;
+                }
+            }
+
             NDocumento _Ndocumento = new NDocumento();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
             request.IdUsuario = 1;
             request.FechaTransaccion = DateTime.Now;
+            request.IndicadorHabilitado = true;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _Ndocumento.Registrar(request, null);
-            return Json(result, JsonRequestBehavior.AllowGet);
+            response = "";
+            return response;
         }
     }
 }

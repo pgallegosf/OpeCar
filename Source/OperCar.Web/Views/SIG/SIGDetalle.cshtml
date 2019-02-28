@@ -11,7 +11,7 @@
         <div class="row vertical-default">
             <div class="col-md-12 position-inh">
 
-                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular">
                     @ViewBag.Title
                 </h1>
                 <div class="col-md-12 position-inh text-right">
@@ -39,7 +39,7 @@
                         </div>
                         @foreach (var item in Model.ListaSubAreas.Where(x => !x.IdPadre.HasValue && x.EsUltimo))
                         {
-                            <div class="lista-ultimo-subArea" data-id="@item.Codigo">
+                            <div class="lista-ultimo-subArea titulosubarea" data-id="@item.Codigo">
                                 <span>@item.Descripcion</span>
                             </div>
                         }
@@ -77,7 +77,7 @@
                         <div class="card-header header-area" id="heading-@collapse">
                             <h5 class="mb-0">
 
-                                <button class="btn btn-link collapsed btn-titulo " type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                <button class="btn btn-link collapsed btn-titulo titulosubarea" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
                                     @item.Descripcion
                                 </button>
 
@@ -101,24 +101,45 @@
                                     </div>
                                 </div>
                                 @{
-                                    if (Model.ListaDocumentos.Any(x => x.Codigo == item.Codigo))
-                                    {
-                                        foreach (var docPrimario in Model.ListaDocumentos.Where(x => x.Codigo == item.Codigo))
-                                        {
-                                            <div class="col-2 card-documento card-subArea @docPrimario.IdSubArea">
-                                                <div class="card">
-                                                    <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
-                                                    <div class="card-body card-body-doc">
-                                                        <h4 class="nombre-doc">@docPrimario.Descripcion</h4>
-                                                        <div class="div-btn-descarga">
-                                                            <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = "GALLEGOSFLORES_POOL-CV.docx"})">Descargar</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                        <hr/>
+                    if (Model.ListaDocumentos.Any(x => x.IdSubArea == item.Codigo))
+                    {
+                        <div class="row col-12">
+                            @foreach (var docPrimario in Model.ListaDocumentos.Where(x => x.IdSubArea == item.Codigo))
+                            {
+                            <div class="col-2 card-documento card-subArea @docPrimario.IdSubArea">
+                                <div class="card">
+                                    @if (@docPrimario.IdTipoDocumento==1) { 
+                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
                                     }
+                                    else if (@docPrimario.IdTipoDocumento == 2)
+                                    {
+                                        <img class="card-img-top" src="~/Content/images/word_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                    }
+                                    else if (@docPrimario.IdTipoDocumento == 3)
+                                    {
+                                        <img class="card-img-top" src="~/Content/images/excel_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                    }
+                                    else if (@docPrimario.IdTipoDocumento == 4)
+                                    {
+                                        <img class="card-img-top" src="~/Content/images/ppt_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                    }
+                                    else
+                                    {
+                                        <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                    }
+                                    
+                                    <div class="card-body card-body-doc">
+                                        <h4 class="nombre-doc">@docPrimario.Descripcion</h4>
+                                        <div class="div-btn-descarga">
+                                            <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new { urlDoc = @docPrimario.UrlDocumento,nombreDoc=@docPrimario.Descripcion })">Descargar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                                                        <hr/>
+                    }
                                     if (Model.ListaSubAreas.Any(x => x.IdPadre == item.Codigo && x.EsUltimo))
                                     {
                                         <div class="col-12">
@@ -140,11 +161,30 @@
                                             {
                                                 <div class="col-2 card-documento card-subArea @doc.IdSubArea">
                                                     <div class="card">
-                                                        <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
+                                                        @if (@doc.IdTipoDocumento == 1)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                                        }
+                                                        else if (@doc.IdTipoDocumento == 2)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/word_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                                        }
+                                                        else if (@doc.IdTipoDocumento == 3)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/excel_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                                        }
+                                                        else if (@doc.IdTipoDocumento == 4)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/ppt_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga" />
+                                                        }
                                                         <div class="card-body card-body-doc">
                                                             <h4 class="nombre-doc">@doc.Descripcion</h4>
                                                             <div class="div-btn-descarga">
-                                                                <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new { urlDoc = @doc.Descripcion })">Descargar</a>
+                                                                <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new { urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion })">Descargar</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -209,7 +249,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+               
                     <div class="form-group">
                         <select class="custom-select mr-sm-2" id="selSubArea">
                             <option selected>Seleccione una Carpeta</option>
@@ -220,16 +260,15 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-file">
-                            <form enctype="multipart/form-data" id="formfiledocumento" method="post">
+                            <form id="formfiledocumento" method="post" enctype="multipart/form-data">
                                 <input type="file" class="custom-file-input" id="fileDocumento" name="file" lang="es">
                             </form>
                                 <label class="custom-file-label" for="fileDocumento">Seleccionar Archivo</label>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
                 <button type="submit" id="btnGuardarDocumento" class="btn btn-primary">Guardar</button>
             </div>
         </div>

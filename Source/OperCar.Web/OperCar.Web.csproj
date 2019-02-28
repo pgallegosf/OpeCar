@@ -185,6 +185,7 @@
     <Content Include="Content\images\cropped-cropped-ALEATICA_CMYK_POS-1-32x32.png" />
     <Content Include="Content\images\enc_mision.PNG" />
     <Content Include="Content\images\enc_valores.PNG" />
+    <Content Include="Content\images\excel_imagev4.png" />
     <Content Include="Content\images\iconos_ALEATICA-14.png" />
     <Content Include="Content\images\iconos_ALEATICA-33.png" />
     <Content Include="Content\images\iconos_ALEATICA-37.png" />
@@ -197,7 +198,10 @@
     <Content Include="Content\images\iconos_colores_naranja-oscuro-63.png" />
     <Content Include="Content\images\logo.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\otro_imagev4.png" />
     <Content Include="Content\images\pdf_imagev4.jpg" />
+    <Content Include="Content\images\ppt_imagev4.png" />
+    <Content Include="Content\images\word_imagev4.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

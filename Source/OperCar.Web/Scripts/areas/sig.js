@@ -4,6 +4,9 @@
     $('.lista-ultimo-subArea').on("click", HabilitarActive);
     $('.lista-ultimo-subArea').on("click", HabilitarActive);
     $('.lista-ultimo-subArea.subAreaTodo').on("click", MostarTodosDocumentos);
+    $('.titulosubarea').on("click", function () {
+        $('.lista-ultimo-subArea.subAreaTodo').trigger("click");
+    });
     $('#btnAddSubAreaPrim').on("click", ActualizarDatosSubArea);
     $('#btnGuardarSubArea').on("click", RegistrarSubArea);
     $('#btnGuardarDocumento').on("click", RegistrarDocumento);
@@ -48,6 +51,9 @@ function RegistrarSubArea() {
         esUltimo = true;
     }
     var descripcion = $("#txtSubArea").val();
+    if (descripcion == null || descripcion == "") {
+        return;
+    }
     var idPadre = $("#idPadre").val();
     if (idPadre === "") {
         idPadre = null;
@@ -77,7 +83,7 @@ function RegistrarSubArea() {
         setTimeout(function () {
             $(".alert").fadeOut();
             location.reload();
-        }, 3000);
+        }, 2500);
         
         ActualizarSubArea();
     })
@@ -127,12 +133,19 @@ function ActualizarComboSubArea(idArea,idPadre) {
 function RegistrarDocumento() {
     var codigoSubArea = $("#selSubArea").val();
     var fileDoc = $("#fileDocumento").val();
+    if (codigoSubArea == null || fileDoc == null || codigoSubArea == "" || fileDoc=="") {
+        return;
+    }
+    
     var extensiones = fileDoc.substring(fileDoc.lastIndexOf("."));
 
     var formData = new FormData();
-    var file = document.getElementById("fileDocumento").files[0];
-    formData.append("file", file);
+    //var file = document.getElementById("fileDocumento").files[0];
+    //var file = $('#fileDocumento').prop("files")[0];
 
+    //formData.append("file", file);
+
+    formData = new FormData(document.getElementById("formfiledocumento"));
     //var formData = new FormData(document.getElementById("formfiledocumento"));
 
     //var descripcion = $("#txtSubArea").val();
@@ -154,17 +167,17 @@ function RegistrarDocumento() {
 
     //    }
     //};
-    var jqxhr = $.ajax({
-        type: "POST",
-        dataType: "html",
-        cache: false,
-        contentType: false,
-        processData: false,
-        url: "RegistrarDocumento",
-        data: formData,
-        //contentType: "application/json; charset=utf-8",
-        //dataType: "json"
-    })
+    try {
+        var jqxhr = $.ajax({
+            type: "POST",
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: "RegistrarDocumento",
+            data: formData,
+            //contentType: "application/json; charset=utf-8",
+            //dataType: "json"
+        })
     .done(function (data) {
         // $('#myModal').modal('hide');
         $(".btnCloseModal").trigger("click");
@@ -172,13 +185,20 @@ function RegistrarDocumento() {
         setTimeout(function () {
             $(".alert").fadeOut();
             location.reload();
-        }, 3000);
+        }, 2500);
 
-        ActualizarSubArea();
     })
-    .fail(function () {
-       
+    .fail(function (error) {
+        alert(error);
     })
     .always(function () {
     });
+    }
+    catch (error) {
+        console.error(error);
+        alert(error);
+        // expected output: ReferenceError: nonExistentFunction is not defined
+        // Note - error messages will vary depending on browser
+    }
+   
 }

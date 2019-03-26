@@ -10,6 +10,7 @@
     $('#btnAddSubAreaPrim').on("click", ActualizarDatosSubArea);
     $('#btnGuardarSubArea').on("click", RegistrarSubArea);
     $('#btnGuardarDocumento').on("click", RegistrarDocumento);
+    $(".alert").alert();
     //$('#btnAddSubAreaSec').on("click", ActualizarDatosSubArea);
       
 });
@@ -167,6 +168,7 @@ function RegistrarDocumento() {
 
     //    }
     //};
+    
     try {
         var jqxhr = $.ajax({
             type: "POST",

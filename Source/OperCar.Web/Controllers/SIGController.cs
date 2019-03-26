@@ -87,16 +87,19 @@ namespace OpeCar.OperCar.Web.Controllers
             {
                 string archivo = (file.FileName).ToLower();
                 string ext = Path.GetExtension(archivo);
-                string dicoUrl = ConfigurationManager.AppSettings["DiscoUrl"];
-                urlDocumento = @""+dicoUrl + idSubArea;
-                bool exists = System.IO.Directory.Exists(urlDocumento);
+                //string dicoUrl = ConfigurationManager.AppSettings["DiscoUrl"];
+                string dicoUrl = "~/Content/file/SIG/ ";
+                //urlDocumento = @""+dicoUrl + idSubArea;
+                urlDocumento = dicoUrl + idSubArea;
+                //bool exists = System.IO.Directory.Exists(urlDocumento);
+                bool exists = System.IO.Directory.Exists(Server.MapPath(urlDocumento));
 
                 if (!exists)
-                    System.IO.Directory.CreateDirectory(urlDocumento);
+                    System.IO.Directory.CreateDirectory(Server.MapPath(urlDocumento));
 
                 urlDocumento = @""+dicoUrl + idSubArea +"\\"+ archivo;
                 //file.SaveAs(Server.MapPath("~/" + urlDocumento));
-                file.SaveAs(urlDocumento);
+                file.SaveAs(Server.MapPath(urlDocumento));
                 request.UrlDocumento = urlDocumento;
                 request.Descripcion = archivo;
                 request.IdSubArea = idSubArea;

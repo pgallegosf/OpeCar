@@ -24,5 +24,14 @@ namespace OpeCar.ServiceAgent.Repositories.GestionDocumental
             var metodo = _utilEndPoint.GetMethod(service, "Documento_Registrar");
             return CallApiRest.Post<bool, EDocumentoRequest>(request, urlBase, metodo, headers);
         }
+        public bool Eliminar(int idDocumento, string headers)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Documento_Eliminar");
+            var metodoComplete = string.Format(metodo, idDocumento);
+
+            return CallApiRest.Get<bool>(urlBase, metodoComplete, headers);
+        }
     }
 }

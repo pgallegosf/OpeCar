@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.ESeccionResponse>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,38 +9,37 @@
     <div class="container">
         <div class="row vertical-default">
             <div class="col-md-12 position-inh">
-                <div class="fondo-mision position-inh">
-                    <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular  subtittle-organizacion ">
-                        Misión
-                    </h1>
+                @foreach (var item in Model)
+                {
+
+                    <div class="fondo-mision position-inh">
+                        <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular  subtittle-organizacion ">
+                            @item.Titulo
+                        </h1>
+                    </div>
+                    if (@item.RutaMultimedia == "")
+                    {
+                        <div class="col-text-1 text-normal font_24px element-top-20 element-bottom-20" data-os-animation="none" data-os-animation-delay="0s">
+                            <p>@item.Contenido</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-text-1 text-normal font_24px element-top-20 element-bottom-20" data-os-animation="none" data-os-animation-delay="0s">
+                                <p>@item.Contenido</p>
+                            </div>
+                        </div>
+                <div class="col-md-6">
+                    <img src="@item.RutaMultimedia" class="attachment-full size-full" alt=""/>
                 </div>
-                <div class="col-text-1 text-normal font_24px element-top-20 element-bottom-20" data-os-animation="none" data-os-animation-delay="0s">
-                    <p>Brindar servicios de Operación y Conservación de Infraestructura Vial, que excedan las expectativas de nuestros clientes y grupos de interés, con las mejores prácticas de gestión y excelencia, contribuyendo al desarrollo sostenible de las comunidades en que operamos.</p>
-                </div>
-                <div class="fondo-mision">
-                    <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal os-animation normal regular animated fadeIn subtittle-organizacion" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
-                        Visión
-                    </h1>
-                </div>
-                <div class="col-text-1 text-normal font_24px element-top-20 element-bottom-20" data-os-animation="none" data-os-animation-delay="0s">
-                    <p>A finales del 2020, convertirnos en la empresa especializada en servicios de Operación y Conservación de la Infraestructura Vial, reconocido por superar las expectativas de los clientes y por contribuir al desarrollo sostenible de nuestro planeta.</p>
-                </div>
-                <div class="fondo-valores">
-                    <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal os-animation normal regular animated fadeIn subtittle-organizacion" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
-                        Valores corporativos
-                    </h1>
-                </div>
-                <div class="col-text-1 text-normal font_24px element-top-20 element-bottom-20" data-os-animation="none" data-os-animation-delay="0s">
-                    <p>Toda referencia en nuestro Cuerpo Normativo a “la Comisión de Auditoría, Cumplimiento y Responsabilidad Social” debe entenderse ante su ausencia por el “Consejero Delegado”.</p>
-                </div>
-                <div class="fondo-valores">
-                    <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal os-animation normal regular animated fadeIn subtittle-organizacion" data-os-animation="fadeIn" data-os-animation-delay="0s" style="animation-delay: 0s;">
-                        Organigrama Empresarial
-                    </h1>
-                </div>
-                <div class="col-text-1 text-normal font_24px element-top-20 element-bottom-20" data-os-animation="none" data-os-animation-delay="0s">
-                    <p>En construcción.</p>
-                </div>
+                    </div>
+                    }
+                }
+
+
+                
             </div>
         </div>
     </div>

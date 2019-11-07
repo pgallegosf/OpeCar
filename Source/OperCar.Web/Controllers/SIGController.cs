@@ -19,15 +19,56 @@ namespace OpeCar.OperCar.Web.Controllers
         // GET: SIG                                                          
         public ActionResult Index()
         {
-            //Tomar como ejemplo
+            var rolAdmin = System.Web.HttpContext.Current.Session["rolAdmin"];
+            ViewBag.EsSuperAdmin = rolAdmin != null && rolAdmin.ToString().Equals("superAdmin");
+            //ViewBag.EsAdmin = true;
+            //ViewBag.EsSuperAdmin = true;
              _Area = new NArea();
             var listaArea = _Area.Listar(1, null);
-            //var li = listaArea;
-            //END ejemplo
+            var rol = System.Web.HttpContext.Current.Session["rolUsuario"];
+            if (rol == null) return RedirectToAction("Index", "Login");
+            ViewBag.EsAdmin = rol.ToString().Equals("admin");
             return View(listaArea);
+        }
+        public JsonResult RegistrarArea(EAreaRequest request)
+        {
+            NArea _NsubArea = new NArea();
+            //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
+            request.IdTipoArea = 1;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            request.UrlImg = "Content/images/iconos_ALEATICA-40.png";
+            //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
+            var result = _NsubArea.Registrar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult EditarArea(EAreaRequest request)
+        {
+            NArea _NsubArea = new NArea();
+            //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
+            request.IdTipoArea = 1;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
+            var result = _NsubArea.Editar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult EliminarArea(EAreaRequest request)
+        {
+            NArea _NsubArea = new NArea();
+            request.IdTipoArea = 1;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            var result = _NsubArea.Eliminar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult SIGDetalle(int idArea)
         {
+            var rolAdmin = System.Web.HttpContext.Current.Session["rolAdmin"];
+            ViewBag.EsSuperAdmin = rolAdmin != null && rolAdmin.ToString().Equals("superAdmin");
+            var rol = System.Web.HttpContext.Current.Session["rolUsuario"];
+            if (rol == null) return RedirectToAction("Index", "Login");
+            ViewBag.EsAdmin = rol.ToString().Equals("admin");
             _Area = new NArea();
             var _SubArea = new NSubArea();
             var _Documento = new NDocumento();
@@ -67,6 +108,27 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _NsubArea.Registrar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult EditarSubArea(ESubAreaRequest request)
+        {
+            NSubArea _NsubArea = new NSubArea();
+            //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
+            var result = _NsubArea.Editar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult EliminarSubArea(ESubAreaRequest request)
+        {
+            NSubArea _NsubArea = new NSubArea();
+            //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
+            request.IdUsuario = 1;
+            request.FechaTransaccion = DateTime.Now;
+            //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
+            var result = _NsubArea.Eliminar(request, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult ListaComboSubArea(ESubAreaRequest request)
         {
             NSubArea _NsubArea = new NSubArea();
@@ -85,10 +147,10 @@ namespace OpeCar.OperCar.Web.Controllers
             }
             else
             {
-                string archivo = (file.FileName).ToLower();
+                string archivo = (file.FileName);
                 string ext = Path.GetExtension(archivo);
                 //string dicoUrl = ConfigurationManager.AppSettings["DiscoUrl"];
-                string dicoUrl = "~/Content/file/SIG/ ";
+                string dicoUrl = "~/Content/file/SIG/";
                 //urlDocumento = @""+dicoUrl + idSubArea;
                 urlDocumento = dicoUrl + idSubArea;
                 //bool exists = System.IO.Directory.Exists(urlDocumento);
@@ -134,6 +196,13 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _Ndocumento.Registrar(request, null);
             response = "";
             return response;
+        }
+
+        public JsonResult EliminarDocumento(int idDocumento)
+        {
+            NDocumento _Ndocumento = new NDocumento();
+            var result = _Ndocumento.Eliminar(idDocumento, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

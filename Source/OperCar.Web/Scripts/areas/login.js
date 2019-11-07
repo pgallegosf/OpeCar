@@ -12,43 +12,49 @@ function Login() {
     if (usuario.length <= 0 || clave.length <= 0) {
         return;
     }
+
+    //var data = {
+    //    login: {
+    //        Usuario: usuario,
+    //        Clave: clave
+    //    }
+    //};
+
     var login = {
         Usuario: usuario,
         Clave: clave
     };
-    if (login.Usuario === "admin@operadora.pe" && login.Clave === "1234") {
-        var url = $("#RedirectTo").val();
-        location.href = url;
-        //window.location.replace("/Aplicacion");
-    }
-    else {
-        
-        $("#btnLogin").removeClass("disabled");
-        $("#contenedorMensaje").html(divmensaje);
-        $("#textAlert").text("Usuario y/o contraseña incorrectos");
-        $("#contenedorMensaje").show();
-        
-    }
 
-    //var ajax = $.ajax({
-    //    type: "POST",
-    //    url: "Login/Autenticar",
-    //    contentType: "application/json; charset=utf-8",
-    //    data: JSON.stringify(login),
-    //    dataType: "json",
-    //    success: function (data) {
-    //        if (data.Success) {
-    //            localStorage.setItem("tokenSW", JSON.stringify(data.Token));
-    //            window.location.replace("Home");
-    //        } else {
-    //            $("#btnLogin").removeClass("disabled");
-    //            $("#contenedorMensaje").show();
-    //            $("#contenedorMensaje").text(data.Error);
+    var ajax = $.ajax({
+        type: "POST",
+        url: "Login/Autenticar",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(login),
+        dataType: "json",
+        success: function (data) {
+            if (data.Success) {
+                localStorage.setItem("tokenSW", JSON.stringify(data.Token));
+                var url = $("#RedirectTo").val();
+                location.href = url;
+            } else {
+                $("#btnLogin").removeClass("disabled");
+                $("#contenedorMensaje").html(divmensaje);
+                $("#textAlert").text(data.Error);
+                $("#contenedorMensaje").show();
 
-    //        }
+            }
 
-    //    }
-    //});
+        },
+        error: function (data) {
+            $("#btnLogin").removeClass("disabled");
+            $("#contenedorMensaje").html(divmensaje);
+            $("#textAlert").text("Usuario y/o contraseña incorrectos");
+            $("#contenedorMensaje").show();
+        }
+    });
+
+
+
 
 }
 

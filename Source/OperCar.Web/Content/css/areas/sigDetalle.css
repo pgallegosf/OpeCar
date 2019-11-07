@@ -36,6 +36,17 @@ position: absolute;
 .custom-select {
     font-size: 17px;
 }
-.custom-file-label {
-    font-size: 17px;
+
+.botonEliminar {
+    color: rgba(0, 0, 0, 0.125)!important;
+}
+.botonEliminar:hover {
+    color: red!important;
+    cursor: pointer;
+}
+.subArea-eliminar {
+    color: #FFFFFF;
+}
+.subArea-eliminar:hover {
+    color: red;
 }

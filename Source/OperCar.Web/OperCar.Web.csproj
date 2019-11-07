@@ -159,9 +159,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AplicacionController.cs" />
+    <Compile Include="Controllers\GDocumentariaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OrganizacionController.cs" />
+    <Compile Include="Controllers\SeguridadController.cs" />
     <Compile Include="Controllers\SIGController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,8 +209,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\areas\aplicacion.js" />
+    <Content Include="Scripts\areas\gestionDocumentaria.js" />
+    <Content Include="Scripts\areas\log.js" />
     <Content Include="Scripts\areas\login.js" />
+    <Content Include="Scripts\areas\organizacion.js" />
+    <Content Include="Scripts\areas\seguridad.js" />
     <Content Include="Scripts\areas\sig.js" />
+    <Content Include="Scripts\areas\sigDetalle.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\general.js" />
@@ -237,7 +245,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\file\SIG\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +252,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <Content Include="Content\file\SIG\ 1\0005246010013537131.pdf" />
+    <Content Include="Content\file\SIG\ 1\anita flores. lima - iquitos %281%29.pdf" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Scripts\particles\particles.json" />
@@ -254,6 +263,12 @@
     <Content Include="Views\Organizacion\Index.cshtml" />
     <Content Include="Views\SIG\SIGDetalle.cshtml" />
     <Content Include="ServiceConfig\EndPoint.config" />
+    <Content Include="Views\GDocumentaria\Index.cshtml" />
+    <Content Include="Views\GDocumentaria\GDocumentariaDetalle.cshtml" />
+    <Content Include="Views\Seguridad\Index.cshtml" />
+    <Content Include="Views\Aplicacion\AplicacionMantenimiento.cshtml" />
+    <Content Include="Views\Organizacion\OrganizacionMantenimiento.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">

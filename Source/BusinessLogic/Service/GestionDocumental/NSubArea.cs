@@ -20,5 +20,13 @@ namespace OpeCar.BusinessLogic.Service.GestionDocumental
         {
             return _filter.Registrar(request, headers);
         }
+        public bool Editar(ESubAreaRequest request, string headers)
+        {
+            return _filter.Editar(request, headers);
+        }
+        public bool Eliminar(ESubAreaRequest request, string headers)
+        {
+            return _filter.Eliminar(request, headers);
+        }
     }
 }

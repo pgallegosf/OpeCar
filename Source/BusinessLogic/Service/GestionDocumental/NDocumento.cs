@@ -20,5 +20,9 @@ namespace OpeCar.BusinessLogic.Service.GestionDocumental
         {
             return _filter.Registrar(request, headers);
         }
+        public bool Eliminar(int idDocumento, string headers)
+        {
+            return _filter.Eliminar(idDocumento, headers);
+        }
     }
 }

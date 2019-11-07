@@ -42,7 +42,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\GestionDocumental\NArea.cs" />
     <Compile Include="Service\GestionDocumental\NDocumento.cs" />
+    <Compile Include="Service\GestionDocumental\NEnlace.cs" />
+    <Compile Include="Service\GestionDocumental\NSeccion.cs" />
     <Compile Include="Service\GestionDocumental\NSubArea.cs" />
+    <Compile Include="Service\Seguridad\NLog.cs" />
+    <Compile Include="Service\Seguridad\NLogin.cs" />
+    <Compile Include="Service\Seguridad\NPermiso.cs" />
+    <Compile Include="Service\Seguridad\NUsuario.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

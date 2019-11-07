@@ -24,5 +24,19 @@ namespace OpeCar.ServiceAgent.Repositories.GestionDocumental
             var metodo = _utilEndPoint.GetMethod(service, "Area_Registrar");
             return CallApiRest.Post<bool, EAreaRequest>(request, urlBase, metodo, headers);
         }
+        public bool Editar(EAreaRequest request, string headers)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Area_Editar");
+            return CallApiRest.Post<bool, EAreaRequest>(request, urlBase, metodo, headers);
+        }
+        public bool Eliminar(EAreaRequest request, string headers)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Area_Eliminar");
+            return CallApiRest.Post<bool, EAreaRequest>(request, urlBase, metodo, headers);
+        }
     }
 }

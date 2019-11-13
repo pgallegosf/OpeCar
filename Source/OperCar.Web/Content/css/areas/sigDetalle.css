@@ -1,0 +1,52 @@
+﻿.background_soft_gray {
+    background: #FFFFFF !important;
+}
+
+.mb-0 .btn.btn-link.btn-titulo.collapsed:after {
+    content: "\f107";
+}
+.mb-0 .btn-link:focus, .btn-link.focus {
+    text-decoration: none!important;
+}
+.mb-0 .btn-link:focus:hover {
+    text-decoration: none!important;
+}
+.mb-0 .btn-link.btn-titulo.collapsed:focus, .btn-link.focus {
+    text-decoration: none!important;
+}
+.mb-0 .btn-link.btn-titulo.collapsed:hover {
+    text-decoration: none!important;
+}
+.mb-0 .btn.btn-link.btn-titulo:after {
+position: absolute;
+    display: block;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f106";
+    font-size: 14px;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.custom-select {
+    font-size: 17px;
+}
+
+.botonEliminar {
+    color: rgba(0, 0, 0, 0.125)!important;
+}
+.botonEliminar:hover {
+    color: red!important;
+    cursor: pointer;
+}
+.subArea-eliminar {
+    color: #FFFFFF;
+}
+.subArea-eliminar:hover {
+    color: red;
+}

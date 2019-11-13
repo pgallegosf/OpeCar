@@ -1,0 +1,14 @@
+﻿body {
+}
+.subtittle-organizacion{
+	color: #FFFFFF;
+	margin-left: 10px;
+}
+.fondo-mision {
+    /*background-image: url('../../images/enc_mision.PNG');*/
+    background-color: #78b82a;
+}
+
+.fondo-valores{
+	background-image: url("../../images/enc_mision.PNG");
+}

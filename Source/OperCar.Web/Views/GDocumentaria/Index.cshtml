@@ -1,0 +1,100 @@
+﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EAreaResponse>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                    Gestión Documentaria
+                </h1>
+                @if (@ViewBag.EsAdmin)
+                {
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-md-12 position-inh text-right">
+
+                            <button type="button" id="btnAddArea" class="btn btn-primary" data-toggle="modal" data-target="#modalArea" style="text-align: right; right: 0">
+                                +
+                            </button>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <div class="container">
+        <div class="alert alert-success text-right" style="display: none;">
+            <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
+        </div>
+        <div class="row vertical-top">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-2 position-inh">
+                    <div class="figure margin-top-0 margin-bottom-0 image-effect-zoom-in  os-animation animated bounceInDown animation-inh position-inh" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                        <a href="@Url.Action("GDocumentariaDetalle", "GDocumentaria", new {idArea = @item.IdArea})" class="figure-image">
+                            <img width="252" height="238" src="@item.UrlImg" class="attachment-full size-full" alt="">
+                        </a>
+                    </div>
+                    <div class="col-text-1 text-normal  margin-top-0 margin-bottom-20 os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                        <hr class="hr_brown_ohl">
+                    </div>
+                    <div class="col-text-1 text-normal font_24px margin-top-0 margin-bottom-20 os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
+                        <p class="descripcionArea @item.IdArea">
+                            @if (@ViewBag.EsAdmin)
+                            {
+
+                                <span style="color: #534741;" data-idarea="@item.IdArea" data-descripcion="@item.Descripcion" class="area-edit">
+                                    @item.Descripcion
+                                </span>
+                                <input type="text" data-idarea="@item.IdArea" class="form-control txtDescripcionArea" style="display: none;" value="@item.Descripcion">
+                                <button class="btn btn-link area-eliminar btnEliminar" type="button" data-idarea="@item.IdArea">
+                                    <i class=" fas fa-backspace"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <a href="#" rel="noopener">
+                                    <span style="color: #534741;">
+                                        @item.Descripcion
+                                    </span>
+                                </a>
+                            }
+                        </p>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="modalArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">Nueva Area</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="txtArea" class="col-form-label lbl-modal">Descripción:</label>
+                        <input type="text" class="form-control" id="txtArea">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarArea">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/bundles/gestionDocumentaria")

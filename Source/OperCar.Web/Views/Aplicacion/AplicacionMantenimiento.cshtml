@@ -1,0 +1,106 @@
+﻿@using System.Runtime.InteropServices.ComTypes
+@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EEnlaceResponse>
+@{
+    ViewBag.Title = "AplicacionMantenimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                    Mantenimiento de Aplicaciones
+                </h1>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-md-12 position-inh text-right">
+
+                            <button type="button" id="btnAddAplicacion" class="btn btn-primary" data-toggle="modal" data-target="#modalAplicacion" data-placement="top" title="Agregar Aplicación" style="text-align: right; right: 0">
+                                +
+                            </button>
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <div class="container">
+        <div class="alert alert-success text-right" style="display: none;">
+            <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
+        </div>
+        <div class="row vertical-top">
+            <div class="table-responsive-xl bd-example">
+                <table class="table table-hover table-borderless" id="tableAplicacion">
+                    <thead>
+                        <tr>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Enlace</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Fecha Creación</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr data-id="@item.IdEnlace">
+                                <td>@item.Descripcion</td>
+                                <td>@item.UrlEnlace</td>
+                                <td><img width="40" height="40" src="@item.ImgEnlace" class="attachment-full size-full" alt=""></td>
+                                <td>@item.FechaCreacion</td>
+                                <td>
+                                    <button class="btn btn-link aplicacion-editar" type="button" data-toggle="modal" data-target="#modalAplicacion"  data-placement="top" title="Editar Aplicación" data-id="@item.IdEnlace" data-enlace="@item.UrlEnlace" data-descripcion="@item.Descripcion" data-urlimg="@item.ImgEnlace">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-link aplicacion-eliminar btnEliminar" data-toggle="tooltip" data-placement="top" title="Eliminar Aplicación" type="button" data-id="@item.IdEnlace">
+                                        <i class=" fas fa-backspace"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="modalAplicacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">Nueva Aplicación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formAplicacion" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="text" class="form-control" id="txtIdAplicacion" name="idAplicacion" style="display:none;">
+                    <div class="form-group">
+                        <label for="txtAplicacion" class="col-form-label lbl-modal">Descripción:</label>
+                        <input type="text" class="form-control" id="txtAplicacion" name="descripcion">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtEnlace" class="col-form-label lbl-modal">Enlace:</label>
+                        <input type="text" class="form-control" id="txtEnlace" name="enlace">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="fileImagen" name="fileImagen" lang="es" onchange="MostrarNombreImagen()">
+                            <input type="text" name="idImagen" style="display: none;">
+                            <label class="custom-file-label" for="fileImagen" id="lblFileImagen">Seleccionar Imagen</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardarAplicacion">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/aplicacion")

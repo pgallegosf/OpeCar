@@ -1,0 +1,66 @@
+﻿body {
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background: #78b82a;
+    color: #fff;
+    /*border-bottom: 1px solid rgba(0, 0, 0, 0.125);*/
+}
+.collapse > .card-body {
+    border-top-color: #ffffff !important;
+    background: #F1F0EF !important;
+}
+.btn-titulo {
+    color: #ffffff!important;
+}
+.card-documento{
+    margin:2px;
+}
+
+.card-body-doc {
+    background-color: #f9f9f9 !important;
+    padding: 15px 8px 15px 8px;
+}
+.div-btn-descarga {
+    text-align: center;
+}
+.botondescarga {
+    font-size: 18px;
+    color: #fff;
+    background-color: #78b82a;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+.botondescarga:hover {
+    color: #fff;
+    background-color: #7476AB;
+}
+.nombre-doc {
+    color: #78b82a;
+    font-size: 16px;
+}
+.header-area {
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.lista-ultimo-subArea {
+    float: left;
+    cursor: pointer;
+    margin: 4px;
+    color: #534741;
+    padding: 2px 10px;
+    border-radius: 30px;
+}
+.lista-ultimo-subArea.active{
+    color: #FFF;
+    background-color: #F79468;
+}
+.lista-ultimo-subArea:hover{
+    color: #FFF;
+    background-color: #F79468;
+}

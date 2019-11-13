@@ -1,0 +1,114 @@
+﻿h1, h2, h3, h4, h5, h6 {
+    color: #78b82a;
+}
+.margin-top-0 {
+    margin-top: 0;
+}
+.margin-bottom-0 {
+    margin-bottom: 0;
+}
+.margin-top-20 {
+    margin-top: 20px;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 36px;
+}
+.background_soft_gray {
+    background: #F1F0EF !important;
+}
+#content {
+    background: #fff;
+    color: #534741;
+}
+.table-borderless > thead > tr {
+    background-color: #C0C0C0
+}
+/****aplicaciones***/
+
+
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.blog-os-animation.animated, .os-animation.animated, .recent-simple-os-animation.animated, .staff-os-animation.animated {
+    opacity: 1;
+}
+.figure {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    max-width: 100%;
+}
+.bounceInLeft {
+    animation-name: bounceInLeft;
+}
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+.figure-image img {
+    transition: all .5s;
+}
+
+hr.hr_brown_ohl {
+    border-top: 4px solid #e35000 !important;
+}
+hr {
+    border-top-color: #fff !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+.wp-caption img,img{max-width:100%;height:auto}
+.figure.image-effect-zoom-in:hover img {
+    transform: scale3d(1.1,1.1,1);
+}
+.font_24px {
+    font-size: 24px !important;
+}
+.position-inh {
+    position: inherit;
+}
+.animation-inh {
+    animation-name: none!important;
+}
+.lbl-modal {
+    font-size: 16px;
+    color: #534741;
+}
+.bd-example {
+    background-color: #FFFFFF !important;
+    font-size: 20px;
+    border:2px solid #f8f9fa!important;
+    margin-bottom: 1.5rem;
+}
+
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+.active-tr {
+    background: #c5ccd1 !important;
+}
+#selRol {
+    height: 2.5rem;
+}
+.btnDeleteItem:hover {
+    color: red;
+}
+
+.btnEliminar {
+    color: #78b82a;
+}
+.btnEliminar:hover {
+    color: red;
+}
+.custom-file-label {
+    font-size: 17px!important;
+}
+.custom-select {
+    font-size: 17px;
+}

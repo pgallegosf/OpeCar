@@ -1,0 +1,328 @@
+﻿@model OpeCar.BusinessEntities.GestionArchivo.ESubAreaDocumento
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/sig")
+@Styles.Render("~/Content/sigDetalle")
+
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default">
+            <div class="col-md-12 position-inh">
+
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular">
+                    @ViewBag.Title
+                </h1>
+@if (@ViewBag.EsAdmin)
+                    {
+                        <div class="col-md-12 position-inh text-right">
+
+                            <button type="button" id="btnAddSubAreaPrim" class="btn btn-primary" data-codigo="@ViewBag.IdArea" data-esultimo="0" data-toggle="modal" data-target="#modalSubArea" style="text-align: right; right: 0">
+                                +
+                            </button>
+
+                        </div>
+                    }
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <br />
+    <div class="container">
+        <div class="alert alert-success text-right" style="display: none;">
+            <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
+        </div>
+        <div class="row vertical-top">
+            @{
+                if (Model.ListaSubAreas.Any(x => !x.IdPadre.HasValue && x.EsUltimo))
+                {
+                    <div class="col-12">
+                        <div class="lista-ultimo-subArea subAreaTodo active">
+                            <span>Todo</span>
+                        </div>
+                        @foreach (var item in Model.ListaSubAreas.Where(x => !x.IdPadre.HasValue && x.EsUltimo))
+                        {
+                            <div class="lista-ultimo-subArea titulosubarea" data-id="@item.Codigo">
+                                <span>@item.Descripcion</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="row col-12">
+                        @foreach (var doc in from item in Model.ListaSubAreas.Where(x => !x.IdPadre.HasValue && x.EsUltimo)
+                                            from doc in Model.ListaDocumentos.Where(x => x.IdSubArea == item.Codigo)
+                                            let car = doc.Descripcion
+                                            select doc)
+                        {
+                            <div class="col-2 card-documento card-subArea @doc.IdSubArea">
+                                <div class="card">
+                                    <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
+                                    <div class="card-body card-body-doc">
+                                        <h4 class="nombre-doc">@doc.Descripcion</h4>
+                                        <div class="div-btn-descarga">
+                                            <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+            <div class="col-12 accordion" id="accordionExample">
+                @{int cont = 0;}
+                @foreach (var item in Model.ListaSubAreas.Where(x => x.IdArea == ViewBag.IdArea && !x.EsUltimo))
+                {
+
+
+
+                    string collapse = "collapse" + @item.Codigo;
+                    <div class="card">
+                        <div class="card-header header-area" id="heading-@collapse">
+                            <h5 class="mb-0 descripcionSubArea @item.Codigo">
+                                @if (@ViewBag.EsAdmin)
+                                {
+                                    <button class="btn btn-link btn-titulo collapsed titulosubarea subArea-edit" type="button" data-idsubarea="@item.Codigo" data-descripcion="@item.Descripcion" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                        @item.Descripcion
+                                    </button>
+                                    <input type="text" data-idsubarea="@item.Codigo" class="form-control txtDescripcionSubArea" style="display: none;" value="@item.Descripcion">
+                                    <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@item.Codigo">
+                                       <i class=" fas fa-backspace"></i>
+                                    </button>
+                                    @*<span style="color:#FFFFFF" data-idarea="@item.IdArea" data-descripcion="@item.Descripcion" class="subArea-edit">
+                                        @item.Descripcion
+                                    </span>*@
+                                }
+                                else
+                                {
+                                    <button class="btn btn-link collapsed btn-titulo titulosubarea" type="button" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
+                                        @item.Descripcion
+                                    </button>
+                                }
+
+                            </h5>
+                        </div>
+
+                        <div id="@collapse" class="collapse show" aria-labelledby="heading-@collapse" data-parent="#accordionExample">
+                            <div class="card-body">
+                                @if (@ViewBag.EsAdmin)
+                                {
+                                <div class="col-md-12 text-right">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            +
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <button type="button" id="btnAddSubAreaSec" class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#modalSubArea" onclick=" ActualizarDatosSubAreaSec(@ViewBag.IdArea, @item.Codigo, 1) ">Carpeta</button>
+                                            <a class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#modalDocumento" onclick=" ActualizarComboSubArea(@ViewBag.IdArea, @item.Codigo) ">Documento</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                                @{
+                                    if (Model.ListaDocumentos.Any(x => x.IdSubArea == item.Codigo))
+                                    {
+                                        <div class="row col-12">
+                                            @foreach (var docPrimario in Model.ListaDocumentos.Where(x => x.IdSubArea == item.Codigo))
+                                            {
+                                                <div class="col-2 card-documento card-subArea @docPrimario.IdSubArea">
+                                                    <div class="card">
+                                                        @if (@docPrimario.IdTipoDocumento == 1)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else if (@docPrimario.IdTipoDocumento == 2)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/word_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else if (@docPrimario.IdTipoDocumento == 3)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/excel_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else if (@docPrimario.IdTipoDocumento == 4)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/ppt_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+
+                                                        <div class="card-body card-body-doc">
+                                                            <h4 class="nombre-doc">@docPrimario.Descripcion</h4>
+                                                            <div class="div-btn-descarga">
+                                                                <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @docPrimario.UrlDocumento, nombreDoc = @docPrimario.Descripcion})">Descargar</a>
+                                                                @if (@ViewBag.EsAdmin)
+                                                                {
+                                                                    <a class="botonEliminar" onclick=" EliminarDocumento(@docPrimario.Codigo) ">x</a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                        <hr/>
+                                    }
+                                    if (Model.ListaSubAreas.Any(x => x.IdPadre == item.Codigo && x.EsUltimo))
+                                    {
+                                        <div class="col-12">
+                                            <div class="lista-ultimo-subArea subAreaTodo active">
+                                                <span>Todo</span>
+                                            </div>
+                                            @foreach (var subArea in Model.ListaSubAreas.Where(x => x.IdPadre == item.Codigo && x.EsUltimo))
+                                            {
+                                                <div class="lista-ultimo-subArea descripcionSubArea @subArea.Codigo" data-id="@subArea.Codigo">
+                                                    @if (@ViewBag.EsAdmin)
+                                                    {
+                                                        <span class="subareaUltimo-edit" data-idsubarea="@subArea.Codigo" data-descripcion="@subArea.Descripcion">@subArea.Descripcion</span>
+                                                        <input type="text" data-idsubarea="@subArea.Codigo" class="form-control txtDescripcionSubAreaUltimo" style="display: none;" value="@subArea.Descripcion">
+                                                        <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@subArea.Codigo">
+                                                            <i class=" fas fa-backspace"></i>
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@subArea.Descripcion</span>
+                                                    }
+                                                </div>
+                                            }
+                                                </div>
+                                        <div class="row col-12">
+                                            @foreach (var doc in from sub in Model.ListaSubAreas.Where(x => x.IdPadre == item.Codigo && x.EsUltimo)
+                                                from doc in Model.ListaDocumentos.Where(x => x.IdSubArea == sub.Codigo)
+                                                let car = doc.Descripcion
+                                                select doc)
+                                            {
+                                                <div class="col-2 card-documento card-subArea @doc.IdSubArea">
+                                                    <div class="card">
+                                                        @if (@doc.IdTipoDocumento == 1)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else if (@doc.IdTipoDocumento == 2)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/word_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else if (@doc.IdTipoDocumento == 3)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/excel_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else if (@doc.IdTipoDocumento == 4)
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/ppt_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                                        }
+                                                        <div class="card-body card-body-doc">
+                                                            <h4 class="nombre-doc">@doc.Descripcion</h4>
+                                                            <div class="div-btn-descarga">
+                                                                <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion})">Descargar</a>
+                                                                @if (@ViewBag.EsAdmin)
+                                                                {
+                                                                    <a class="botonEliminar" onclick=" EliminarDocumento(@doc.Codigo) ">x</a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                }
+            </div>
+
+
+        </div>
+    </div>
+    <br />
+</section>
+
+
+<div class="modal fade" id="modalSubArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">Nueva carpeta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="txtSubArea" class="col-form-label lbl-modal">Descripción:</label>
+                        <input type="text" class="form-control" id="txtSubArea">
+                        <input type="text" class="form-control" id="idArea" style="display: none;">
+                        <input type="text" class="form-control" id="idPadre" style="display: none;">
+                        <input type="text" class="form-control" id="indicadorEsUltimo" style="display: none;">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarSubArea">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDocumento" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo documento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @*@using (Html.BeginForm("RegistrarDocumento", "SIG", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {*@
+            <form id="formfiledocumento" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <select class="custom-select mr-sm-2" id="selSubArea" name="idSubArea">
+                            <option selected>Seleccione una Carpeta</option>
+                            <option value="0">Ninguna</option>
+                            <option value="1">2018</option>
+                            <option value="2">2019</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file">
+                            @*<form id="formfiledocumento" method="post" enctype="multipart/form-data">*@
+
+                            <input type="file" class="custom-file-input" id="fileDocumento" name="file" lang="es" onchange=" MostrarNombreArchivo() ">
+                            <input type="text" name="idSubArea" style="display: none;">
+                            @*</form>*@
+                            <label class="custom-file-label" for="fileDocumento" id="lblFileDocumento">Seleccionar Archivo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="btnGuardarDocumento" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+            @*}*@
+        </div>
+
+    </div>
+</div>
+
+
+
+@Scripts.Render("~/bundles/sigDetalle")

@@ -1,0 +1,43 @@
+@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EEnlaceResponse>
+@{
+    ViewBag.Title = "Aplicaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default position-inh">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                    Aplicaciones
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <div class="container">
+        <div class="row vertical-top">
+@foreach (var item in Model)
+{
+
+    <div class="col-md-2 position-inh">
+        <div class="figure margin-top-0 margin-bottom-0 image-effect-zoom-in  os-animation animated bounceInDown animation-inh position-inh" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
+            <a href="@item.UrlEnlace" class="figure-image" target="_blank">
+                <img src="@item.ImgEnlace" class="attachment-full size-full" alt="" style="max-width: 160px; max-height: 151px;">
+            </a>
+        </div>
+        <div class="col-text-1 text-normal  margin-top-0 margin-bottom-20 os-animation animated bounceInUp" data-os-animation="bounceInUp" data-os-animation-delay="0s" style="animation-delay: 0s;">
+            <hr class="hr_brown_ohl">
+        </div>
+        <div class="col-text-1 text-normal font_24px margin-top-0 margin-bottom-20 os-animation animated bounceInUp" data-os-animation="bounceInUp" data-os-animation-delay="0s" style="animation-delay: 0s;">
+            <p>
+                <a href="@item.UrlEnlace" target="_blank" rel="noopener"><span style="color: #534741;">@item.Descripcion</span></a>
+            </p>
+        </div>
+    </div>
+}
+
+        </div>
+    </div>
+</section>
+

@@ -154,7 +154,7 @@
     .top-bar .sidebar-widget {
         padding-right: 6px;
         margin-left: 6px;
-        font-size: 8px !important;
+        font-size: 9px !important;
     }
 }
 .top-bar a {
@@ -414,6 +414,11 @@ hr {
     margin-top: 0;
     position: relative;
 }
+@media (max-width:767px) {
+    .sidebar-header{
+        display: none;
+    }
+}
 h1, h2, h3, h4, h5, h6 {
     font-family: Titillium Web, sans-serif;
     font-weight: 400;
@@ -428,6 +433,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .textwidget {
     text-align: justify;
+}
+@media (max-width:767px){
+    .hide{
+        display: none;
+    }
 }
 .margin-bottom-40 {
     margin-bottom: 40px!important;

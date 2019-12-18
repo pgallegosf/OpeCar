@@ -88,5 +88,13 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _Nenlace.Eliminar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult MenuNavbar()
+        {
+            var rolAdmin = System.Web.HttpContext.Current.Session["rolAdmin"];
+            ViewBag.EsSuperAdmin = rolAdmin != null && rolAdmin.ToString().Equals("superAdmin");
+            var _Nseccion = new NSeccion();
+            var listaSeccion = _Nseccion.Listar(1, null);
+            return PartialView("~/Views/Shared/_MenuNavbar.cshtml", listaSeccion);
+        }
     }
 }

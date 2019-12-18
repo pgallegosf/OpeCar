@@ -43,6 +43,8 @@ namespace OpeCar.OperCar.Web
                         "~/Scripts/areas/organizacion.js"));
             bundles.Add(new ScriptBundle("~/bundles/log").Include(
                         "~/Scripts/areas/log.js"));
+            bundles.Add(new ScriptBundle("~/bundles/menu_organizacion").Include(
+                        "~/Scripts/menu_organizacion.js"));
 
 
             /**********************************HOJAS DE ESTILOS***********************************************/
@@ -65,6 +67,8 @@ namespace OpeCar.OperCar.Web
                       "~/Content/css/areas/sig.css"));
             bundles.Add(new StyleBundle("~/Content/sigDetalle").Include(
                       "~/Content/css/areas/sigDetalle.css"));
+
+         
         }
     }
 }

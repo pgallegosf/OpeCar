@@ -45,21 +45,22 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr data-id="@item.IdSeccion">
-                                <td>@item.Titulo</td>
-                                <td>@item.Contenido.Substring(0, 50)</td>
-                                <td><img width="40" height="40" src="@item.RutaMultimedia" class="attachment-full size-full" alt=""></td>
-                                <td>@item.Posicion</td>
-                                <td>@item.FechaCreacion</td>
-                                <td>
-                                    <button class="btn btn-link organizacion-editar" type="button" data-toggle="modal" data-target="#modalOrganizacion" data-placement="top" title="Editar Contenido" data-id="@item.IdSeccion" data-titulo="@item.Titulo" data-posicion="@item.Posicion" data-contenido="@item.Contenido" data-urlimg="@item.RutaMultimedia">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-link organizacion-eliminar btnEliminar" data-toggle="tooltip" data-placement="top" title="Eliminar Contenido" type="button" data-id="@item.IdSeccion">
-                                        <i class=" fas fa-backspace"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tr data-id="@item.IdSeccion">
+                            <td>@item.Titulo</td>
+                            @*<td>@item.Contenido.Substring(0, 50)</td>*@
+                            <td>@item.Contenido</td>
+                            <td><img width="40" height="40" src="@item.RutaMultimedia" class="attachment-full size-full" alt=""></td>
+                            <td>@item.Posicion</td>
+                            <td>@item.FechaCreacion</td>
+                            <td>
+                                <button class="btn btn-link organizacion-editar" type="button" data-toggle="modal" data-target="#modalOrganizacion" data-placement="top" title="Editar Contenido" data-id="@item.IdSeccion" data-titulo="@item.Titulo" data-posicion="@item.Posicion" data-contenido="@item.Contenido" data-urlimg="@item.RutaMultimedia">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-link organizacion-eliminar btnEliminar" data-toggle="tooltip" data-placement="top" title="Eliminar Contenido" type="button" data-id="@item.IdSeccion">
+                                    <i class=" fas fa-backspace"></i>
+                                </button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

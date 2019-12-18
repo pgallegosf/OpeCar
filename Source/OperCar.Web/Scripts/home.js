@@ -12,6 +12,13 @@
 
     });
     OcultarTopBar();
+
+    //kati 16/11/19
+    //$("#menu-").on("click",
+    //    function () {
+    //        localStorage.setItem("menu-id", $(this).attr("data-name"));
+    //    }
+    //);
     
 });
 
@@ -28,6 +35,6 @@ function OcultarTopBar() {
         } else {
             //$("#masthead").removeClass("navbar-scrolled navbar-stuck");
         }
-
     });
 }
+

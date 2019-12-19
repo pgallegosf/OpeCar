@@ -1,0 +1,205 @@
+﻿@model OpeCar.BusinessEntities.GestionArchivo.EMantMenu
+
+@{
+    ViewBag.Title = "OrganizacionMantenimiento";
+    Layout = "~/Views/Shared/_Layout.cshtml";   
+}
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                    Mantenimiento de la Organización
+                </h1>
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-12 position-inh text-right">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <div class="container">
+        <div class="alert alert-success text-right" style="display: none;">
+            <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
+        </div>
+        <div class="row vertical-top">
+            <div class="table-responsive-xl bd-example w-100">
+                <table class="table table-hover table-borderless rounded" id="tableOrganizacion">
+                    <thead>
+                        <tr>
+                            <th scope="col">Logo</th>
+                            <th scope="col">Teléfono(s)</th>
+                            <th scope="col">Sobre nosotros</th>
+                            <th scope="col">Derechos reservados</th>
+                            <th scope="col">Fecha Actualización</th>
+                            <th scope="col">Acciones</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Mantenimiento)
+                        {
+                            <tr data-id="@item.MantenimientoId">
+                                <td>
+                                    <img src="@item.MantenimientoLogo" class="img-responsive"/>                                    
+                                </td>
+                                <td>@item.MantenimientoTelefono</td>
+                                <td>@item.MantenimientoSobreNosotros</td>
+                                <td>@item.MantenimientoDerechosReservados</td>
+                                <td>@item.MantenimientoFechaActualizacion</td>
+                                <td>
+                                    <button class="btn btn-link btn-edit-maintenance" type="button" data-toggle="modal" data-target="#modalInformacion" data-placement="top" title="Editar Información" data-id="@item.MantenimientoId" 
+                                            data-titulo="@item.MantenimientoLogo" data-posicion="@item.MantenimientoSobreNosotros" data-contenido="@item.MantenimientoDerechosReservados">
+                                        <i class="fas fa-edit"></i>
+                                    </button> 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row vertical-top">
+            <div class="table-responsive-xl bd-example w-100">               
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-12 position-inh text-right">
+                        <h2 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                            Menu Footer
+                        </h2>
+                        <button type="button" id="btn-add-menu-footer" class="btn btn-primary" data-toggle="modal" data-target="#modalMenuFooter" data-placement="top" title="Agregar Menu" style="text-align: right; right: 0">
+                            +
+                        </button>
+                    </div>
+                </div>
+                <table class="table table-hover table-borderless rounded" id="tableMenuFooter">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Url</th>
+                            <th scope="col">Posición</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.MenuFooter)
+                        {
+                            <tr data-id="@item.MenuFooterId">
+                                <td>@item.MenuFooterId</td>
+                                <td>@item.MenuFooterName</td>
+                                <td>@item.MenuFooterUrl</td>
+                                <td>@item.MenuFooterPosition</td>
+                                <td>
+                                    @if (item.MenuFooterStatus)
+                                    {
+                                        <span class="badge badge-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger">Inactivo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <button class="btn btn-link btn-edit-menu-footer" type="button" data-toggle="modal" data-target="#modalMenuFooter" data-placement="top" title="Editar Menu" data-id="@item.MenuFooterId"
+                                            data-nombre="@item.MenuFooterName" data-url="@item.MenuFooterUrl" data-position="@item.MenuFooterPosition" data-status="@item.MenuFooterStatus" data-is-super-user="@item.MenuFooterIsSuperAdmin">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* MODAL MANTENIMIENTO *@
+<div class="modal fade" id="modalInformacion">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">Información</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="form-maintenance" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" id="txt-maintenance-id" value="@Model.Mantenimiento[0].MantenimientoId">
+                    <div class="form-group">
+                        <label for="txt-maintenance-logo" class="col-form-label lbl-modal">Logo:</label>
+                        <input  id="txt-maintenance-logo" type="file" accept="image/*" class="dropify" data-allowed-file-extensions="png jpg jpeg" data-max-file-size="5M"
+                               data-default-file="@Model.Mantenimiento[0].MantenimientoLogo" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="txt-maintenance-telefono" class="col-form-label lbl-modal">Teléfono(s):</label>
+                        <input type="text" class="form-control" id="txt-maintenance-telefono"value="@Model.Mantenimiento[0].MantenimientoTelefono">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt-maintenance-sobre-nosotros" class="col-form-label lbl-modal">Sobre Nosotros:</label>
+                        <textarea class="form-control" id="txt-maintenance-sobre-nosotros">@Model.Mantenimiento[0].MantenimientoSobreNosotros</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt-derechos-reservados" class="col-form-label lbl-modal">Derechos Reservados:</label>
+                        <input type="text" class="form-control" id="txt-maintenance-derechos-reservados" value="@Model.Mantenimiento[0].MantenimientoDerechosReservados">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-maintenance">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* MODAL MENU FOOTER *@
+<div class="modal fade" id="modalMenuFooter">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">Menu Footer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formOrganizacion" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="hidden" id="txt-mf-id">
+                    <div class="form-group">
+                        <label for="txt-mf-nombre" class="col-form-label lbl-modal">Nombre:</label>
+                        <input type="text" class="form-control" id="txt-mf-nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt-mf-url" class="col-form-label lbl-modal">URL:</label>
+                        <input type="text" class="form-control" id="txt-mf-url">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt-mf-position" class="col-form-label lbl-modal">Posicion:</label>
+                        <input type="number" class="form-control" id="txt-mf-position">
+                    </div>
+                    <div class="form-group">
+                        <label for="txt-mf-status" class="col-form-label lbl-modal">Status:</label><br />
+                        <input id="rd-mf-active" type="radio" name="rd-status" value="true" checked/> <span class="badge badge-success">Activo</span> &nbsp;&nbsp;&nbsp;
+                        <input id="rd-mf-inactive" type="radio" name="rd-status" value="false"/> <span class="badge badge-danger">Inactivo</span>
+                    </div>
+                    <div class="form-group">
+                        <input id="chk-mf-is-super-user" type="checkbox" /> &nbsp;&nbsp;Super Usuario
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-menu-footer">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/Mantenimiento")
+}

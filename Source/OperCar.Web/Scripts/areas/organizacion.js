@@ -1,120 +1,119 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿//================================================================================================================================
+/**
+ * @fileOverview    Script Organización
+ * @since           1.0.0 - 18/11/2019
+ * @version         1.0.0 - 23/12/2019
+ * @author          Jean Carlos Sánchez Castromonte
+*/
+//================================================================================================================================
+
+document.addEventListener("DOMContentLoaded", function () {
+    initFroalaEditor();
+    setTimeout(() => { $("html, body").animate({ scrollTop: $('#footer').get(0).scrollTop }, 1000); }, 2000);
+    let form_organizacion = document.getElementById("formOrganizacion");
+    form_organizacion.addEventListener("submit", function(e) { GuardarOrganizacion(e); });
     $(".organizacion-editar").on("click", ObtenerDatosEdicion);
     $(".organizacion-eliminar").on("click", EliminarOrganizacion);
     $('#btnAddOrganizacion').on("click", LimpiarFormulario);
 });
+//================================================================================================================================
 
-function LimpiarFormulario() {
-    $("#txtIdOrganizacion").val("");
-    $("#fileImagen").val("");
-    $("#txtTitulo").val("");
-    $("#txtContenido").val("");
-    $("#txtPosicion").val(0);
-    $("#lblFileImagen").html("Seleccionar Imagen");
-}
+function initFroalaEditor() {
+    $('#div-contenido').froalaEditor({
+        height           : 350,
+        zIndex           : 8000,
+        language         : 'es',
+        theme            : 'gray',
+        imageUploadURL   : 'InsertImage',
+        imageUploadParams: { id: 'my_image' },
+        toolbarButtons: ['fontFamily', 'bold', 'italic','underline','strikeThrough','fontSize','|','color','paragraphFormat',
+        'indent', 'outdent', 'formatOL', 'formatUL', '|', 'insertLink', 'insertImage', 'insertTable', 'emoticons']
+    })   
+    .on ('froalaEditor.image.removed', function (e, editor, $img) {
+        let filePath = "~" + $img.attr('src');
+        let data      = {};
+        data.filePath = filePath;
 
-document.addEventListener("DOMContentLoaded", function () {
-    $("#formOrganizacion").on("submit", function (e) {
-        e.preventDefault();
-        var fileImg = $("#fileImagen").val();
-        var titulo = $("#txtTitulo").val();
-        var contenido = $("#txtContenido").val();
-        var posicion = $("#txtPosicion").val();
-        if (titulo == "" || contenido == "") {
-            return;
-        }
-        if (fileImg !== "") {
-            var extension = fileImg.substring(fileImg.lastIndexOf("."));
-            if (extension !== ".jpg" && extension !== ".png" && extension !== ".jpeg") {
-                alert("La extención de la imagen no es soportada");
-                return;
-            }
-        }
-
-        var formData = new FormData(document.getElementById("formOrganizacion"));
-        $.ajax({
-            url: "RegistrarOrganizacion",
-            type: "post",
-            dataType: "html",
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false
+        fetch("DeleteImage", {
+            method : 'POST',
+            body   : JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
         })
-            .done(function (res) {
-                $("#mensaje").html("Respuesta: " + res);
-                $(".btnCloseModal").trigger("click");
-                $(".alert-link").html("Se realizó el registro correctamente");
-                $('.alert').fadeIn();
-                setTimeout(function () {
-                    $(".alert").fadeOut();
-                    location.reload();
-                }, 2500);
-
-            })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-        alert('Uncaught Error: ' + jqXHR.responseText);
-
-    })
-    .always(function () {
+        .then((response) => response.json())
+        .catch((error) => console.error('Error:', error))
+        .then((resp) => {
+            console.log(resp);
+        });
     });
-    });
-});
-
-function MostrarNombreImagen() {
-    var nombreImg = document.getElementById('fileImagen').files[0].name;
-    $("#lblFileImagen").html(nombreImg);
 }
+//================================================================================================================================
+
+function GuardarOrganizacion(e) {
+    e.preventDefault();
+    let data = {};
+    data.idOrganizacion = document.getElementById("txtIdOrganizacion").value;
+    data.titulo         = document.getElementById("txtTitulo").value;
+    data.contenido      = $('#div-contenido').froalaEditor('html.get');
+    data.posicion       = document.getElementById("txtPosicion").value;
+    fetch("RegistrarOrganizacion", {
+        method : 'POST',
+        body   : JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+        $(".btnCloseModal").trigger("click");
+        $(".alert-link").html("Se realizó el registro correctamente");
+        $('.alert').fadeIn();
+        setTimeout(() => { $(".alert").fadeOut(); location.reload();}, 2500);
+    })
+    .catch(error => console.error('Error:', error));
+}
+//================================================================================================================================
 
 function ObtenerDatosEdicion() {
     var idOrganizacion = $(this).data("id");
-    var titulo = $(this).data("titulo");
-    var urlimg = $(this).data("urlimg");
-    var contenido = $(this).data("contenido");
-    var posicion = $(this).data("posicion");
-    if (urlimg !== "") {
-        var nombreImg = urlimg.replace("/Content/images/", "");
-        $("#lblFileImagen").html(nombreImg);
-    }
+    var titulo         = $(this).data("titulo");
+    var contenido      = $(this).data("contenido");
+    var posicion       = $(this).data("posicion");
     $("#txtIdOrganizacion").val(idOrganizacion);
     $("#txtTitulo").val(titulo);
-    $("#txtContenido").val(contenido);
+    $('#div-contenido').froalaEditor('html.set', contenido);
     $("#txtPosicion").val(posicion);
-
 }
+//================================================================================================================================
+
 function EliminarOrganizacion() {
     var opcion = confirm("¿Desea eliminar el contenido?");
-    if (!opcion) {
-        return;
-    }
+    if (!opcion) { return; }
     var idOrganizacion = $(this).data("id");
     var data = {
         request: {
             IdSeccion: idOrganizacion,
             IndicadorHabilitado: false
-
         }
     };
-    var jqxhr = $.ajax({
-        type: "POST",
-        url: "/Organizacion/EliminarOrganizacion",
-        data: JSON.stringify(data),
-        contentType: "application/json; charset=utf-8",
-        dataType: "json"
+    $.ajax({
+        type       : "POST",
+        url        : "/Organizacion/EliminarOrganizacion",
+        data       : JSON.stringify(data),
+        contentType: "application/json; charset = utf-8",
+        dataType   : "json"
     })
     .done(function (data) {
         $(".alert-link").html("Se eliminó el contenido");
         $('.alert').fadeIn();
-        setTimeout(function () {
-            $(".alert").fadeOut();
-            location.reload();
-        }, 2500);
-
+        setTimeout(function () { $(".alert").fadeOut(); location.reload(); }, 2500);
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         alert('Uncaught Error: ' + jqXHR.responseText);
-
-    })
-    .always(function () {
     });
 }
+//================================================================================================================================
+
+function LimpiarFormulario() {
+    $("#txtIdOrganizacion").val("");
+    $("#txtTitulo").val("");
+    $('#div-contenido').froalaEditor('html.set', "");
+    $("#txtPosicion").val(0);
+}
+//================================================================================================================================

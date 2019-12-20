@@ -225,6 +225,7 @@
     <Content Include="Scripts\home.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\menu_organizacion.js" />
     <Content Include="Scripts\particles\js\app.js" />
     <Content Include="Scripts\particles\js\lib\stats.js" />
     <Content Include="Scripts\particles\particles.js" />
@@ -274,6 +275,7 @@
     <Content Include="Views\Organizacion\OrganizacionMantenimiento.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
     <Content Include="Views\Organizacion\Mantenimiento.cshtml" />
+    <Content Include="Views\Shared\_MenuNavbar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">

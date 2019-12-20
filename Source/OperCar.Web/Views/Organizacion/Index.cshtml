@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    @Styles.Render("~/Content/css/areas/organizacion")
+@Styles.Render("~/Content/css/areas/organizacion")
 
 <section class="section">
     <div class="container">
@@ -11,7 +11,7 @@
             <div class="col-md-12 position-inh">
                 @foreach (var item in Model)
                 {
-                    <div class="fondo-mision position-inh">
+                    <div class="fondo-mision position-inh" id="seccion-organizacion-@item.IdSeccion">
                         <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular  subtittle-organizacion ">
                             @item.Titulo
                         </h1>
@@ -24,3 +24,6 @@
         </div>
     </div>
 </section>
+@section Scripts{
+    @Scripts.Render("~/bundles/menu_organizacion")
+}

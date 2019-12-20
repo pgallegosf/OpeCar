@@ -87,7 +87,7 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
-    font-size: .9em;
+    font-size: .8em;
 }
 .top-bar .sidebar-widget>* {
     margin-bottom: 0!important;
@@ -134,7 +134,7 @@
     border-color: rgba(0, 0, 0, 0.08);
 }
 .top-bar .sidebar-widget {
-    font-size: 14px !important;
+    font-size: 14px;
 }
 .top-bar .sidebar-widget {
     display: inline-block;
@@ -154,6 +154,7 @@
     .top-bar .sidebar-widget {
         padding-right: 6px;
         margin-left: 6px;
+        font-size: 9px !important;
     }
 }
 .top-bar a {
@@ -230,7 +231,7 @@ a:active, a:focus, a:hover{
 @media (min-width: 992px) {
     .navbar-stuck {
         position: fixed;
-        z-index: 1100;
+        z-index: 999;
         height: 70px;
     }
 }
@@ -276,6 +277,8 @@ a:active, a:focus, a:hover{
     margin-bottom: 0;
     margin-left: 0!important;
     position: relative;
+    width: 167px;
+    height: 73px;    
     text-shadow: none;
     transform: translate3d(0,0,0);
     transition: height .3s,width .3s,line-height .3s;
@@ -411,6 +414,11 @@ hr {
     margin-top: 0;
     position: relative;
 }
+@media (max-width:767px) {
+    .sidebar-header{
+        display: none;
+    }
+}
 h1, h2, h3, h4, h5, h6 {
     font-family: Titillium Web, sans-serif;
     font-weight: 400;
@@ -425,6 +433,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 .textwidget {
     text-align: justify;
+}
+@media (max-width:767px){
+    .hide{
+        display: none;
+    }
 }
 .margin-bottom-40 {
     margin-bottom: 40px!important;

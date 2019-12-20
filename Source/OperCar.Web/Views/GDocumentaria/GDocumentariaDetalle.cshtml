@@ -126,7 +126,7 @@
                                         <div class="row col-12">
                                             @foreach (var docPrimario in Model.ListaDocumentos.Where(x => x.IdSubArea == item.Codigo))
                                             {
-                                                <div class="col-2 card-documento card-subArea @docPrimario.IdSubArea">
+                                                <div class="col-sm-5 col-lg-2 card-documento card-subArea @docPrimario.IdSubArea">
                                                     <div class="card">
                                                         @if (@docPrimario.IdTipoDocumento == 1)
                                                         {
@@ -195,7 +195,7 @@
                                                 let car = doc.Descripcion
                                                 select doc)
                                             {
-                                                <div class="col-2 card-documento card-subArea @doc.IdSubArea">
+                                                <div class="col-sm-5 col-lg-2 card-documento card-subArea @doc.IdSubArea">
                                                     <div class="card">
                                                         @if (@doc.IdTipoDocumento == 1)
                                                         {

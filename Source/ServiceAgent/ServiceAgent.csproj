@@ -54,6 +54,8 @@
     <Compile Include="Repositories\GestionDocumental\DArea.cs" />
     <Compile Include="Repositories\GestionDocumental\DDocumento.cs" />
     <Compile Include="Repositories\GestionDocumental\DEnlace.cs" />
+    <Compile Include="Repositories\GestionDocumental\DMenuFooter.cs" />
+    <Compile Include="Repositories\GestionDocumental\DMantenimiento.cs" />
     <Compile Include="Repositories\GestionDocumental\DSeccion.cs" />
     <Compile Include="Repositories\GestionDocumental\DSubArea.cs" />
     <Compile Include="Repositories\Seguridad\DLog.cs" />

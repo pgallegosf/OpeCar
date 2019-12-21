@@ -209,6 +209,18 @@ namespace OpeCar.OperCar.Web
                 url: "ListarAccesos",
                 defaults: new { controller = "Log", action = "ListarAccesos", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "ListarMantenimiento",
+               url: "ListarMantenimiento",
+               defaults: new { controller = "Organizacion", action = "ListarMantenimiento"}
+           );
+
+            routes.MapRoute(
+               name: "ListarMenuFooter",
+               url: "ListarMenuFooter",
+               defaults: new { controller = "Organizacion", action = "ListarMenuFooter"}
+           );
         }
     }
 }

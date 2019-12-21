@@ -13,11 +13,9 @@
                 </h1>
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-12 position-inh text-right">
-
                         <button type="button" id="btnAddOrganizacion" class="btn btn-primary" data-toggle="modal" data-target="#modalOrganizacion" data-placement="top" title="Agregar Cntenido" style="text-align: right; right: 0">
                             +
                         </button>
-
                     </div>
                 </div>
             </div>
@@ -30,13 +28,12 @@
             <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
         </div>
         <div class="row vertical-top">
-            <div class="table-responsive-xl bd-example">
+            <div class="table-responsive-xl bd-example w-100">
                 <table class="table table-hover table-borderless rounded" id="tableOrganizacion">
                     <thead>
                         <tr>
                             <th scope="col">Título</th>
                             <th scope="col">Contenido</th>
-                            <th scope="col">Imagen</th>
                             <th scope="col">Posición</th>
                             <th scope="col">Fecha Creación</th>
                             <th scope="col">Acciones</th>
@@ -45,22 +42,30 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr data-id="@item.IdSeccion">
-                            <td>@item.Titulo</td>
-                            @*<td>@item.Contenido.Substring(0, 50)</td>*@
-                            <td>@item.Contenido</td>
-                            <td><img width="40" height="40" src="@item.RutaMultimedia" class="attachment-full size-full" alt=""></td>
-                            <td>@item.Posicion</td>
-                            <td>@item.FechaCreacion</td>
-                            <td>
-                                <button class="btn btn-link organizacion-editar" type="button" data-toggle="modal" data-target="#modalOrganizacion" data-placement="top" title="Editar Contenido" data-id="@item.IdSeccion" data-titulo="@item.Titulo" data-posicion="@item.Posicion" data-contenido="@item.Contenido" data-urlimg="@item.RutaMultimedia">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-link organizacion-eliminar btnEliminar" data-toggle="tooltip" data-placement="top" title="Eliminar Contenido" type="button" data-id="@item.IdSeccion">
-                                    <i class=" fas fa-backspace"></i>
-                                </button>
-                            </td>
-                        </tr>
+                            <tr data-id="@item.IdSeccion">
+                                <td>@item.Titulo</td>
+                                <td>
+                                    @if (item.Contenido.Length > 50)
+                                    {
+                                        string contenido = item.Contenido.Substring(0, 50) + "...";
+                                        @contenido
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(item.Contenido)
+                                    }
+                                </td>
+                                <td>@item.Posicion</td>
+                                <td>@item.FechaCreacion</td>
+                                <td>
+                                    <button class="btn btn-link organizacion-editar" type="button" data-toggle="modal" data-target="#modalOrganizacion" data-placement="top" title="Editar Contenido" data-id="@item.IdSeccion" data-titulo="@item.Titulo" data-posicion="@item.Posicion" data-contenido="@item.Contenido" data-urlimg="@item.RutaMultimedia">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-link organizacion-eliminar btnEliminar" data-toggle="tooltip" data-placement="top" title="Eliminar Contenido" type="button" data-id="@item.IdSeccion">
+                                        <i class=" fas fa-backspace"></i>
+                                    </button>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -69,7 +74,7 @@
     </div>
 </section>
 <div class="modal fade" id="modalOrganizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="tituloModal">Nuevo Contenido</h5>
@@ -86,18 +91,12 @@
                     </div>
                     <div class="form-group">
                         <label for="txtContenido" class="col-form-label lbl-modal">Contenido:</label>
-                        <textarea class ="form-control" id="txtContenido" name="contenido"></textarea>
+                        <div id="div-contenido"></div>
+
                     </div>
                     <div class="form-group">
                         <label for="txtPosicion" class="col-form-label lbl-modal">Posicion:</label>
                         <input type="number" class="form-control" id="txtPosicion" name="posicion">
-                    </div>
-                    <div class="form-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="fileImagen" name="fileImagen" lang="es" onchange="MostrarNombreImagen()">
-                            <input type="text" name="idImagen" style="display: none;">
-                            <label class="custom-file-label" for="fileImagen" id="lblFileImagen">Seleccionar Imagen</label>
-                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -108,7 +107,16 @@
         </div>
     </div>
 </div>
+<style>
+    .fr-element {
+        font-size: 1rem !important;
+    }
+</style>
+@section css {
+    @Styles.Render("~/Content/FroalaEditor")
+}
 
-@Scripts.Render("~/bundles/organizacion")
-
-
+@section scripts {
+    @Scripts.Render("~/bundles/FroalaEditor")
+    @Scripts.Render("~/bundles/organizacion")
+}

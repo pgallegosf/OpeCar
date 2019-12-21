@@ -10,7 +10,10 @@
     @Styles.Render("~/Content/general")
     @Styles.Render("~/Content/home")
     @Styles.Render("~/Content/animate")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" href="http://jeremyfagis.github.io/dropify/dist/css/dropify.min.css"/>
+    @RenderSection("css", required: false)
 </head>
 <body>
     <div class="top-bar" id="topBar">
@@ -35,13 +38,11 @@
                     </div>
                 </div>
                 <div id="custom_html-3" class="widget_text sidebar-widget text-right small-screen-center widget_custom_html">
-
-                    <div class="textwidget custom-html-widget">
-                        <a href="tel:+51987947810">CAE: 987947810 / 999216057 / 043-604014 Anexo 130014.</a>
+                    <div id="mant-telefono" class="textwidget custom-html-widget">
+                        <a href="tel:+34913489444">CAE: 987947810/ 999216057 / 043-604014 Anexo 130014.</a>
                     </div>
                 </div>
                 <div id="custom_html-5" class="widget_text sidebar-widget text-right small-screen-center widget_custom_html">
-
                     <div class="textwidget custom-html-widget">
                         <a id="salirtopbar" href="@Url.Action("Logout", "Login")">
                             <i class="menu-icon fas fa-user"></i>&nbsp;SALIR
@@ -69,45 +70,20 @@
                 <hr>
                 <div class="row margin-bottom-40 margin-top-40">
                     <div class="col-sm-4">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <a href="@Url.Action("Index", "Organizacion")">Conoce tu organización</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="@Url.Action("Index", "Aplicacion")">Aplicaciones</a>
-                            </li>
-                            <li class="list-group-item">
-                                <a href="@Url.Action("Index", "SIG")">SIG</a>
-                               
-                            </li>
-                            <li class="list-group-item">
-                                <a href="@Url.Action("Index", "GDocumentaria")">Gestión Documentaria</a>
-
-                            </li>
-                            @if (@ViewBag.EsSuperAdmin)
-                            {
-                                <li class="list-group-item">
-                                    <a href="@Url.Action("Index", "Seguridad")">Seguridad</a>
-
-                                </li>
-                            }
+                        <ul id="mant-menu-footer" class="list-group list-group-flush">
                         </ul>
                     </div>
+                    <input id="txtEsSuperAdmin" type="hidden" value="@Html.Raw(ViewBag.EsSuperAdmin)"/>
                     <div class="col-sm-4">
                         <div id="text-2" class="sidebar-widget  widget_text">
                             <h3 class="sidebar-header">Sobre nosotros</h3>
-                            <div class="textwidget hide">
-                                Somos un Grupo de promoción y operación de Infraestructura Smart con visión de futuro.
-                                Incorporamos el desarrollo tecnológico, la inteligencia empresarial e iniciativas socialmente responsables
-                                y respetuosas con el entorno ambiental para aportar soluciones de infraestructura y movilidad eficientes
-                                y sostenibles.
-                            </div>
+                            <div id="mant-sobre-nosotros" class="textwidget"></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div id="text-19" class="sidebar-widget  widget_text">
-                            <div class="textwidget hide">
-                                <p>© @DateTime.Now.Year AUNOR</p>
+                            <div class="textwidget">
+                                <p>© @DateTime.Now.Year <span id="mant-derechos-reservados"></span></p>
                             </div>
                         </div>
                     </div>
@@ -121,10 +97,9 @@
     @Scripts.Render("~/bundles/popper")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/home")
- 
 
-    @RenderSection("Scripts", required: false)
+    <script type="text/javascript" src="http://jeremyfagis.github.io/dropify/dist/js/dropify.min.js"></script>
 
-
+    @RenderSection("scripts", required: false)
 </body>
 </html>

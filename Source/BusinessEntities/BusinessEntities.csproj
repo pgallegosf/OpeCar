@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,9 @@
     <Compile Include="GestionArchivo\EDocumentoResponse.cs" />
     <Compile Include="GestionArchivo\EEnlaceRequest.cs" />
     <Compile Include="GestionArchivo\EEnlaceResponse.cs" />
+    <Compile Include="GestionArchivo\EMantenimiento.cs" />
+    <Compile Include="GestionArchivo\EMantMenu.cs" />
+    <Compile Include="GestionArchivo\EMenuFooter.cs" />
     <Compile Include="GestionArchivo\ESeccionRequest.cs" />
     <Compile Include="GestionArchivo\ESeccionResponse.cs" />
     <Compile Include="GestionArchivo\ESubArea.cs" />

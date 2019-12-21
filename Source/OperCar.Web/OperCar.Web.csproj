@@ -214,6 +214,7 @@
     <Content Include="Scripts\areas\gestionDocumentaria.js" />
     <Content Include="Scripts\areas\log.js" />
     <Content Include="Scripts\areas\login.js" />
+    <Content Include="Scripts\areas\mantenimiento.js" />
     <Content Include="Scripts\areas\organizacion.js" />
     <Content Include="Scripts\areas\seguridad.js" />
     <Content Include="Scripts\areas\sig.js" />
@@ -248,6 +249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\file\froala_editor\" />
     <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +274,7 @@
     <Content Include="Views\Aplicacion\AplicacionMantenimiento.cshtml" />
     <Content Include="Views\Organizacion\OrganizacionMantenimiento.cshtml" />
     <Content Include="Views\Log\Index.cshtml" />
+    <Content Include="Views\Organizacion\Mantenimiento.cshtml" />
     <Content Include="Views\Shared\_MenuNavbar.cshtml" />
   </ItemGroup>
   <ItemGroup>

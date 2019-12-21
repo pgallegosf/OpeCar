@@ -12,15 +12,15 @@
                 <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
                     Mantenimiento de Aplicaciones
                 </h1>
-                    <div class="row" style="padding-bottom: 10px;">
-                        <div class="col-md-12 position-inh text-right">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-12 position-inh text-right">
 
-                            <button type="button" id="btnAddAplicacion" class="btn btn-primary" data-toggle="modal" data-target="#modalAplicacion" data-placement="top" title="Agregar Aplicación" style="text-align: right; right: 0">
-                                +
-                            </button>
+                        <button type="button" id="btnAddAplicacion" class="btn btn-primary" data-toggle="modal" data-target="#modalAplicacion" data-placement="top" title="Agregar Aplicación" style="text-align: right; right: 0">
+                            +
+                        </button>
 
-                        </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
                                 <td><img width="40" height="40" src="@item.ImgEnlace" class="attachment-full size-full" alt=""></td>
                                 <td>@item.FechaCreacion</td>
                                 <td>
-                                    <button class="btn btn-link aplicacion-editar" type="button" data-toggle="modal" data-target="#modalAplicacion"  data-placement="top" title="Editar Aplicación" data-id="@item.IdEnlace" data-enlace="@item.UrlEnlace" data-descripcion="@item.Descripcion" data-urlimg="@item.ImgEnlace">
+                                    <button class="btn btn-link aplicacion-editar" type="button" data-toggle="modal" data-target="#modalAplicacion" data-placement="top" title="Editar Aplicación" data-id="@item.IdEnlace" data-enlace="@item.UrlEnlace" data-descripcion="@item.Descripcion" data-urlimg="@item.ImgEnlace">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-link aplicacion-eliminar btnEliminar" data-toggle="tooltip" data-placement="top" title="Eliminar Aplicación" type="button" data-id="@item.IdEnlace">
@@ -102,5 +102,6 @@
         </div>
     </div>
 </div>
-
-@Scripts.Render("~/bundles/aplicacion")
+@section scripts {
+    @Scripts.Render("~/bundles/aplicacion")
+}

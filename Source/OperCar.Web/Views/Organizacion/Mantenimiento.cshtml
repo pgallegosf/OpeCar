@@ -40,21 +40,32 @@
                     <tbody>
                         @foreach (var item in Model.Mantenimiento)
                         {
-                            <tr data-id="@item.MantenimientoId">
-                                <td>
-                                    <img src="@item.MantenimientoLogo" class="img-responsive"/>                                    
-                                </td>
-                                <td>@item.MantenimientoTelefono</td>
-                                <td>@item.MantenimientoSobreNosotros</td>
-                                <td>@item.MantenimientoDerechosReservados</td>
-                                <td>@item.MantenimientoFechaActualizacion</td>
-                                <td>
-                                    <button class="btn btn-link btn-edit-maintenance" type="button" data-toggle="modal" data-target="#modalInformacion" data-placement="top" title="Editar Información" data-id="@item.MantenimientoId" 
-                                            data-titulo="@item.MantenimientoLogo" data-posicion="@item.MantenimientoSobreNosotros" data-contenido="@item.MantenimientoDerechosReservados">
-                                        <i class="fas fa-edit"></i>
-                                    </button> 
-                                </td>
-                            </tr>
+                        <tr data-id="@item.MantenimientoId">
+                            <td>
+                                <img src="@item.MantenimientoLogo" class="img-responsive" />
+                            </td>
+                            <td>@item.MantenimientoTelefono</td>
+                            <td>
+                                @if (item.MantenimientoSobreNosotros.Length > 50)
+                                {
+                                    string mantenimientoSobreNosotros = item.MantenimientoSobreNosotros.Substring(0, 50) + "...";
+                                    @mantenimientoSobreNosotros
+                                }
+                                else
+                                {
+                                    @item.MantenimientoSobreNosotros
+                                }
+                            </td>
+
+                            <td>@item.MantenimientoDerechosReservados</td>
+                            <td>@item.MantenimientoFechaActualizacion</td>
+                            <td>
+                                <button class="btn btn-link btn-edit-maintenance" type="button" data-toggle="modal" data-target="#modalInformacion" data-placement="top" title="Editar Información" data-id="@item.MantenimientoId"
+                                        data-titulo="@item.MantenimientoLogo" data-posicion="@item.MantenimientoSobreNosotros" data-contenido="@item.MantenimientoDerechosReservados">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

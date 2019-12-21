@@ -94,13 +94,27 @@ function ObtenerDatosEdicion() {
     var descripcion = $(this).data("descripcion");
     
     var nombreImg = urlimg.replace("/Content/images/", "");
-
+    
     $("#txtIdAplicacion").val(idAplicacion);
     $("#txtAplicacion").val(descripcion);
     $("#txtEnlace").val(enlace);
-    $("#lblFileImagen").html(nombreImg);
+
+    setTextFileImage(nombreImg);
 
 }
+
+function setTextFileImage(nombreImg) {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (nombreImg.length > 20) {
+            $("#lblFileImagen").html(nombreImg.substring(0, 20) + '...');
+        }
+    }
+    else {
+        $("#lblFileImagen").html(nombreImg);
+    }
+}
+
+
 function EliminarAplicacion() {
     var opcion = confirm("¿Desea eliminar la aplicación?");
     if (!opcion) {

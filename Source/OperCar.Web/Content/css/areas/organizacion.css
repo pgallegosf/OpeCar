@@ -12,3 +12,6 @@
 .fondo-valores{
 	background-image: url("../../images/enc_mision.PNG");
 }
+.align-organizacion{
+    text-align: justify;
+}

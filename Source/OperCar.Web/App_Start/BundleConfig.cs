@@ -7,6 +7,8 @@ namespace OpeCar.OperCar.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            BundleTable.EnableOptimizations = true;
+
             /**********************************QUERYS************************************************************/
             bundles.Add(new ScriptBundle("~/bundles/jquerySlim").Include(
                         "~/Scripts/jquery-3.3.1.slim.min.js"));

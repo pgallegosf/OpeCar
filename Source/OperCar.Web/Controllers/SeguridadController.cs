@@ -65,5 +65,26 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = nPermiso.Eliminar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ListarPermisoDetalle(int idUsuario, int idRol)
+        {
+            var nUsuario = new NUsuario();
+            var totalLista = nUsuario.ListarPermisoDetalle(idUsuario, idRol, null);
+            return Json(totalLista, JsonRequestBehavior.AllowGet);
+
+        }
+        [HttpPost]
+        public JsonResult RegistrarPermisoDetalle(List<int> checkedIds,int idUsuario,int idRol)
+        {
+            if (checkedIds == null)
+            {
+                checkedIds = new List<int>();
+            
+            }
+            var nUsuario = new NUsuario();
+            var idUsuarioCreacion = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
+            var totalLista = nUsuario.RegistrarPermisoDetalle(idUsuario, idRol, checkedIds,idUsuarioCreacion, null);
+            return Json(totalLista, JsonRequestBehavior.AllowGet);
+        }
     }
 }

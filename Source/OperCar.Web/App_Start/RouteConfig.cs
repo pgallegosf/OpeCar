@@ -198,6 +198,17 @@ namespace OpeCar.OperCar.Web
                 url: "EliminarPermiso",
                 defaults: new { controller = "Seguridad", action = "EliminarPermiso", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "ListarPermisoDetalle",
+                url: "ListarPermisoDetalle",
+                defaults: new { controller = "Seguridad", action = "ListarPermisoDetalle", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "RegistrarPermisoDetalle",
+                url: "RegistrarPermisoDetalle",
+                defaults: new { controller = "Seguridad", action = "RegistrarPermisoDetalle", id = UrlParameter.Optional }
+            );
+            
             //Log
             routes.MapRoute(
                 name: "Log",

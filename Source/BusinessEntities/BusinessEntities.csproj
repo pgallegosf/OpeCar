@@ -57,8 +57,10 @@
     <Compile Include="GestionArchivo\ESubAreaResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\EAcceso.cs" />
+    <Compile Include="Seguridad\EListaPermisos.cs" />
     <Compile Include="Seguridad\ELogin.cs" />
     <Compile Include="Seguridad\EPermiso.cs" />
+    <Compile Include="Seguridad\EPermisoDetalle.cs" />
     <Compile Include="Seguridad\ERolAddDto.cs" />
     <Compile Include="Seguridad\ERolFilterSearch.cs" />
     <Compile Include="Seguridad\EUserAd.cs" />

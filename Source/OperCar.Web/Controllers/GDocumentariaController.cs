@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using OpeCar.BusinessEntities.GestionArchivo;
@@ -17,11 +18,12 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             var rolAdmin = System.Web.HttpContext.Current.Session["rolAdmin"];
             ViewBag.EsSuperAdmin = rolAdmin != null && rolAdmin.ToString().Equals("superAdmin");
+            var idUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             var rol = System.Web.HttpContext.Current.Session["rolUsuario"];
             if (rol == null) return RedirectToAction("Index", "Login");
             ViewBag.EsAdmin = rol.ToString().Equals("admin");
             _Area = new NArea();
-            var listaArea = _Area.Listar(2, null);
+            var listaArea = _Area.Listar(idUsuario,2, null);
             return View(listaArea);
         }
         public JsonResult RegistrarAreaGD(EAreaRequest request)
@@ -52,31 +54,33 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _NsubArea.Eliminar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GDocumentariaDetalle(int idArea)
+        public ActionResult GDocumentariaDetalle(string idArea)
         {
             var rolAdmin = System.Web.HttpContext.Current.Session["rolAdmin"];
             ViewBag.EsSuperAdmin = rolAdmin != null && rolAdmin.ToString().Equals("superAdmin");
             var rol = System.Web.HttpContext.Current.Session["rolUsuario"];
+            var idUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             if (rol == null) return RedirectToAction("Index", "Login");
             ViewBag.EsAdmin = rol.ToString().Equals("admin");
             _Area = new NArea();
             var _SubArea = new NSubArea();
             var _Documento = new NDocumento();
-            var area = _Area.Listar(2, null).FirstOrDefault(x => x.IdArea == idArea);
+            var idAreaBusqueda = Convert.ToInt32(Encoding.ASCII.GetString(Convert.FromBase64String(idArea)));
+            var area = _Area.Listar(idUsuario,2, null).FirstOrDefault(x => x.IdArea == idAreaBusqueda);
             if (area != null)
             {
                 ViewBag.Title = area.Descripcion;
             }
 
-            ViewBag.IdArea = idArea;
+            ViewBag.IdArea = idAreaBusqueda;
 
             var listaDocumento = new List<EDocumento>();
 
             var modelo = new ESubAreaDocumento();
             //modelo.ListaDocumentos = listaDocumento;
-            modelo.ListaDocumentos = _Documento.Listar(idArea, null);
+            modelo.ListaDocumentos = _Documento.Listar(idAreaBusqueda, null);
             //modelo.ListaSubAreas = listaSubArea.Where(x=>x.IdArea==idArea).ToList();
-            modelo.ListaSubAreas = _SubArea.Listar(idArea, null);
+            modelo.ListaSubAreas = _SubArea.Listar(idUsuario,idAreaBusqueda, null);
 
             return View(modelo);
         }
@@ -101,7 +105,8 @@ namespace OpeCar.OperCar.Web.Controllers
         public JsonResult ListaComboSubArea(ESubAreaRequest request)
         {
             NSubArea _NsubArea = new NSubArea();
-            var result = _NsubArea.Listar(request.IdArea, null).Where(x => x.IdPadre == request.IdPadre).ToList();
+            var idUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
+            var result = _NsubArea.Listar(idUsuario,request.IdArea, null).Where(x => x.IdPadre == request.IdPadre).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]

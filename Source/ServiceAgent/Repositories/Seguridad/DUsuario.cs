@@ -45,5 +45,21 @@ namespace OpeCar.ServiceAgent.Repositories.Seguridad
 
             return CallApiRest.Get<bool>(urlBase, metodoComplete, headers);
         }
+        public EPermisoDetalle ListarPermisoDetalle(int idUsuario, int idRol, string headers)
+        {
+            var service = _utilEndPoint.GetService("Seguridad");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Seguridad_Usuario_ListarPermisoDetalle");
+            var metodoComplete = string.Format(metodo, idUsuario, idRol);
+
+            return CallApiRest.Get<EPermisoDetalle>(urlBase, metodoComplete, headers);
+        }
+        public bool RegistrarPermisoDetalle(EPermisoDetalle request, string headers)
+        {
+            var service = _utilEndPoint.GetService("Seguridad");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Seguridad_Usuario_RegistrarPermisoDetalle");
+            return CallApiRest.Post<bool, EPermisoDetalle>(request, urlBase, metodo, headers);
+        }
     }
 }

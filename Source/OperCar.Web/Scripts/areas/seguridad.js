@@ -1,13 +1,32 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿$(document).ready(function () {
+   
+    //$('#btnSave').on('click', function () {
+    //    var checkedIds = tree.getCheckedNodes();
+    //    $.ajax({ url: '/Locations/SaveCheckedNodes', data: { checkedIds: checkedIds }, method: 'POST' })
+    //        .fail(function () {
+    //            alert('Failed to save.');
+    //        });
+    //});
+});
+document.addEventListener("DOMContentLoaded", function () {
     $("tbody> tr").on("click", ActivarFila);
     $("#tableUser>tbody> tr").on("click", ActualizarTablaRol);
+    
     $("#btnBuscarUsuario").on("click", ObtenerUsuariosAd);
     $("#btnGuardarRol").on("click", GuardarRol);
     $("#btnDeleteRol").on("click", EliminarRol);
     $("#btnDeleteUser").on("click", EliminarUsuario);
+    $("#btnRegistrarDetalle").on("click", RegistrarDetalleRol);
     
     ActivarPrimeraFila();
     
+    //var tree = $('#tree').tree({
+    //    primaryKey: 'id',
+    //    uiLibrary: 'bootstrap4',
+    //    dataSource: '/Seguridad/ListarPermisoDetalle',
+    //    checkboxes: true
+    //});
+
     $("#txtUsuario").keyup(function (event) {
         if (event.keyCode === 13) {
             var requestBuscar = $(this).val();
@@ -77,7 +96,7 @@ function ActualizarTablaRol() {
         var tbody = '<tbody>';
         if (data.length > 0) {
             $.each(data, function (i, o) {
-                tbody += '<tr data-id="'+o.IdRol+'" >';
+                tbody += '<tr data-id="' + o.IdRol + '" data-idusuario="' + o.IdUsuario + '"  >';
                 tbody += '<td>' + o.NombreRol + '</td>';
                 tbody += '</tr>';
             });
@@ -91,14 +110,17 @@ function ActualizarTablaRol() {
         $("#tableRol").append(tbody);
 
         $("tbody> tr").on("click", ActivarFila);
-
+        $("#tableRol>tbody> tr").on("click", ActualizarPermisoDetalle);
+        $("#tableRol>tbody> tr").first().click();
     })
     .fail(function () {
         alert("Ocurrio un error", "comuniquese con su administrador", "error");
     })
     .always(function () {
+        
+        
     });
-
+    
 }
 
 function ActivarPrimeraFila() {
@@ -319,4 +341,46 @@ function EliminarUsuario() {
 })
 .always(function () {
 });
+}
+var tree = $('#tree').tree();
+var idUsuario = 0;
+var idRol = 0;
+function ActualizarPermisoDetalle() {
+
+    
+    
+    tree.destroy();
+
+    idUsuario = $(this).data("idusuario");
+    idRol = $(this).data("id");
+    if (idRol == 1) {
+        $('#btnDeleteRol').hide();
+        $('#btnRegistrarDetalle').show();
+        
+        //var tree = $('#tree').tree({
+        tree = $('#tree').tree({
+            primaryKey: 'id',
+            uiLibrary: 'bootstrap4',
+            dataSource: '/Seguridad/ListarPermisoDetalle?idUsuario=' + idUsuario + '&idRol=' + idRol,
+            checkboxes: true
+        });
+    } else {
+        $('#btnDeleteRol').show();
+        $('#btnRegistrarDetalle').hide();
+    }
+    
+}
+
+function RegistrarDetalleRol() {
+    var checkedIds = tree.getCheckedNodes();
+    $.ajax({ url: '/Seguridad/RegistrarPermisoDetalle', data: { checkedIds: checkedIds,idUsuario:idUsuario,idRol:idRol }, method: 'POST' })
+        .done(function(data) {
+            $('.alert').fadeIn();
+            setTimeout(function () {
+                $(".alert").fadeOut();
+            }, 2500);
+        })
+        .fail(function () {
+            alert('Failed to save.');
+        });
 }

@@ -8,9 +8,9 @@ namespace OpeCar.BusinessLogic.Service.GestionDocumental
     public class NArea
     {
         readonly DArea _filter = new DArea();
-        public List<EAreaResponse> Listar(int idTipoArea, string headers)
+        public List<EAreaResponse> Listar(int? idUsuario,int idTipoArea, string headers)
         {
-            return _filter.Listar(idTipoArea, headers);
+            return _filter.Listar(idUsuario,idTipoArea, headers);
 
         }
         public bool Registrar(EAreaRequest request, string headers)

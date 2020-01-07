@@ -23,7 +23,7 @@
             <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
         </div>
         <div class="row vertical-top">
-            <div class="col-lg-8 col-md-12 col-sm-12">
+            <div class="col-lg-6 col-md-12 col-sm-12">
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-12 position-inh text-right">
 
@@ -41,7 +41,6 @@
                         <tr>
                             <th scope="col">Usuario</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Usuario Creación</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -50,18 +49,17 @@
                             <tr data-id="@item.IdUsuario">
                                 <td>@item.Usuario1</td>
                                 <td>@item.NombreCompleto</td>
-                                <td>@item.NombreUsuarioCreacion</td>
                             </tr>
                         }
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="col-lg-3 col-md-12 col-sm-12">
                 <div class="row" style="padding-bottom: 10px;">
                     <div class="col-md-12 position-inh text-right">
 
-                        <button type="button" id="btnAddRol" class="btn btn-primary" data-toggle="modal" data-target="#modalRol"  data-placement="top" title="Agregar rol" style="text-align: right; right: 0">
+                        <button type="button" id="btnAddRol" class="btn btn-primary" data-toggle="modal" data-target="#modalRol" data-placement="top" title="Agregar rol" style="text-align: right; right: 0">
                             +
                         </button>
                         <button type="button" id="btnDeleteRol" class="btn btn-primary btnDeleteItem" data-toggle="tooltip" data-placement="top" title="Eliminar rol" style="text-align: right; right: 0">
@@ -81,6 +79,18 @@
                     </table>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-12 col-sm-12">
+                <div class="row" style="padding-bottom: 10px;">
+                    <div class="col-md-12 position-inh text-right">
+                        <button type="button" id="btnRegistrarDetalle" class="btn btn-primary" data-placement="top" title="Guardar" style="text-align: right; right: 0">
+                            <i class="far fa-save"></i>
+                        </button>
+                    </div>
+                    </div>
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div id="tree"></div>
+                    </div>
+                </div>
         </div>
     </div>
 </section>
@@ -148,7 +158,6 @@
                     <div class="form-group">
                         <select class="custom-select mr-sm-2" id="selRol" name="selRol">
                             <option selected>Seleccione un Rol</option>
-                            <option value="1">Colaborador</option>
                             <option value="2">Administrator</option>
                             <option value="3">SuperAdmin</option>
                         </select>

@@ -87,7 +87,6 @@ namespace OpeCar.OperCar.Web
                       "~/Content/plugins/froala_editor/css/plugins/file.css",
                       "~/Content/plugins/froala_editor/css/themes/gray.css"
              ));
-
             // FroalaEditor js
             bundles.Add(new ScriptBundle("~/bundles/FroalaEditor").Include(
                         "~/Content/plugins/froala_editor/js/froala_editor.min.js",

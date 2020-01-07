@@ -326,7 +326,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 function MostrarNombreArchivo() {
     var nombreDoc = document.getElementById('fileDocumento').files[0].name;
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        if (nombreDoc.length > 20) {
+        nombreDoc = nombreDoc.substring(0, 20)+"...";
+        }      
+    }
+    else if (nombreDoc.length>35){
+        nombreDoc = nombreDoc.substring(0, 35) + "...";
+    }
     $("#lblFileDocumento").html(nombreDoc);
+
 }
 
 function EliminarDocumento(codigo) {

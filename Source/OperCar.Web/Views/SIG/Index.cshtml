@@ -1,4 +1,6 @@
 ﻿@using System.Runtime.InteropServices.ComTypes
+@using System.Text
+@using OpeCar.BusinessEntities.GestionArchivo
 @model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.EAreaResponse>
 @{
     ViewBag.Title = "Index";
@@ -38,9 +40,10 @@
             {
                 <div class="col-md-2 position-inh">
                     <div class="figure margin-top-0 margin-bottom-0 image-effect-zoom-in  os-animation animated bounceInDown animation-inh position-inh" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
-                        <a href="@Url.Action("SIGDetalle", "SIG", new {idArea = @item.IdArea})" class="figure-image">
-                            <img width="252" height="238" src="@item.UrlImg" class="attachment-full size-full" alt="">
-                        </a>
+                        @*<a href="@Url.Action("SIGDetalle", "SIG", new {idArea = @item.IdArea})" class="figure-image">*@
+                            <a href="@Url.Action("SIGDetalle", "SIG", new { idArea = Convert.ToBase64String(Encoding.ASCII.GetBytes(Convert.ToString(@item.IdArea))) })" class="figure-image">
+                                <img width="252" height="238" src="@item.UrlImg" class="attachment-full size-full" alt="">
+                            </a>
                     </div>
                     <div class="col-text-1 text-normal  margin-top-0 margin-bottom-20 os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
                         <hr class="hr_brown_ohl">

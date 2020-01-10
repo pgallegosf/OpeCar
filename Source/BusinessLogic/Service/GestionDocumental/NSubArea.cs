@@ -11,9 +11,9 @@ namespace OpeCar.BusinessLogic.Service.GestionDocumental
     public class NSubArea
     {
         readonly DSubArea _filter = new DSubArea();
-        public List<ESubAreaResponse> Listar(int idArea, string headers)
+        public List<ESubAreaResponse> Listar(int? idUsuario,int idArea, string headers)
         {
-            return _filter.Listar(idArea, headers);
+            return _filter.Listar(idUsuario,idArea, headers);
 
         }
         public bool Registrar(ESubAreaRequest request, string headers)

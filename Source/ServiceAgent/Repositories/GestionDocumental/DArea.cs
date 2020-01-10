@@ -8,12 +8,12 @@ namespace OpeCar.ServiceAgent.Repositories.GestionDocumental
     public class DArea
     {
         private readonly UtilEndPoint _utilEndPoint = new UtilEndPoint();
-        public List<EAreaResponse> Listar(int idTipo, string headers)
+        public List<EAreaResponse> Listar(int? idUsuario,int idTipo, string headers)
         {
             var service = _utilEndPoint.GetService("GestionDocumental");
             var urlBase = service.Url;
             var metodo = _utilEndPoint.GetMethod(service, "Area_Listar");
-            var metodoComplete = string.Format(metodo, idTipo);
+            var metodoComplete = string.Format(metodo,idUsuario, idTipo);
 
             return CallApiRest.Get<List<EAreaResponse>>(urlBase, metodoComplete, headers);
         }

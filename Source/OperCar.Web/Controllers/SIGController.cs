@@ -214,5 +214,13 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _Ndocumento.Eliminar(idDocumento, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult ListarArea(EAreaRequest request)
+        {
+            NArea _NArea = new NArea();
+            var idUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
+            var result = _NArea.Listar(idUsuario, request.IdTipoArea, null);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

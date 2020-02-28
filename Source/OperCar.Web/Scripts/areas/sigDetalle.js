@@ -425,3 +425,84 @@ function EliminarSubArea() {
     .always(function () {
     });
 }
+//================================================================================================================================
+
+/*****************************************
+| Mover carpeta o archivo
+******************************************/
+let idarea = 0;
+let idsubarea = 0;
+let docCode   = 0;
+
+$(".subArea-mover").on("click", moverCarpetaArchivo);
+$("#mov-area").on("change", function() {
+    ListarSubArea($("#mov-subarea"), idarea, idsubarea);
+});
+
+function moverCarpetaArchivo() {
+
+    let level  = parseInt($(this).attr("data-level"));
+    idarea = $(this).attr("data-idarea");
+    idsubarea  = $(this).attr("data-idsubarea");
+    docCode    = $(this).attr("data-doccode");
+
+    switch(level) {
+        case 1:
+            $(".div-carpeta").hide();
+            $(".div-subcarpeta").hide();
+            break;
+        case 2:
+            $(".div-carpeta").show();
+            $(".div-subcarpeta").hide();
+            break;
+        case 3:
+            $(".div-carpeta").show();
+            $(".div-subcarpeta").show();
+            break;
+    }
+    ListarArea(idarea);
+}
+
+function ListarArea(idarea) {
+    var data = {
+        request: {IdTipoArea: 2}
+    };
+    var jqxhr = $.ajax({
+        type: "POST",
+        url: "/SIG/ListarArea",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    })
+    .done(function (data) {
+        $("#mov-area").empty();
+        $.each(data, function (key, item) {
+            $("#mov-area").append('<option value=' + item.IdArea + '>' + item.Descripcion + '</option>');
+        });
+        $("#mov-area").val(idarea).trigger("change");
+        $("#modalMover").modal("show");
+    })
+    .fail(function () {})
+    .always(function () {});
+}
+
+function ListarSubArea($select, idarea, idpadre) {
+    var data = {
+        request: {
+            IdArea: idarea,
+            IdPadre: idpadre
+        }
+    };
+    var jqxhr = $.ajax({
+        type: "POST",
+        url: "ListaComboSubArea",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    })
+    .done(function (data) {
+        console.log(data);
+    })
+    .fail(function () {})
+    .always(function () {});
+}

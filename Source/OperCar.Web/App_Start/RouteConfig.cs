@@ -109,6 +109,11 @@ namespace OpeCar.OperCar.Web
                 "Index",
                 new { controller = "Aplicacion", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                 "ListarArea",
+                "ListarArea",
+                 new { controller = "SIG", action = "ListarArea", id = UrlParameter.Optional }
+            );
             //GDocumentaria
             routes.MapRoute(
                 name: "GDocumentaria",

@@ -184,7 +184,7 @@
                                                         <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@subArea.Codigo">
                                                             <i class=" fas fa-backspace"></i>
                                                         </button>
-                                                        <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@subArea.Codigo" data-idarea="@item.IdArea" data-level="2">
+                                                        <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@subArea.Codigo" data-idpadre="@subArea.IdPadre" data-idarea="@item.IdArea" data-level="2">
                                                             <i class=" fas fa-arrow-right"></i> Mover
                                                         </button>
                                                     }
@@ -226,7 +226,7 @@
                                                         <div class="card-body card-body-doc">
                                                             <h4 class="nombre-doc">@doc.Descripcion</h4>                                                            
                                                             <div class="div-btn-descarga">
-                                                                <button class="btn btn-link subArea-mover" type="button" data-doccode="@doc.Codigo" data-idarea="@item.IdArea" data-level="3">
+                                                                <button class="btn btn-link subArea-mover" type="button" data-doccode="@doc.Codigo" data-idarea="@item.IdArea" data-idsubarea="@doc.IdSubArea" data-idpadre="@Model.ListaSubAreas[0].Codigo" data-level="3">
                                                                     <i class=" fas fa-arrow-right"></i> Mover
                                                                 </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion})">Descargar</a>
@@ -251,7 +251,6 @@
     </div>
     <br />
 </section>
-
 
 <div class="modal fade" id="modalSubArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

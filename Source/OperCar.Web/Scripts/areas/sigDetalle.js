@@ -430,19 +430,20 @@ function EliminarSubArea() {
 /*****************************************
 | Mover carpeta o archivo
 ******************************************/
-let idarea = 0;
+let idarea    = 0;
+let idpadre   = 0;
 let idsubarea = 0;
 let docCode   = 0;
 
 $(".subArea-mover").on("click", moverCarpetaArchivo);
 $("#mov-area").on("change", function() {
-    ListarSubArea($("#mov-subarea"), idarea, idsubarea);
+    ListarSubArea($("#mov-subarea"), idarea, null, idsubarea);
 });
 
 function moverCarpetaArchivo() {
-
     let level  = parseInt($(this).attr("data-level"));
-    idarea = $(this).attr("data-idarea");
+    idarea     = $(this).attr("data-idarea");
+    idpadre     = $(this).attr("data-idpadre");
     idsubarea  = $(this).attr("data-idsubarea");
     docCode    = $(this).attr("data-doccode");
 
@@ -467,7 +468,7 @@ function ListarArea(idarea) {
     var data = {
         request: {IdTipoArea: 2}
     };
-    var jqxhr = $.ajax({
+    $.ajax({
         type: "POST",
         url: "/SIG/ListarArea",
         data: JSON.stringify(data),
@@ -480,20 +481,20 @@ function ListarArea(idarea) {
             $("#mov-area").append('<option value=' + item.IdArea + '>' + item.Descripcion + '</option>');
         });
         $("#mov-area").val(idarea).trigger("change");
-        $("#modalMover").modal("show");
+        $("#modalMover").modal({backdrop: 'static', keyboard: false});
     })
     .fail(function () {})
     .always(function () {});
 }
 
-function ListarSubArea($select, idarea, idpadre) {
+function ListarSubArea($select, idarea, idpadre, idsubarea) {
     var data = {
         request: {
             IdArea: idarea,
             IdPadre: idpadre
         }
     };
-    var jqxhr = $.ajax({
+    $.ajax({
         type: "POST",
         url: "ListaComboSubArea",
         data: JSON.stringify(data),
@@ -502,6 +503,7 @@ function ListarSubArea($select, idarea, idpadre) {
     })
     .done(function (data) {
         console.log(data);
+        console.log("Seleccionar: " + idsubarea);
     })
     .fail(function () {})
     .always(function () {});

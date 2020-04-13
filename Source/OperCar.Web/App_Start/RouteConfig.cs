@@ -104,6 +104,19 @@ namespace OpeCar.OperCar.Web
                 "EliminarDocumento",
                  new { controller = "SIG", action = "EliminarDocumento", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                "MoverDocumento",
+                "MoverDocumento",
+                new { controller = "SIG", action = "MoverDocumento"}
+            );
+
+            routes.MapRoute(
+                "BuscarDocumento",
+                "BuscarDocumento",
+                new { controller = "SIG", action = "BuscarDocumento"}
+            );
+            
             routes.MapRoute(
                 "Aplicaciones",
                 "Index",

@@ -60,7 +60,7 @@
                                     <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
                                     <div class="card-body card-body-doc">
                                         <h4 class="nombre-doc">@doc.Descripcion</h4>
-                                        <div class="div-btn-descarga">
+                                        <div class="div-btn-descarga">                                            
                                             <a class="botondescarga" target="_blank" href="#">Descargar</a>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                        <i class=" fas fa-backspace"></i>
                                     </button>
 
-                                    <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@item.Codigo" data-idarea="@item.IdArea" data-level="1">
+                                    <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@item.Codigo" data-idarea="@item.IdArea" data-descsubarea="@item.Descripcion" data-level="1">
                                        <i class=" fas fa-arrow-right"></i> Mover
                                     </button>
 
@@ -154,7 +154,10 @@
 
                                                         <div class="card-body card-body-doc">
                                                             <h4 class="nombre-doc">@docPrimario.Descripcion</h4>
-                                                            <div class="div-btn-descarga">                                                                
+                                                            <div class="div-btn-descarga">    
+                                                                <button class="btn btn-link subArea-mover" type="button" data-doccode="@docPrimario.Codigo" data-idpadre="@docPrimario.IdSubArea" data-idarea="@item.IdArea" data-level="3">
+                                                                    <i class=" fas fa-arrow-right"></i> Mover
+                                                                </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @docPrimario.UrlDocumento, nombreDoc = @docPrimario.Descripcion})">Descargar</a>
                                                                 @if (@ViewBag.EsAdmin)
                                                                 {
@@ -184,7 +187,7 @@
                                                         <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@subArea.Codigo">
                                                             <i class=" fas fa-backspace"></i>
                                                         </button>
-                                                        <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@subArea.Codigo" data-idpadre="@subArea.IdPadre" data-idarea="@item.IdArea" data-level="2">
+                                                        <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@subArea.Codigo" data-idpadre="@subArea.IdPadre" data-idarea="@item.IdArea" data-descsubarea="@subArea.Descripcion" data-level="2">
                                                             <i class=" fas fa-arrow-right"></i> Mover
                                                         </button>
                                                     }
@@ -325,7 +328,7 @@
 </div>
 
 <!-- BEGIN: Modal Mover Carpeta/Archivo -->
-<div class="modal fade" id="modalMover" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalMoverDocumento" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -337,27 +340,27 @@
             <form id="formfiledocumento" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
-                        Área:
+                        <span style="color:red;font-weight:bold;">*</span>Área:
                         <select class="custom-select mr-sm-2" id="mov-area">
-                            <option selected>Seleccione Área</option>
                         </select>
                     </div>
                     <div class="form-group div-carpeta">
-                        Carpeta:
+                        <span style="color:red;font-weight:bold;">*</span> Carpeta:
                         <select class="custom-select mr-sm-2" id="mov-subarea">
-                            <option selected>Seleccione Carpeta</option>
+                            <option value="0" selected>No existe Carpeta...</option>
                         </select>
+                        <label id="label-error-subarea" style="color:red;font-size:12px;"></label>
                     </div>
                     <div class="form-group div-subcarpeta">
                         SubCarpeta:
                         <select class="custom-select mr-sm-2" id="mov-subarea-2">
-                            <option selected>Seleccione SubCarpeta</option>
+                            <option value="0" selected>No existe SubCarpeta</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" id="btnGuardarDocumento" class="btn btn-primary">Guardar</button>
+                    <button type="button" id="btn-mover-documento" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>

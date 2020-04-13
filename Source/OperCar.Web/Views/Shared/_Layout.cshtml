@@ -33,19 +33,10 @@
             </div>
             <div class="top top-right">
                 <div class="sidebar-widget widget_search">
-                    <div class="top-search">
-
-                        <form role="search" method="get" id="searchform" action="">
-                            <div class="input-group">
-                                <input type="text" value="" name="s" id="s" class="form-control" placeholder="Buscar">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit" id="searchsubmit" value="Buscar">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                        <a class="search-trigger"><i class="fas fa-search"></i></a><b class="search-close"></b>
+                    <div class="textwidget custom-html-widget">
+                        <a id="btn-search-document" href="javascript:void(0);">
+                            <i class="menu-icon fas fa-search"></i>&nbsp;Busqueda
+                        </a>
                     </div>
                 </div>
                 <div id="custom_html-3" class="widget_text sidebar-widget text-right small-screen-center widget_custom_html">
@@ -104,7 +95,84 @@
         </section>
     </footer>
 </div>
-    
+<div class="modal fade" id="modal-search-document" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Busqueda de archivos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formfiledocumento" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">                        
+                        <input type="text" id="txt-search-document" class="form-control" placeholder="Busqueda"/>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row col-12 div-document">    
+                        @* <div class="col-sm-6 col-lg-4 card-documento card-subArea">
+                            <div class="card">
+                                <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                <div class="card-body card-body-doc">
+                                    <h4 class="nombre-doc">Descripcion</h4>
+                                    <div class="div-btn-descarga">    
+                                        <button class="btn btn-link subArea-mover" type="button" data-doccode="Codigo" data-idpadre="IdSubArea" data-idarea="IdArea" data-level="3">
+                                            <i class=" fas fa-arrow-right"></i> Mover
+                                        </button>
+                                        <button class="btn btn-link subArea-mover" type="button" data-doccode="Codigo" data-idpadre="IdSubArea" data-idarea="IdArea" data-level="3">
+                                            <i class=" fas fa-download"></i> Descargar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 card-documento card-subArea">
+                            <div class="card">
+                                <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                <div class="card-body card-body-doc">
+                                    <h4 class="nombre-doc">Descripcion</h4>
+                                    <div class="div-btn-descarga">    
+                                        <button class="btn btn-link subArea-mover" type="button" data-doccode="Codigo" data-idpadre="IdSubArea" data-idarea="IdArea" data-level="3">
+                                            <i class=" fas fa-arrow-right"></i> Mover
+                                        </button>
+                                        <button class="btn btn-link subArea-mover" type="button" data-doccode="Codigo" data-idpadre="IdSubArea" data-idarea="IdArea" data-level="3">
+                                            <i class=" fas fa-download"></i> Descargar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4 card-documento card-subArea">
+                            <div class="card">
+                                <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga"/>
+                                <div class="card-body card-body-doc">
+                                    <h4 class="nombre-doc">Descripcion</h4>
+                                    <div class="div-btn-descarga">    
+                                        <button class="btn btn-link subArea-mover" type="button" data-doccode="Codigo" data-idpadre="IdSubArea" data-idarea="IdArea" data-level="3">
+                                            <i class=" fas fa-arrow-right"></i> Mover
+                                        </button>
+                                        <button class="btn btn-link subArea-mover" type="button" data-doccode="Codigo" data-idpadre="IdSubArea" data-idarea="IdArea" data-level="3">
+                                            <i class=" fas fa-download"></i> Descargar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> *@
+                        <div style="text-align:center;width:100%;">
+                            <i class="fa fa-search" style="color:gray;font-size:50px;"></i>
+                        </div>
+                    </div>                    
+                </div>
+                @* <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btn-mover-documento" class="btn btn-primary">Guardar</button>
+                </div> *@
+            </form>
+        </div>
+    </div>
+</div>
     
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/home")

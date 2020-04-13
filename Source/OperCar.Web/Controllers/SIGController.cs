@@ -222,5 +222,38 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _NArea.Listar(idUsuario, request.IdTipoArea, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult MoverDocumento(int idSubArea, int idArea, bool isDocument, int? idDocumento = null, int? idPadre = null)
+        {
+            if (isDocument)
+            {
+                NDocumento _Ndocumento = new NDocumento();
+                var request = new EDocumentoRequest();
+                request.Codigo = idDocumento;
+                request.IdSubArea = idSubArea;                
+                var result = _Ndocumento.Mover(request);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                NSubArea _NsubArea = new NSubArea();
+                var request = new ESubAreaRequest();
+                request.Codigo = idSubArea;
+                request.Descripcion = "";
+                request.IdArea = idArea;
+                request.IdPadre = idPadre;
+                var result = _NsubArea.Mover(request);
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+         public JsonResult BuscarDocumento(string descripcion)
+        {
+            NDocumento _Ndocumento = new NDocumento();
+            var request = new EDocumentoRequest();
+            request.Descripcion = descripcion;
+            var result = _Ndocumento.Buscar(request);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

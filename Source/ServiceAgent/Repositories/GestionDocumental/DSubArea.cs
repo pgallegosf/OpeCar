@@ -38,6 +38,13 @@ namespace OpeCar.ServiceAgent.Repositories.GestionDocumental
             var metodo = _utilEndPoint.GetMethod(service, "SubArea_Eliminar");
             return CallApiRest.Post<bool, ESubAreaRequest>(request, urlBase, metodo, headers);
         }
+        public bool Mover(ESubAreaRequest request)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "SubArea_Mover");
+            return CallApiRest.Post<bool, ESubAreaRequest>(request, urlBase, metodo, null);
+        }
 
     }
 }

@@ -14,7 +14,7 @@
                 <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular">
                     @ViewBag.Title
                 </h1>
-@if (@ViewBag.EsAdmin)
+@if (@ViewBag.EsSuperAdmin)
                     {
                         <div class="col-md-12 position-inh text-right">
 
@@ -79,7 +79,7 @@
                     <div class="card">
                         <div class="card-header header-area" id="heading-@collapse">
                             <h5 class="mb-0 descripcionSubArea @item.Codigo">
-                                @if (@ViewBag.EsAdmin)
+                                @if (@ViewBag.EsSuperAdmin)
                                 {
                                     <button class="btn btn-link btn-titulo collapsed titulosubarea subArea-edit" type="button" data-idsubarea="@item.Codigo" data-descripcion="@item.Descripcion" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
                                         @item.Descripcion
@@ -109,7 +109,7 @@
 
                         <div id="@collapse" class="collapse show" aria-labelledby="heading-@collapse" data-parent="#accordionExample">
                             <div class="card-body">
-                                @if (@ViewBag.EsAdmin)
+                                @if (@ViewBag.EsSuperAdmin)
                                 {
                                 <div class="col-md-12 text-right">
                                     <div class="btn-group" role="group">
@@ -159,7 +159,7 @@
                                                                     <i class=" fas fa-arrow-right"></i> Mover
                                                                 </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @docPrimario.UrlDocumento, nombreDoc = @docPrimario.Descripcion})">Descargar</a>
-                                                                @if (@ViewBag.EsAdmin)
+                                                                @if (@ViewBag.EsSuperAdmin)
                                                                 {
                                                                     <a class="botonEliminar" onclick=" EliminarDocumento(@docPrimario.Codigo) ">x</a>
                                                                 }
@@ -180,7 +180,7 @@
                                             @foreach (var subArea in Model.ListaSubAreas.Where(x => x.IdPadre == item.Codigo && x.EsUltimo))
                                             {
                                                 <div class="lista-ultimo-subArea descripcionSubArea @subArea.Codigo" data-id="@subArea.Codigo">
-                                                    @if (@ViewBag.EsAdmin)
+                                                    @if (@ViewBag.EsSuperAdmin)
                                                     {
                                                         <span class="subareaUltimo-edit" data-idsubarea="@subArea.Codigo" data-descripcion="@subArea.Descripcion">@subArea.Descripcion</span>
                                                         <input type="text" data-idsubarea="@subArea.Codigo" class="form-control txtDescripcionSubAreaUltimo" style="display: none;" value="@subArea.Descripcion">
@@ -233,7 +233,7 @@
                                                                     <i class=" fas fa-arrow-right"></i> Mover
                                                                 </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion})">Descargar</a>
-                                                                @if (@ViewBag.EsAdmin)
+                                                                @if (@ViewBag.EsSuperAdmin)
                                                                 {
                                                                     <a class="botonEliminar" onclick=" EliminarDocumento(@doc.Codigo) ">x</a>
                                                                 }

@@ -2,23 +2,26 @@
 /**
  * @fileOverview    Script de mantenimiento
  * @since           1.0.0 - 17/12/2019
- * @version         1.0.0 - 19/12/2019
+ * @version         1.0.0 - 01/10/2020
  * @author          Jean Carlos Sánchez Castromonte
 */
 //================================================================================================================================
-
+let countMenuFooter   = 0;
+let cboPosition       = null;
 document.addEventListener("DOMContentLoaded", function () {
     window.scrollTo(0, 0);
     initDropify($('.dropify'));
-
-    let btnEditMenuFooter = document.getElementsByClassName("btn-edit-menu-footer");
-    Array.from(btnEditMenuFooter).forEach(function (element) {
+    cboPosition = document.querySelector('#cbo-mf-position');
+    const btnEditMenuFooter = document.getElementsByClassName("btn-edit-menu-footer");
+    Array.from(btnEditMenuFooter).forEach(function ( element, index ) {
         element.addEventListener('click', setFormEditMenuFooter);
+        createOptionPosition( cboPosition, index );
     });
+    countMenuFooter = btnEditMenuFooter.length;
 
     document.getElementById("btn-add-menu-footer").addEventListener("click", clearFormMenuFooter);    
     document.getElementById("btn-save-maintenance").addEventListener("click", (event) => saveFormMaintenance(event));
-    document.getElementById("btn-save-menu-footer").addEventListener("click", (event) => saveFormMenuFooter(event));
+    document.getElementById("btn-save-menu-footer").addEventListener("click", (event) => saveFormMenuFooter(event));   
 });
 //================================================================================================================================
 function initDropify($selector) {
@@ -38,11 +41,13 @@ function initDropify($selector) {
 //================================================================================================================================
 
 function setFormEditMenuFooter() {
+    const cboPositionOption = document.querySelectorAll('#cbo-mf-position option');
+    rebuildOptionsPosition( cboPosition, cboPositionOption, countMenuFooter );
 
     document.getElementById("txt-mf-id").value       = this.getAttribute("data-id");
     document.getElementById("txt-mf-nombre").value   = this.getAttribute("data-nombre");
     document.getElementById("txt-mf-url").value      = this.getAttribute("data-url");
-    document.getElementById("txt-mf-position").value = this.getAttribute("data-position");
+    document.getElementById("cbo-mf-position").value = this.getAttribute("data-position");
 
     if(this.getAttribute("data-status") == "True") {
         document.getElementById("rd-mf-active").checked = true;
@@ -55,17 +60,20 @@ function setFormEditMenuFooter() {
 //================================================================================================================================
 
 function clearFormMenuFooter() {
+    const lastPosition = ( countMenuFooter + 1 );
+    const cboPositionOption = document.querySelectorAll('#cbo-mf-position option');
+    rebuildOptionsPosition( cboPosition, cboPositionOption, lastPosition );
+
     document.getElementById("txt-mf-id").value              = "";
     document.getElementById("txt-mf-nombre").value          = ""
     document.getElementById("txt-mf-url").value             = "";
-    document.getElementById("txt-mf-position").value        = "";
+    document.getElementById("cbo-mf-position").value        = lastPosition;
     document.getElementById("rd-mf-active").checked         = true;
     document.getElementById("chk-mf-is-super-user").checked = false;
 }
 //================================================================================================================================
 
-function saveFormMaintenance(event) {
-
+function saveFormMaintenance( event ) {
     event.preventDefault();    
 
     let maintenaceId            = document.getElementById("txt-maintenance-id").value;
@@ -96,8 +104,7 @@ function saveFormMaintenance(event) {
 }
 //================================================================================================================================
 
-function saveFormMenuFooter(event) {
-
+function saveFormMenuFooter( event ) {
     event.preventDefault();
 
     let data                   = {};
@@ -105,7 +112,7 @@ function saveFormMenuFooter(event) {
     data.MantenimientoId       = 1;
     data.MenuFooterName        = document.getElementById("txt-mf-nombre").value;
     data.MenuFooterUrl         = document.getElementById("txt-mf-url").value;
-    data.MenuFooterPosition    = document.getElementById("txt-mf-position").value;
+    data.MenuFooterPosition    = document.getElementById("cbo-mf-position").value;
     data.MenuFooterStatus      = document.querySelector('input[name="rd-status"]:checked').value == "true";   
     data.MenuFooterIsSuperUser = document.getElementById("chk-mf-is-super-user").checked;
     

@@ -12,7 +12,7 @@
                 <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
                     Gestión Documentaria
                 </h1>
-                @if (@ViewBag.EsAdmin)
+                @if (@ViewBag.EsSuperAdmin)
                 {
                     <div class="row" style="padding-bottom: 10px;">
                         <div class="col-md-12 position-inh text-right">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-text-1 text-normal font_24px margin-top-0 margin-bottom-20 os-animation animated bounceInDown" data-os-animation="bounceInDown" data-os-animation-delay="0s" style="animation-delay: 0s;">
                         <p class="descripcionArea @item.IdArea">
-                            @if (@ViewBag.EsAdmin)
+                            @if (@ViewBag.EsSuperAdmin)
                             {
 
                                 <span style="color: #534741;" data-idarea="@item.IdArea" data-descripcion="@item.Descripcion" class="area-edit">

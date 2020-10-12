@@ -170,3 +170,18 @@ const getIconTypeDocument = (idTipoDocumento) => {
     }
     return imageTypeDoc;
 }
+//================================================================================================================================
+const createOptionPosition = ( selCbo, index ) => {
+    const option = document.createElement('option');
+    option.setAttribute('value', ( index + 1) );
+    option.innerText = `${( index + 1)}`;
+    selCbo.appendChild(option);
+}
+//================================================================================================================================
+const rebuildOptionsPosition = ( selCbo, selCboAllOption, count ) => {
+    selCboAllOption.forEach( item => item.remove() );
+    for(let i = 0; i < count; i++) {
+        createOptionPosition( selCbo, i );
+    }
+}
+//================================================================================================================================

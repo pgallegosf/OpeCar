@@ -9,9 +9,9 @@
     });
     OcultarTopBar();
     initInfoMantenimiento();
+    $(".botonver").on("click",VerArchivo);
 });
 //================================================================================================================================
-
 function OcultarTopBar() {
     var altoVentana = 36;
     var posicionVentana = document.getElementById("topBar").offsetTop;
@@ -91,3 +91,12 @@ async function listarMenuFooter(mantenimientoId) {
     });
 }
 //================================================================================================================================
+/**
+ * Ver Archivo.
+ *
+ * @param   {Number}  mantenimientoId
+ */
+function VerArchivo() {
+    const url = $(this).attr("data-url");
+    $("#iframeArchivo").attr("src", url);
+}

@@ -14,16 +14,16 @@
                 <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular">
                     @ViewBag.Title
                 </h1>
-@if (@ViewBag.EsAdmin)
-                    {
-                        <div class="col-md-12 position-inh text-right">
+                @if (@ViewBag.EsAdmin)
+                {
+                    <div class="col-md-12 position-inh text-right">
 
-                            <button type="button" id="btnAddSubAreaPrim" class="btn btn-primary" data-codigo="@ViewBag.IdArea" data-esultimo="0" data-toggle="modal" data-target="#modalSubArea" style="text-align: right; right: 0">
-                                +
-                            </button>
+                        <button type="button" id="btnAddSubAreaPrim" class="btn btn-primary" data-codigo="@ViewBag.IdArea" data-esultimo="0" data-toggle="modal" data-target="#modalSubArea" style="text-align: right; right: 0">
+                            +
+                        </button>
 
-                        </div>
-                    }
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -62,6 +62,10 @@
                                         <h4 class="nombre-doc">@doc.Descripcion</h4>
                                         <div class="div-btn-descarga">
                                             <a class="botondescarga" target="_blank" href="#">Descargar</a>
+                                            <div class="p-2">
+                                                @{string url = doc.UrlDocumento.Replace("~", ""); }
+                                                <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,11 +92,11 @@
                                     </button>
                                     <input type="text" data-idsubarea="@item.Codigo" class="form-control txtDescripcionSubArea" style="display: none;" value="@item.Descripcion">
                                     <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@item.Codigo">
-                                       <i class=" fas fa-backspace"></i>
+                                        <i class=" fas fa-backspace"></i>
                                     </button>
                                     @*<span style="color:#FFFFFF" data-idarea="@item.IdArea" data-descripcion="@item.Descripcion" class="subArea-edit">
-                                        @item.Descripcion
-                                    </span>*@
+                                            @item.Descripcion
+                                        </span>*@
                                 }
                                 else
                                 {
@@ -108,17 +112,17 @@
                             <div class="card-body">
                                 @if (@ViewBag.EsAdmin)
                                 {
-                                <div class="col-md-12 text-right">
-                                    <div class="btn-group" role="group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            +
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <button type="button" id="btnAddSubAreaSec" class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#modalSubArea" onclick=" ActualizarDatosSubAreaSec(@ViewBag.IdArea, @item.Codigo, 1) ">Carpeta</button>
-                                            <a class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#modalDocumento" onclick=" ActualizarComboSubArea(@ViewBag.IdArea, @item.Codigo) ">Documento</a>
+                                    <div class="col-md-12 text-right">
+                                        <div class="btn-group" role="group">
+                                            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                +
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                <button type="button" id="btnAddSubAreaSec" class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#modalSubArea" onclick=" ActualizarDatosSubAreaSec(@ViewBag.IdArea, @item.Codigo, 1) ">Carpeta</button>
+                                                <a class="dropdown-item btn btn-primary" data-toggle="modal" data-target="#modalDocumento" onclick=" ActualizarComboSubArea(@ViewBag.IdArea, @item.Codigo) ">Documento</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
                                 @{
                                     if (Model.ListaDocumentos.Any(x => x.IdSubArea == item.Codigo))
@@ -153,6 +157,10 @@
                                                             <h4 class="nombre-doc">@docPrimario.Descripcion</h4>
                                                             <div class="div-btn-descarga">
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @docPrimario.UrlDocumento, nombreDoc = @docPrimario.Descripcion})">Descargar</a>
+                                                                <div class="p-2">
+                                                                    @{string url = docPrimario.UrlDocumento.Replace("~", ""); }
+                                                                    <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                                </div>
                                                                 @if (@ViewBag.EsAdmin)
                                                                 {
                                                                     <a class="botonEliminar" onclick=" EliminarDocumento(@docPrimario.Codigo) ">x</a>
@@ -188,12 +196,12 @@
                                                     }
                                                 </div>
                                             }
-                                                </div>
+                                        </div>
                                         <div class="row col-12">
                                             @foreach (var doc in from sub in Model.ListaSubAreas.Where(x => x.IdPadre == item.Codigo && x.EsUltimo)
-                                                from doc in Model.ListaDocumentos.Where(x => x.IdSubArea == sub.Codigo)
-                                                let car = doc.Descripcion
-                                                select doc)
+                                                                from doc in Model.ListaDocumentos.Where(x => x.IdSubArea == sub.Codigo)
+                                                                let car = doc.Descripcion
+                                                                select doc)
                                             {
                                                 <div class="col-sm-5 col-lg-2 card-documento card-subArea @doc.IdSubArea">
                                                     <div class="card">
@@ -221,6 +229,10 @@
                                                             <h4 class="nombre-doc">@doc.Descripcion</h4>
                                                             <div class="div-btn-descarga">
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion})">Descargar</a>
+                                                                <div class="p-2">
+                                                                    @{string url = doc.UrlDocumento.Replace("~", ""); }
+                                                                    <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                                </div>
                                                                 @if (@ViewBag.EsAdmin)
                                                                 {
                                                                     <a class="botonEliminar" onclick=" EliminarDocumento(@doc.Codigo) ">x</a>

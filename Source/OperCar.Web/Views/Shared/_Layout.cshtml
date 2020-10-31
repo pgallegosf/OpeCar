@@ -57,6 +57,7 @@
                     <div class="textwidget custom-html-widget">
                         <a id="salirtopbar" href="@Url.Action("Logout", "Login")">
                             <i class="menu-icon fas fa-user"></i>&nbsp;SALIR
+                           (@Session["userName"].ToString())
                         </a>
                     </div>
                 </div>
@@ -104,7 +105,25 @@
         </section>
     </footer>
 </div>
-    
+<div class="modal fade" id="modalverarchivo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tituloModal">Ver Archivo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="iframeArchivo" style="border:1px solid #666CCC; height:1100px ; width:100%" title="PDF in an i-Frame" src="#" frameborder="1" scrolling="auto"></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarSubArea">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>    
     
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/home")

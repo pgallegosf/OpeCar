@@ -179,6 +179,5 @@ namespace OpeCar.OperCar.Web.Controllers
             var result = _Ndocumento.Eliminar(idDocumento, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
     }
 }

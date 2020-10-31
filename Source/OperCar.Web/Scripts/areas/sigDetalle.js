@@ -275,7 +275,7 @@ function RegistrarDocumento() {
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
         alert('Uncaught Error: ' + jqXHR.responseText);
-
+        console.log(jqXHR);
     })
     .always(function () {
     });
@@ -283,6 +283,7 @@ function RegistrarDocumento() {
     catch (error) {
         console.error(error);
         alert(error);
+
         // expected output: ReferenceError: nonExistentFunction is not defined
         // Note - error messages will vary depending on browser
     }

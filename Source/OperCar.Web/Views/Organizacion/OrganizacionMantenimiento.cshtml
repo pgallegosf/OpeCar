@@ -45,14 +45,14 @@
                             <tr data-id="@item.IdSeccion">
                                 <td>@item.Titulo</td>
                                 <td>
-                                    @if (item.Contenido.Length > 50)
+                                    @if (item.Contenido.Length > 200)
                                     {
-                                        string contenido = item.Contenido.Substring(0, 50) + "...";
+                                        string contenido = item.Contenido.Substring(0, 200) + "...";
                                         @contenido
                                     }
                                     else
                                     {
-                                        @Html.Raw(item.Contenido)
+                                        @item.Contenido
                                     }
                                 </td>
                                 <td>@item.Posicion</td>
@@ -73,6 +73,7 @@
         </div>
     </div>
 </section>
+
 <div class="modal fade" id="modalOrganizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -95,8 +96,8 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="txtPosicion" class="col-form-label lbl-modal">Posicion:</label>
-                        <input type="number" class="form-control" id="txtPosicion" name="posicion">
+                        <label for="cbo-position" class="col-form-label lbl-modal">Posicion:</label>
+                        <select name="cbo-position" id="cbo-position" class="form-control"></select>
                     </div>
                 </div>
                 <div class="modal-footer">

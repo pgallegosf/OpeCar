@@ -28,5 +28,9 @@ namespace OpeCar.BusinessLogic.Service.GestionDocumental
         {
             return _filter.Eliminar(request, headers);
         }
+        public bool Mover(ESubAreaRequest request)
+        {
+            return _filter.Mover(request);
+        }
     }
 }

@@ -33,5 +33,21 @@ namespace OpeCar.ServiceAgent.Repositories.GestionDocumental
 
             return CallApiRest.Get<bool>(urlBase, metodoComplete, headers);
         }
+
+        public bool Mover(EDocumentoRequest request)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Documento_Mover");
+            return CallApiRest.Post<bool, EDocumentoRequest>(request, urlBase, metodo, null);
+        }
+
+        public List<EDocumentoResponse> Buscar(EDocumentoRequest request)
+        {
+            var service = _utilEndPoint.GetService("GestionDocumental");
+            var urlBase = service.Url;
+            var metodo = _utilEndPoint.GetMethod(service, "Documento_Buscar");
+            return CallApiRest.Post<List<EDocumentoResponse>, EDocumentoRequest>(request, urlBase, metodo, null);
+        }
     }
 }

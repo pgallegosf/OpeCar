@@ -17,11 +17,9 @@
                 @if (@ViewBag.EsAdmin)
                 {
                     <div class="col-md-12 position-inh text-right">
-
                         <button type="button" id="btnAddSubAreaPrim" class="btn btn-primary" data-codigo="@ViewBag.IdArea" data-esultimo="0" data-toggle="modal" data-target="#modalSubArea" style="text-align: right; right: 0">
                             +
                         </button>
-
                     </div>
                 }
             </div>
@@ -60,7 +58,7 @@
                                     <img class="card-img-top" src="~/Content/images/pdf_imagev4.jpg" height="auto" width="auto" alt="img descarga" />
                                     <div class="card-body card-body-doc">
                                         <h4 class="nombre-doc">@doc.Descripcion</h4>
-                                        <div class="div-btn-descarga">
+                                        <div class="div-btn-descarga">                                            
                                             <a class="botondescarga" target="_blank" href="#">Descargar</a>
                                             <div class="p-2">
                                                 @{string url = doc.UrlDocumento.Replace("~", ""); }
@@ -74,18 +72,16 @@
                     </div>
                 }
             }
+
             <div class="col-12 accordion" id="accordionExample">
                 @{int cont = 0;}
                 @foreach (var item in Model.ListaSubAreas.Where(x => x.IdArea == ViewBag.IdArea && !x.EsUltimo))
                 {
-
-
-
                     string collapse = "collapse" + @item.Codigo;
                     <div class="card">
                         <div class="card-header header-area" id="heading-@collapse">
                             <h5 class="mb-0 descripcionSubArea @item.Codigo">
-                                @if (@ViewBag.EsAdmin)
+                                @if (@ViewBag.EsSuperAdmin)
                                 {
                                     <button class="btn btn-link btn-titulo collapsed titulosubarea subArea-edit" type="button" data-idsubarea="@item.Codigo" data-descripcion="@item.Descripcion" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
                                         @item.Descripcion
@@ -94,9 +90,10 @@
                                     <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@item.Codigo">
                                         <i class=" fas fa-backspace"></i>
                                     </button>
-                                    @*<span style="color:#FFFFFF" data-idarea="@item.IdArea" data-descripcion="@item.Descripcion" class="subArea-edit">
-                                            @item.Descripcion
-                                        </span>*@
+
+                                    <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@item.Codigo" data-idarea="@item.IdArea" data-descsubarea="@item.Descripcion" data-level="1">
+                                       <i class=" fas fa-arrow-right"></i> Mover
+                                    </button>
                                 }
                                 else
                                 {
@@ -110,7 +107,7 @@
 
                         <div id="@collapse" class="collapse show" aria-labelledby="heading-@collapse" data-parent="#accordionExample">
                             <div class="card-body">
-                                @if (@ViewBag.EsAdmin)
+                                @if (@ViewBag.EsSuperAdmin)
                                 {
                                     <div class="col-md-12 text-right">
                                         <div class="btn-group" role="group">
@@ -155,7 +152,10 @@
 
                                                         <div class="card-body card-body-doc">
                                                             <h4 class="nombre-doc">@docPrimario.Descripcion</h4>
-                                                            <div class="div-btn-descarga">
+                                                            <div class="div-btn-descarga">    
+                                                                <button class="btn btn-link subArea-mover" type="button" data-doccode="@docPrimario.Codigo" data-idpadre="@docPrimario.IdSubArea" data-idarea="@item.IdArea" data-level="3">
+                                                                    <i class=" fas fa-arrow-right"></i> Mover
+                                                                </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @docPrimario.UrlDocumento, nombreDoc = @docPrimario.Descripcion})">Descargar</a>
                                                                 <div class="p-2">
                                                                     @{string url = docPrimario.UrlDocumento.Replace("~", ""); }
@@ -182,12 +182,15 @@
                                             @foreach (var subArea in Model.ListaSubAreas.Where(x => x.IdPadre == item.Codigo && x.EsUltimo))
                                             {
                                                 <div class="lista-ultimo-subArea descripcionSubArea @subArea.Codigo" data-id="@subArea.Codigo">
-                                                    @if (@ViewBag.EsAdmin)
+                                                    @if (@ViewBag.EsSuperAdmin)
                                                     {
                                                         <span class="subareaUltimo-edit" data-idsubarea="@subArea.Codigo" data-descripcion="@subArea.Descripcion">@subArea.Descripcion</span>
                                                         <input type="text" data-idsubarea="@subArea.Codigo" class="form-control txtDescripcionSubAreaUltimo" style="display: none;" value="@subArea.Descripcion">
                                                         <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@subArea.Codigo">
                                                             <i class=" fas fa-backspace"></i>
+                                                        </button>
+                                                        <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@subArea.Codigo" data-idpadre="@subArea.IdPadre" data-idarea="@item.IdArea" data-descsubarea="@subArea.Descripcion" data-level="2">
+                                                            <i class=" fas fa-arrow-right"></i> Mover
                                                         </button>
                                                     }
                                                     else
@@ -226,8 +229,11 @@
                                                             <img class="card-img-top" src="~/Content/images/otro_imagev4.png" height="auto" width="auto" alt="img descarga"/>
                                                         }
                                                         <div class="card-body card-body-doc">
-                                                            <h4 class="nombre-doc">@doc.Descripcion</h4>
+                                                            <h4 class="nombre-doc">@doc.Descripcion</h4>                                                            
                                                             <div class="div-btn-descarga">
+                                                                <button class="btn btn-link subArea-mover" type="button" data-doccode="@doc.Codigo" data-idarea="@item.IdArea" data-idsubarea="@doc.IdSubArea" data-idpadre="@Model.ListaSubAreas[0].Codigo" data-level="3">
+                                                                    <i class=" fas fa-arrow-right"></i> Mover
+                                                                </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion})">Descargar</a>
                                                                 <div class="p-2">
                                                                     @{string url = doc.UrlDocumento.Replace("~", ""); }
@@ -245,23 +251,15 @@
                                         </div>
                                     }
                                 }
-
                             </div>
                         </div>
-
                     </div>
-
-
-
                 }
             </div>
-
-
         </div>
     </div>
     <br />
 </section>
-
 
 <div class="modal fade" id="modalSubArea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -335,6 +333,45 @@
     </div>
 </div>
 
-
+<!-- BEGIN: Modal Mover Carpeta/Archivo -->
+<div class="modal fade" id="modalMoverDocumento" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Mover Carpeta/Documento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="formfiledocumento" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <span style="color:red;font-weight:bold;">*</span>Área:
+                        <select class="custom-select mr-sm-2" id="mov-area">
+                        </select>
+                    </div>
+                    <div class="form-group div-carpeta">
+                        <span style="color:red;font-weight:bold;">*</span> Carpeta:
+                        <select class="custom-select mr-sm-2" id="mov-subarea">
+                            <option value="0" selected>No existe Carpeta...</option>
+                        </select>
+                        <label id="label-error-subarea" style="color:red;font-size:12px;"></label>
+                    </div>
+                    <div class="form-group div-subcarpeta">
+                        SubCarpeta:
+                        <select class="custom-select mr-sm-2" id="mov-subarea-2">
+                            <option value="0" selected>No existe SubCarpeta</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btnCloseModal" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btn-mover-documento" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- END: Modal Mover Carpeta/Archivo -->
 
 @Scripts.Render("~/bundles/sigDetalle")

@@ -2,10 +2,12 @@
 /**
  * @fileOverview    Script Organización
  * @since           1.0.0 - 18/11/2019
- * @version         1.0.0 - 23/12/2019
+ * @version         1.0.0 - 01/10/2020
  * @author          Jean Carlos Sánchez Castromonte
 */
 //================================================================================================================================
+let cboPosition = null;
+let count = 0;
 
 document.addEventListener("DOMContentLoaded", function () {
     initFroalaEditor();
@@ -15,6 +17,11 @@ document.addEventListener("DOMContentLoaded", function () {
     $(".organizacion-editar").on("click", ObtenerDatosEdicion);
     $(".organizacion-eliminar").on("click", EliminarOrganizacion);
     $('#btnAddOrganizacion').on("click", LimpiarFormulario);
+
+    cboPosition = document.querySelector('#cbo-position');
+    const btnEditMaintenance = document.querySelectorAll('.organizacion-editar');
+    btnEditMaintenance.forEach( ( item, index ) => createOptionPosition( cboPosition, index ) );
+    count = btnEditMaintenance.length;
 });
 //================================================================================================================================
 
@@ -54,7 +61,7 @@ function GuardarOrganizacion(e) {
     data.idOrganizacion = document.getElementById("txtIdOrganizacion").value;
     data.titulo         = document.getElementById("txtTitulo").value;
     data.contenido      = $('#div-contenido').froalaEditor('html.get');
-    data.posicion       = document.getElementById("txtPosicion").value;
+    data.posicion       = document.getElementById("cbo-position").value;
     fetch("RegistrarOrganizacion", {
         method : 'POST',
         body   : JSON.stringify(data),
@@ -71,6 +78,8 @@ function GuardarOrganizacion(e) {
 //================================================================================================================================
 
 function ObtenerDatosEdicion() {
+    const cboPositionOption = document.querySelectorAll('#cbo-position option');
+    rebuildOptionsPosition(cboPosition, cboPositionOption, count);
     var idOrganizacion = $(this).data("id");
     var titulo         = $(this).data("titulo");
     var contenido      = $(this).data("contenido");
@@ -78,7 +87,7 @@ function ObtenerDatosEdicion() {
     $("#txtIdOrganizacion").val(idOrganizacion);
     $("#txtTitulo").val(titulo);
     $('#div-contenido').froalaEditor('html.set', contenido);
-    $("#txtPosicion").val(posicion);
+    $("#cbo-position").val(posicion);
 }
 //================================================================================================================================
 
@@ -111,9 +120,13 @@ function EliminarOrganizacion() {
 //================================================================================================================================
 
 function LimpiarFormulario() {
+    const lastPosition = ( count + 1 );
+    const cboPositionOption = document.querySelectorAll('#cbo-position option');
+    rebuildOptionsPosition(cboPosition, cboPositionOption, lastPosition);
+
     $("#txtIdOrganizacion").val("");
     $("#txtTitulo").val("");
     $('#div-contenido').froalaEditor('html.set', "");
-    $("#txtPosicion").val(0);
+    $("#cbo-position").val(lastPosition);
 }
 //================================================================================================================================

@@ -24,5 +24,15 @@ namespace OpeCar.BusinessLogic.Service.GestionDocumental
         {
             return _filter.Eliminar(idDocumento, headers);
         }
+
+        public bool Mover(EDocumentoRequest request)
+        {
+            return _filter.Mover(request);
+        }
+
+        public List<EDocumentoResponse> Buscar(EDocumentoRequest request)
+        {
+            return _filter.Buscar(request);
+        }
     }
 }

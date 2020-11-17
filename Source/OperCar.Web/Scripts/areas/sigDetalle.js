@@ -426,3 +426,164 @@ function EliminarSubArea() {
     .always(function () {
     });
 }
+//================================================================================================================================
+
+/*****************************************
+| Mover carpeta o archivo
+******************************************/
+let level       = 0;
+let idarea      = 0;
+let idpadre     = 0;
+let idSubarea   = 0;
+let idDocumento = 0;
+let descSubArea  = "";
+//================================================================================================================================
+function seleccionarSubAreaDocumento() {
+    level       = parseInt($(this).attr("data-level"));
+    idarea      = $(this).attr("data-idarea");
+    idpadre     = $(this).attr("data-idpadre");
+    idSubarea   = $(this).attr("data-idsubarea");
+    idDocumento = $(this).attr("data-doccode");
+    descSubArea = $(this).attr("data-descsubarea");
+    
+    switch(level) {
+        case 1:
+            $(".div-carpeta").hide();
+            $(".div-subcarpeta").hide();
+            break;
+        case 2:
+            $(".div-carpeta").show();
+            $(".div-subcarpeta").hide();
+            break;
+        case 3:
+            $(".div-carpeta").show();
+            $(".div-subcarpeta").show();
+            break;
+    }
+    ListarArea(idarea);
+}
+//================================================================================================================================
+function ListarArea(idarea) {
+    var data = {
+        request: {IdTipoArea: 2}
+    };
+    $.ajax({
+        type: "POST",
+        url: "/SIG/ListarArea",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    })
+    .done(function (data) {
+        if(data.length > 0) {
+            $("#mov-area").empty();
+            $.each(data, function (key, item) {
+                $("#mov-area").append('<option value=' + item.IdArea + '>' + item.Descripcion + '</option>');
+            });
+            $("#mov-area").val(idarea).trigger("change");
+            $("#modalMoverDocumento").modal({backdrop: 'static', keyboard: false});
+        }
+    })
+    .fail(function () {})
+    .always(function () {});
+}
+//================================================================================================================================
+function ListarSubArea($select, idarea, idpadre, idsubarea, isfather) {
+    var data = {
+        request: {
+            IdArea: idarea,
+            IdPadre: isfather ? idpadre : null
+        }
+    };
+    $.ajax({
+        type: "POST",
+        url: "ListaComboSubArea",
+        data: JSON.stringify(data),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    })
+
+    .done(function (data) {
+        $select.html('<option value="0">Seleccione...</option>');
+        if(data.length > 0) {
+            let isIdExist = false;
+            let idSelected = isfather ? idsubarea : idpadre;
+            $.each(data, function (key, item) {
+                $select.append('<option value=' + item.Codigo + '>' + item.Descripcion + '</option>');
+                if(idSelected == item.Codigo) {
+                    isIdExist = true;
+                }
+            });
+            $select.val(isIdExist ? idSelected : 0).trigger("change");
+        }
+        else {
+            $select.val(0).trigger("change");
+        }        
+    })
+    .fail(function () {})
+    .always(function () {});
+}
+//================================================================================================================================
+function moverDocumento() {
+    let isVisibleSubArea = $("#mov-subarea").is(':visible');
+    let isSelectedSubArea = $("#mov-subarea").val() != 0;
+    if(isVisibleSubArea && !isSelectedSubArea) {
+        return;
+    }
+    idSubarea = idSubarea == 0 ? idpadre: idSubarea;
+    idpadre   = idpadre ? idpadre: null;
+
+    if(idSubarea != 0) {
+        let data = {};
+        data.idDocumento = idDocumento ? idDocumento : null;
+        data.idSubArea   = idSubarea;
+        data.idArea      = idarea;
+        data.idPadre     = idpadre;
+        data.isDocument  = level == 3;
+
+        fetch('../SIG/MoverDocumento', {
+            method : 'POST',
+            body   : JSON.stringify(data),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            $("#modalMoverDocumento").modal("hide");
+            $(".alert-link").html("Se movió correctamente");
+            $('.alert').fadeIn();
+            setTimeout(function () { $(".alert").fadeOut(); location.reload(); }, 2500);
+        })
+        .catch(error => console.error(error));
+    }
+    else {
+        $("#label-error-subarea").html('<div style="padding-top:10px;">Es Obligatorio</div>');
+    }
+}
+//================================================================================================================================
+$(".subArea-mover").on("click", seleccionarSubAreaDocumento);
+
+$("#mov-area").on("change", function() {    
+    idarea = $(this).val();
+    ListarSubArea($("#mov-subarea"), idarea, idpadre, idSubarea, false);
+});
+
+$("#mov-subarea").on("change", function() {
+    if(level != 1) {
+        idpadre = $(this).val();
+    }
+    if(idpadre != 0 && idpadre != null) {
+        $("#label-error-subarea").empty();       
+    }
+    else {
+        $("#label-error-subarea").html('<div style="padding-top:10px;">Es Obligatorio</div>');
+    }
+    ListarSubArea($("#mov-subarea-2"), idarea, idpadre, idSubarea, true);
+});
+
+$("#mov-subarea-2").on("change", function() {
+    if(level == 3) {
+        idSubarea = $(this).val();
+    }
+});
+
+$("#btn-mover-documento").on("click", moverDocumento);
+//================================================================================================================================

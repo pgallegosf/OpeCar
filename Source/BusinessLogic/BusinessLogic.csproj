@@ -43,10 +43,12 @@
     <Compile Include="Service\GestionDocumental\NArea.cs" />
     <Compile Include="Service\GestionDocumental\NDocumento.cs" />
     <Compile Include="Service\GestionDocumental\NEnlace.cs" />
+    <Compile Include="Service\GestionDocumental\NLog.cs" />
     <Compile Include="Service\GestionDocumental\NMenuFooter.cs" />
     <Compile Include="Service\GestionDocumental\NMantenimiento.cs" />
     <Compile Include="Service\GestionDocumental\NSeccion.cs" />
     <Compile Include="Service\GestionDocumental\NSubArea.cs" />
+    <Compile Include="Service\Restauracion\NRestauracionBD.cs" />
     <Compile Include="Service\Seguridad\NLog.cs" />
     <Compile Include="Service\Seguridad\NLogin.cs" />
     <Compile Include="Service\Seguridad\NPermiso.cs" />

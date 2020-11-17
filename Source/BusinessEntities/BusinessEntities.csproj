@@ -50,6 +50,8 @@
     <Compile Include="GestionArchivo\EDocumentoResponse.cs" />
     <Compile Include="GestionArchivo\EEnlaceRequest.cs" />
     <Compile Include="GestionArchivo\EEnlaceResponse.cs" />
+    <Compile Include="GestionArchivo\ELog.cs" />
+    <Compile Include="GestionArchivo\ELogRequest.cs" />
     <Compile Include="GestionArchivo\EMantenimiento.cs" />
     <Compile Include="GestionArchivo\EMantMenu.cs" />
     <Compile Include="GestionArchivo\EMenuFooter.cs" />
@@ -60,6 +62,8 @@
     <Compile Include="GestionArchivo\ESubAreaRequest.cs" />
     <Compile Include="GestionArchivo\ESubAreaResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restauracion\ERestauracionBDRequest.cs" />
+    <Compile Include="Restauracion\ERestauracionBDResponse.cs" />
     <Compile Include="Seguridad\EAcceso.cs" />
     <Compile Include="Seguridad\EListaPermisos.cs" />
     <Compile Include="Seguridad\ELogin.cs" />

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using OpeCar.BusinessEntities.GestionArchivo;
 using OpeCar.BusinessLogic.Service.GestionDocumental;
 
@@ -13,6 +14,7 @@ namespace OpeCar.OperCar.Web.Controllers
     public class GDocumentariaController : Controller
     {
         private NArea _Area { get; set; }
+        readonly NLog _Nlog = new NLog();
         // GET: GDocumentaria
         public ActionResult Index()
         {
@@ -30,28 +32,63 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             NArea _NsubArea = new NArea();
             request.IdTipoArea = 2;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             request.UrlImg = "Content/images/iconos_ALEATICA-40.png";
             var result = _NsubArea.Registrar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog ="Nuevo",
+                    Funcion = "Area Gestión Documentaria",
+                    RegistroLog =request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+            };
+                _Nlog.Registrar(log,null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult EditarAreaGD(EAreaRequest request)
         {
             NArea _NsubArea = new NArea();
             request.IdTipoArea = 1;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             var result = _NsubArea.Editar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Edición",
+                    Funcion = "Area Gestión Documentaria",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult EliminarAreaGD(EAreaRequest request)
         {
             NArea _NsubArea = new NArea();
             request.IdTipoArea = 2;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             var result = _NsubArea.Eliminar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Eliminación",
+                    Funcion = "Area Gestión Documentaria",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GDocumentariaDetalle(string idArea)
@@ -96,10 +133,22 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             NSubArea _NsubArea = new NSubArea();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _NsubArea.Registrar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Nuevo",
+                    Funcion = "SubArea Gestión Documentaria",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ListaComboSubArea(ESubAreaRequest request)
@@ -164,11 +213,23 @@ namespace OpeCar.OperCar.Web.Controllers
 
             NDocumento _Ndocumento = new NDocumento();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             request.IndicadorHabilitado = true;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _Ndocumento.Registrar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Nuevo",
+                    Funcion = "Documento Gestión Documentaria",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             response = "";
             return response;
         }
@@ -177,6 +238,18 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             NDocumento _Ndocumento = new NDocumento();
             var result = _Ndocumento.Eliminar(idDocumento, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Eliminación",
+                    Funcion = "Documento Gestión Documentaria",
+                    RegistroLog = idDocumento.ToString(),
+                    RequestLog = idDocumento.ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         

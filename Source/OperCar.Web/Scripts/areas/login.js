@@ -45,10 +45,11 @@ function Login() {
             }
 
         },
-        error: function (data) {
+        error: function (data, errorThrown) {
             $("#btnLogin").removeClass("disabled");
             $("#contenedorMensaje").html(divmensaje);
-            $("#textAlert").text("Usuario y/o contraseña incorrectos");
+            var error = eval("(" + XMLHttpRequest.responseText + ")");
+            $("#textAlert").text(data.Error);
             $("#contenedorMensaje").show();
         }
     });

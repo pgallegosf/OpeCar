@@ -1,0 +1,51 @@
+﻿@model IEnumerable<OpeCar.BusinessEntities.GestionArchivo.ELog>
+@{
+    ViewBag.Title = "ReporteLog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default position-inh">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                    Reporte de Log
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <div class="container">
+        <div class="row vertical-top">
+            <div class="table-responsive-xl bd-example">
+                <table class="table table-hover table-borderless" id="tableLog">
+                    <thead>
+                        <tr>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Tipo Registro</th>
+                            <th scope="col">Funcion</th>
+                            <th scope="col">Nombre Registro</th>
+                            <th scope="col">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr data-id="@item.IDLog">
+                            <td>@item.Usuario</td>
+                            <td>@item.TipoLog</td>
+                            <td>@item.Funcion</td>
+                            <td>@item.RegistroLog</td>
+                            <td>@item.FechaLog</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+

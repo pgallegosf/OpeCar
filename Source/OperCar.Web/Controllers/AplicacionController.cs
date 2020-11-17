@@ -76,7 +76,7 @@ namespace OpeCar.OperCar.Web.Controllers
             request.ImgEnlace = imgEnlace;
             request.Descripcion = descripcion;
             request.UrlEnlace = enlace;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.IndicadorHabilitado = true;
             var result = _Nenlace.Registrar(request, null);
             response = "";
@@ -84,7 +84,7 @@ namespace OpeCar.OperCar.Web.Controllers
         }
         public JsonResult EliminarAplicacion(EEnlaceRequest request)
         {
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             var result = _Nenlace.Eliminar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

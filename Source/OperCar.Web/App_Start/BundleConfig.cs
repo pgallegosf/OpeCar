@@ -47,7 +47,10 @@ namespace OpeCar.OperCar.Web
                         "~/Scripts/areas/log.js"));
             bundles.Add(new ScriptBundle("~/bundles/menu_organizacion").Include(
                         "~/Scripts/menu_organizacion.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/restauracionBD").Include(
+                        "~/Scripts/areas/restauracionBD.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap_datepicker").Include(
+                        "~/Scripts/bootstrap-datepicker.es.js"));
 
             /**********************************HOJAS DE ESTILOS***********************************************/
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section">
+    <div class="container">
+        <div class="row vertical-default">
+            <div class="col-md-12 position-inh">
+                <h1 class="text-left  margin-top-20 margin-bottom-20 text-normal  normal regular ">
+                    Restauración de Base de Datos
+                </h1>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section background_soft_gray">
+    <div class="container">
+        <div class="alert alert-success text-right" style="display: none;">
+            <a href="#" class="alert-link">Se realizó el registro correctamente.</a>
+        </div>
+        <div class="row vertical-top">
+            <div class="position-inh col-lg-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label for="cmbTipoRestauracion">Tipo de Restauración</label>
+                    <select class="form-control" id="cmbTipoRestauracion">
+                        <option value="1">Completa</option>
+                        <option value="2">Diferencial</option>
+                    </select>
+                </div>
+            </div>
+            <div class="position-inh col-lg-4 col-md-6 col-sm-12" id="divCalendario">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Fecha:</label>
+                    <input data-date-format="dd/mm/yyyy" id="datepicker">
+                </div>
+            </div>
+            <div class="position-inh col-lg-4 col-md-6 col-sm-12" id="divMes">
+                <div class="form-group">
+                    <label for="cmbTipoRestauracion">Mes</label>
+                    <select class="form-control" id="cmbMes">
+                        <option value="1">Enero</option>
+                        <option value="2">Febrero</option>
+                        <option value="3">Marzo</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Mayo</option>
+                        <option value="6">Junio</option>
+                        <option value="7">Julio</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setiembre</option>
+                        <option value="10">Octubre</option>
+                        <option value="11">Noviembre</option>
+                        <option value="12">Diciembre</option>
+                    </select>
+                </div>
+            </div>
+            <div class="position-inh col-lg-4 col-md-6 col-sm-12" id="divMes">
+                <div class="form-group">
+                    <label for="btnRestaurar"></label>
+                    <button type="button" id="btnRestaurar" class="btn btn-primary" data-toggle="modal" data-placement="top" title="Restaurar BD" style="text-align: right; right: 0">
+                        Restaurar
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+@Scripts.Render("~/bundles/restauracionBD")

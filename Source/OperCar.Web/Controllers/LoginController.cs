@@ -69,7 +69,7 @@ namespace OpeCar.OperCar.Web.Controllers
             catch (Exception ex)
             {
 
-                result = new {Success = false, Error = ex};
+                result = new {Success = false, Error = ex.Message};
                 return Json(result, JsonRequestBehavior.AllowGet);
             }
 

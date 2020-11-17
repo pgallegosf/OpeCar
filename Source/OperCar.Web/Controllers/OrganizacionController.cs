@@ -138,7 +138,7 @@ namespace OpeCar.OperCar.Web.Controllers
             request.Titulo = titulo;
             request.Contenido = contenido;
             request.Posicion = posicion;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.IndicadorHabilitado = true;
             request.IdTipoSeccion = 1;
             var result = _Nseccion.Registrar(request, null);
@@ -148,7 +148,7 @@ namespace OpeCar.OperCar.Web.Controllers
 
         public JsonResult EliminarOrganizacion(ESeccionRequest request)
         {
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             var result = _Nseccion.Eliminar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
         }

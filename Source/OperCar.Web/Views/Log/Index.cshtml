@@ -18,9 +18,13 @@
     <div class="container">
         <div class="row vertical-top">
             <div class="form-group">
-                <select class="custom-select mr-sm-2" id="selAnio" name="selAnio" onchange="MostrarReporteAcceso(this.value)"> 
+                <select class="custom-select mr-sm-2" id="selAnio" name="selAnio" onchange="MostrarReporteAcceso(this.value)">
                     <option selected>Seleccione un año</option>
-                    <option value="2019">2019</option>
+                    @for (int i = 2019; i <= DateTime.Now.Year; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+
                 </select>
             </div>
             <canvas id="myChart"></canvas>

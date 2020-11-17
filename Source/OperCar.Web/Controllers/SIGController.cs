@@ -13,13 +13,14 @@ using System.Net.Security;
 using System.Text;
 using System.Web.Helpers;
 using Microsoft.Owin.Security.DataHandler.Encoder;
+using System.Web.Script.Serialization;
 
 namespace OpeCar.OperCar.Web.Controllers
 {
     public class SIGController : Controller
     {
         private NArea _Area { get; set; }
-        
+        readonly NLog _Nlog = new NLog();
         // GET: SIG                                                          
         public ActionResult Index()
         {
@@ -40,11 +41,23 @@ namespace OpeCar.OperCar.Web.Controllers
             NArea _NsubArea = new NArea();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
             request.IdTipoArea = 1;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             request.UrlImg = "Content/images/iconos_ALEATICA-40.png";
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _NsubArea.Registrar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Nuevo",
+                    Funcion = "Area SIG",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult EditarArea(EAreaRequest request)
@@ -52,17 +65,29 @@ namespace OpeCar.OperCar.Web.Controllers
             NArea _NsubArea = new NArea();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
             request.IdTipoArea = 1;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _NsubArea.Editar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Edición",
+                    Funcion = "Area SIG",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = new JavaScriptSerializer().Serialize(request).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult EliminarArea(EAreaRequest request)
         {
             NArea _NsubArea = new NArea();
             request.IdTipoArea = 1;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             var result = _NsubArea.Eliminar(request, null);
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -111,10 +136,22 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             NSubArea _NsubArea= new NSubArea();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _NsubArea.Registrar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Nuevo",
+                    Funcion = "SubArea SIG",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = Json(request, JsonRequestBehavior.AllowGet).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -122,20 +159,44 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             NSubArea _NsubArea = new NSubArea();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _NsubArea.Editar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Edición",
+                    Funcion = "SubArea SIG",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = Json(request, JsonRequestBehavior.AllowGet).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult EliminarSubArea(ESubAreaRequest request)
         {
             NSubArea _NsubArea = new NSubArea();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _NsubArea.Eliminar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Eliminación",
+                    Funcion = "SubArea SIG",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = Json(request, JsonRequestBehavior.AllowGet).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public JsonResult ListaComboSubArea(ESubAreaRequest request)
@@ -199,11 +260,23 @@ namespace OpeCar.OperCar.Web.Controllers
 
             NDocumento _Ndocumento = new NDocumento();
             //var idUsuario = AppSession.Current.UsuarioAutenticado.IdUsuario;
-            request.IdUsuario = 1;
+            request.IdUsuario = Convert.ToInt32(System.Web.HttpContext.Current.Session["idUser"].ToString());
             request.FechaTransaccion = DateTime.Now;
             request.IndicadorHabilitado = true;
             //var header = JsonConvert.SerializeObject(AppSession.Current.Header);
             var result = _Ndocumento.Registrar(request, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Nuevo",
+                    Funcion = "Documento SIG",
+                    RegistroLog = request.Descripcion,
+                    RequestLog = Json(request, JsonRequestBehavior.AllowGet).ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             response = "";
             return response;
         }
@@ -212,6 +285,18 @@ namespace OpeCar.OperCar.Web.Controllers
         {
             NDocumento _Ndocumento = new NDocumento();
             var result = _Ndocumento.Eliminar(idDocumento, null);
+            if (result)
+            {
+                var log = new ELogRequest
+                {
+                    Usuario = System.Web.HttpContext.Current.Session["userName"].ToString(),
+                    TipoLog = "Eliminación",
+                    Funcion = "Documento SIG",
+                    RegistroLog = idDocumento.ToString(),
+                    RequestLog = idDocumento.ToString()
+                };
+                _Nlog.Registrar(log, null);
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

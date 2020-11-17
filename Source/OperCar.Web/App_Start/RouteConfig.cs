@@ -220,7 +220,11 @@ namespace OpeCar.OperCar.Web
                 url: "ListarAccesos",
                 defaults: new { controller = "Log", action = "ListarAccesos", id = UrlParameter.Optional }
             );
-
+            routes.MapRoute(
+               name: "ReporteLog",
+               url: "ReporteLog",
+               defaults: new { controller = "Log", action = "ReporteLog", id = UrlParameter.Optional }
+           );
             routes.MapRoute(
                name: "ListarMantenimiento",
                url: "ListarMantenimiento",
@@ -232,6 +236,16 @@ namespace OpeCar.OperCar.Web
                url: "ListarMenuFooter",
                defaults: new { controller = "Organizacion", action = "ListarMenuFooter"}
            );
+            routes.MapRoute(
+                name: "RestauracionBD",
+                url: "RestauracionBD",
+                defaults: new { controller = "RestauracionBD", action = "Index", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "RestaurarBaseDatos",
+                url: "RestaurarBaseDatos",
+                defaults: new { controller = "RestauracionBD", action = "RestaurarBaseDatos", id = UrlParameter.Optional }
+            );
         }
     }
 }

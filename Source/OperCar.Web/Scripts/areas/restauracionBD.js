@@ -1,7 +1,7 @@
 ﻿var date = new Date();
 var dateMax = new Date();
 date.setDate(date.getDate() - 30);
-dateMax.setDate(date.getDate() - 1);
+dateMax.setDate(date.getDate() - 2);
 $("#divCalendario").hide();
 document.addEventListener("DOMContentLoaded", function () {
     $('#cmbTipoRestauracion').on("change", MostrarMetodoRestauracion);

@@ -252,6 +252,5 @@ namespace OpeCar.OperCar.Web.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
     }
 }

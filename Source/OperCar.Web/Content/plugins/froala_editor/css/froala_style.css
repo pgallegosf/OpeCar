@@ -229,6 +229,13 @@ img.fr-shadow,
   margin: 5px 0 5px 5px;
   max-width: calc(100% - 5px);
 }
+
+img.fr-dii {
+  float: right !important;
+  margin: 5px 0 5px 5px !important;
+  max-width: calc(100% - 5px) !important;
+}
+
 .fr-view span.fr-img-caption {
   position: relative;
   max-width: 100%;

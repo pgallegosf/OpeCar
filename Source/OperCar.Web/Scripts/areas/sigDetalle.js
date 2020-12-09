@@ -460,13 +460,13 @@ function seleccionarSubAreaDocumento() {
             $(".div-subcarpeta").show();
             break;
     }
-    ListarArea(idarea);
+    const IdTipoArea = Number($('#modalMoverDocumento').attr('data-idtipoarea'));
+    console.log(IdTipoArea);
+    ListarArea(idarea, IdTipoArea);
 }
 //================================================================================================================================
-function ListarArea(idarea) {
-    var data = {
-        request: {IdTipoArea: 2}
-    };
+function ListarArea(idarea, IdTipoArea) {
+    var data = { request: { IdTipoArea } };
     $.ajax({
         type: "POST",
         url: "/SIG/ListarArea",

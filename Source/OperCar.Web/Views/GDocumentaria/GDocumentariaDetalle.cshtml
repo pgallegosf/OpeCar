@@ -61,8 +61,15 @@
                                         <div class="div-btn-descarga">                                            
                                             <a class="botondescarga" target="_blank" href="#">Descargar</a>
                                             <div class="p-2">
-                                                @{string url = doc.UrlDocumento.Replace("~", ""); }
-                                                <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                @{ 
+                                                    string url = doc.UrlDocumento.Replace("~", "");
+                                                    string[] words = url.Split('.');
+                                                    string ext = words[words.Length - 1];
+                                                }
+                                                @if(ext == "pdf")
+                                                {
+                                                    <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -81,7 +88,7 @@
                     <div class="card">
                         <div class="card-header header-area" id="heading-@collapse">
                             <h5 class="mb-0 descripcionSubArea @item.Codigo">
-                                @if (@ViewBag.EsSuperAdmin)
+                                @if (@ViewBag.EsAdmin)
                                 {
                                     <button class="btn btn-link btn-titulo collapsed titulosubarea subArea-edit" type="button" data-idsubarea="@item.Codigo" data-descripcion="@item.Descripcion" data-toggle="collapse" data-target="#@collapse" aria-expanded="false" aria-controls="@collapse">
                                         @item.Descripcion
@@ -90,7 +97,6 @@
                                     <button class="btn btn-link subArea-eliminar" type="button" data-idsubarea="@item.Codigo">
                                         <i class=" fas fa-backspace"></i>
                                     </button>
-
                                     <button class="btn btn-link subArea-mover" type="button" data-idsubarea="@item.Codigo" data-idarea="@item.IdArea" data-descsubarea="@item.Descripcion" data-level="1">
                                        <i class=" fas fa-arrow-right"></i> Mover
                                     </button>
@@ -101,13 +107,11 @@
                                         @item.Descripcion
                                     </button>
                                 }
-
                             </h5>
                         </div>
-
                         <div id="@collapse" class="collapse show" aria-labelledby="heading-@collapse" data-parent="#accordionExample">
                             <div class="card-body">
-                                @if (@ViewBag.EsSuperAdmin)
+                                @if (@ViewBag.EsAdmin)
                                 {
                                     <div class="col-md-12 text-right">
                                         <div class="btn-group" role="group">
@@ -158,8 +162,15 @@
                                                                 </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @docPrimario.UrlDocumento, nombreDoc = @docPrimario.Descripcion})">Descargar</a>
                                                                 <div class="p-2">
-                                                                    @{string url = docPrimario.UrlDocumento.Replace("~", ""); }
-                                                                    <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                                    @{
+                                                                        string url = docPrimario.UrlDocumento.Replace("~", "");
+                                                                        string[] words = url.Split('.');
+                                                                        string ext = words[words.Length - 1];
+                                                                    }
+                                                                    @if(ext == "pdf")
+                                                                    {
+                                                                        <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                                    }
                                                                 </div>
                                                                 @if (@ViewBag.EsAdmin)
                                                                 {
@@ -182,7 +193,7 @@
                                             @foreach (var subArea in Model.ListaSubAreas.Where(x => x.IdPadre == item.Codigo && x.EsUltimo))
                                             {
                                                 <div class="lista-ultimo-subArea descripcionSubArea @subArea.Codigo" data-id="@subArea.Codigo">
-                                                    @if (@ViewBag.EsSuperAdmin)
+                                                    @if (@ViewBag.EsAdmin)
                                                     {
                                                         <span class="subareaUltimo-edit" data-idsubarea="@subArea.Codigo" data-descripcion="@subArea.Descripcion">@subArea.Descripcion</span>
                                                         <input type="text" data-idsubarea="@subArea.Codigo" class="form-control txtDescripcionSubAreaUltimo" style="display: none;" value="@subArea.Descripcion">
@@ -236,8 +247,15 @@
                                                                 </button>
                                                                 <a class="botondescarga" target="_blank" href="@Url.Action("ObtenerFichero", "SIG", new {urlDoc = @doc.UrlDocumento, nombreDoc = @doc.Descripcion})">Descargar</a>
                                                                 <div class="p-2">
-                                                                    @{string url = doc.UrlDocumento.Replace("~", ""); }
-                                                                    <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                                    @{
+                                                                        string url = doc.UrlDocumento.Replace("~", "");
+                                                                        string[] words = url.Split('.');
+                                                                        string ext = words[words.Length - 1];
+                                                                    }
+                                                                    @if(ext == "pdf")
+                                                                    {
+                                                                        <a class="botonver" href="javascript:void(0)" data-toggle="modal" data-target="#modalverarchivo" data-url="@url">Ver</a>
+                                                                    }
                                                                 </div>
                                                                 @if (@ViewBag.EsAdmin)
                                                                 {
@@ -298,11 +316,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @*@using (Html.BeginForm("RegistrarDocumento", "SIG", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {*@
             <form id="formfiledocumento" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
-
                     <div class="form-group">
                         <select class="custom-select mr-sm-2" id="selSubArea" name="idSubArea">
                             <option selected>Seleccione una Carpeta</option>
@@ -313,11 +328,8 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-file">
-                            @*<form id="formfiledocumento" method="post" enctype="multipart/form-data">*@
-
                             <input type="file" class="custom-file-input" id="fileDocumento" name="file" lang="es" onchange=" MostrarNombreArchivo() ">
                             <input type="text" name="idSubArea" style="display: none;">
-                            @*</form>*@
                             <label class="custom-file-label" for="fileDocumento" id="lblFileDocumento">Seleccionar Archivo</label>
                         </div>
                     </div>
@@ -327,14 +339,12 @@
                     <button type="submit" id="btnGuardarDocumento" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
-            @*}*@
         </div>
-
     </div>
 </div>
 
 <!-- BEGIN: Modal Mover Carpeta/Archivo -->
-<div class="modal fade" id="modalMoverDocumento" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalMoverDocumento" data-idtipoarea="2" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
